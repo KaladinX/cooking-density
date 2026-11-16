@@ -1,0 +1,61 @@
+<!doctype html>
+<!--
+  cooking-density in a browser, with no build step.
+  Browsers will not load modules from file://, so serve the repository:
+
+    npx serve .        (or: python3 -m http.server 8000)
+
+  then open /examples/browser.html.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>cooking-density in the browser</title>
+  <style>
+    body { font: 16px/1.5 system-ui, sans-serif; max-width: 34rem; margin: 2rem auto; padding: 0 1rem; }
+    form { display: flex; gap: .5rem; flex-wrap: wrap; }
+    input { font: inherit; padding: .3rem .5rem; }
+    #amount { width: 5rem; }
+    #unit { width: 8rem; }
+    #ingredient { flex: 1; min-width: 12rem; }
+    output { display: block; margin-top: 1rem; font-size: 1.5rem; }
+    #detail { color: #555; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h1>Cups to grams</h1>
+  <form id="form">
+    <input id="amount" type="number" step="any" value="1" aria-label="Amount">
+    <input id="unit" value="cup" aria-label="Unit" placeholder="cup, tbsp, large">
+    <input id="ingredient" value="plain flour" aria-label="Ingredient" list="names">
+    <datalist id="names"></datalist>
+  </form>
+  <output id="result" for="amount unit ingredient"></output>
+  <p id="detail"></p>
+
+  <script type="module">
+    import { toGrams, searchIngredients } from '../src/lite.mjs';
+
+    const $ = (id) => document.getElementById(id);
+
+    function update() {
+      const ingredient = $('ingredient').value.trim();
+      $('names').replaceChildren(...searchIngredients(ingredient, { limit: 8 }).map((i) => new Option(i.name)));
+      try {
+        const r = toGrams({ ingredient, amount: Number($('amount').value), unit: $('unit').value.trim() || undefined });
+        $('result').textContent = `${r.value.toFixed(1)} g`;
+        const source = r.source.description ?? r.source.name ?? `label median, ${r.source.rows} brands`;
+        $('detail').textContent = [`Source: ${source}`, ...r.warnings].join('\n');
+      } catch (err) {
+        $('result').textContent = '';
+        $('detail').textContent = err.message;
+      }
+    }
+
+    $('form').addEventListener('input', update);
+    $('form').addEventListener('submit', (event) => event.preventDefault());
+    update();
+  </script>
+</body>
+</html>

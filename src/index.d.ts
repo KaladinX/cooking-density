@@ -42,6 +42,8 @@ export interface CountPortion {
 export interface Ingredient {
   id: string;
   name: string;
+  /** Every name the ingredient answers to: the alias names, or the USDA description alone. */
+  names: string[];
   /** "usda" (SR Legacy or FNDDS record), "model" (water, dairy), "branded" (label median), "ambiguous" (name several brands share). */
   kind: 'usda' | 'model' | 'branded' | 'ambiguous';
   /** Which USDA dataset a "usda" ingredient came from. */
@@ -109,6 +111,13 @@ export interface ConversionResult {
   warnings: string[];
 }
 
+export { createConverter } from './core.js';
+export type { Converter, ConverterData } from './core.js';
+
+/**
+ * Resolve a unit id or a friendly name. A lone capital "T" is a tablespoon and a
+ * lone small "t" a teaspoon; every other name ignores case.
+ */
 export function parseUnit(unit: UnitInput): Unit;
 export function findIngredient(query: string | number | Ingredient): Ingredient | null;
 export function searchIngredients(query: string, options?: { limit?: number }): Ingredient[];
@@ -117,14 +126,16 @@ export function getDensity(ingredient: string | number | Ingredient, options?: D
 export function convert(args: {
   ingredient?: string | number | Ingredient;
   amount: number;
-  from: UnitInput;
+  /** A unit, or a count the ingredient has ("large", "clove"). Without it, the ingredient's defaultUnit. */
+  from?: UnitInput;
   to: UnitInput;
 } & DensityOptions): ConversionResult;
 
 export function toGrams(args: {
   ingredient: string | number | Ingredient;
   amount: number;
-  unit: UnitInput;
+  /** A unit, or a count ("large", "cloves", "eggs"). Without it, the ingredient's defaultUnit. */
+  unit?: UnitInput;
   /** Target unit, default "g". */
   to?: UnitInput;
 } & DensityOptions): ConversionResult;

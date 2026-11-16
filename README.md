@@ -2,7 +2,7 @@
 
 Convert cooking volumes to grams, and grams back to volumes, using measured ingredient densities.
 
-The main product is data: JSON files that any website or app can load. A small helper with no dependencies applies the data for you.
+The main product is data: JSON files that any website or app can load. A small helper with no dependencies applies the data for you, in Node and in the browser.
 
 It converts volumes (cups, tablespoons), masses (grams, ounces) and counts (2 large eggs, 3 garlic cloves, 1 medium banana) in any direction. It also holds egg size standards for the US, Canada and the EU.
 
@@ -10,7 +10,7 @@ Mass is density times volume. A cup of flour and a cup of honey are the same vol
 
 ## The six examples
 
-Run `node examples/basic.mjs`. This is its output as of version 0.2.0:
+Run `node examples/basic.mjs`. This is its output as of version 0.3.0:
 
 ```
 1 US cup all-purpose flour    -> 125.0 g
@@ -87,7 +87,8 @@ import ingredients from 'cooking-density/data/ingredients.json' with { type: 'js
 |---|---|
 | `data/ingredients.json` | 8,617 USDA foods (4,166 from SR Legacy, 4,451 from FNDDS): 7,038 have a volume density in 7,516 forms, and 5,990 count portions ("large", "clove", "slice") sit in a separate `counts` array. Raw portion rows and composition are kept. |
 | `data/ingredients.csv` | One row per food and form: id, fdc_id, description, category, form, density, basis portion, source |
-| `data/aliases.json` | 228 curated common ingredients with US, UK, AU and CA names, mapped to a USDA record and form, a branded-label median, or a model |
+| `data/aliases.json` | 281 curated common ingredients under 886 US, UK, AU and CA names, mapped to a USDA record and form, a branded-label median, or a model |
+| `data/lite.json` | Everything the helper needs for those 281 ingredients in one 165 KB file (32 KB gzipped): the aliases, the 237 USDA records behind them, units, the dairy model, label medians and egg sizes. `data/lite.mjs` is the same object as an ES module |
 | `data/branded-gaps.json` | Densities for 24 ingredients USDA's reference tables lack (ghee, kosher salt by brand, chia, spices), as the median of brand labels with every row kept |
 | `data/egg-sizes.json` | US, Canadian and EU egg size classes with citations, and the shell fraction |
 | `data/measurements.json` | Community measurements, starting with one egg |
@@ -95,7 +96,7 @@ import ingredients from 'cooking-density/data/ingredients.json' with { type: 'js
 | `data/dairy-model.json` | Fit and calibration anchors for `creamDensity` |
 | `data/build-report.json` | What the build kept and skipped, per source |
 
-JSON Schemas for each data file are in `schema/`.
+JSON Schemas for the source data files are in `schema/`. `lite.json` is generated from them; `npm test` rebuilds it in memory and fails if the committed file differs.
 
 ### Schema in short
 
@@ -147,14 +148,47 @@ npm install cooking-density   # once published; or copy the repository
 import { findIngredient, toGrams, toVolume, convert, getDensity } from 'cooking-density';
 ```
 
+The package has three entry points. They export the same functions and differ in where the data comes from:
+
+| Import | Runs in | Knows |
+|---|---|---|
+| `cooking-density` | Node 18 and later | All 8,617 USDA foods and the 281 curated ingredients. Reads `data/` from disk, each file on first use. |
+| `cooking-density/lite` | Browsers, Node, and any other ES-module runtime | The 281 curated ingredients. The data is bundled: 165 KB, 32 KB gzipped. |
+| `cooking-density/core` | Anywhere | Whatever you give it: `createConverter(data)` builds the helper from JSON you loaded yourself. |
+
+The main entry imports `node:fs`, so a browser bundle must import `cooking-density/lite`. Lite answers every name in `aliases.json` with the same numbers as the full helper, and the tests compare the two alias by alias. It does not know the other 8,380 USDA foods: `findIngredient('Kale, raw')` is `null` there.
+
+To use every food in a browser, fetch the files and build your own converter:
+
+```js
+import { createConverter } from 'cooking-density/core';
+
+const file = (name) => fetch(`/data/${name}.json`).then((r) => r.json());
+const { toGrams } = createConverter({
+  units: await file('units'),
+  aliases: await file('aliases'),
+  ingredients: await file('ingredients'),   // 9.6 MB; 0.6 MB gzipped
+  dairyModel: await file('dairy-model'),
+  brandedGaps: await file('branded-gaps'),
+  eggSizes: await file('egg-sizes'),
+});
+```
+
+`createConverter(await file('lite'))` works too: `lite.json` is one object with those same keys. `examples/browser.html` is a working page with no build step.
+
+Every entry point exports these functions:
+
 - `findIngredient(query)`: look up by alias, id, USDA description or fdcId. Returns `null` if unknown. Case, accents and punctuation do not matter.
-- `searchIngredients(query, { limit })`: all words must appear, in any order.
+- `searchIngredients(query, { limit })`: all words must appear, in any order. Curated ingredients come first, an exact name before a partial one; USDA foods follow, raw SR Legacy foods before prepared dishes.
 - `toGrams({ ingredient, amount, unit, form?, temperatureC?, fatPercent?, calibrated? })`
 - `toVolume({ ingredient, amount, unit = 'g', to = 'cup', ... })`
 - `convert({ ingredient?, amount, from, to, ... })`: any unit to any unit. Volume to mass uses the density; same-kind conversions need no ingredient.
 - `fromGrams({ ingredient, amount, unit = 'g', to })`: a count from a weight, `fromGrams({ ingredient: 'egg', amount: 150, to: 'large' })` is 3.
 - `getDensity(ingredient, options)`: the density in g/mL with its source and warnings.
 - `creamDensity({ fatPercent, temperatureC = 20, calibrated = true })`: g/mL of milk or cream at a fat percentage.
+- `createConverter(data)`: all of the above, bound to data you supply.
+
+A call that cannot be answered throws an `Error` whose message says what to change: `No unit given for all-purpose-flour. Pass one, such as "cup", "tbsp" or "g".`
 
 ### Units
 
@@ -163,18 +197,22 @@ Units are ids (`us-legal:cup`) or plain names. A bare `cup`, `tbsp`, `tsp`, `fl 
 | You write | You get |
 |---|---|
 | `cup`, `us cup`, `Tbsp`, `tablespoon`, `fl oz` | US customary (cup = 236.588 mL) |
+| `T`, `t` | US tablespoon and teaspoon, as old recipes write them. These two are the only names where case matters. |
 | `us-legal cup`, `legal tbsp` | FDA labelling units (cup = 240 mL, tbsp = 15 mL, tsp = 5 mL, fl oz = 30 mL) |
-| `metric cup`, `metric tbsp` | 250 mL, 15 mL |
+| `metric cup`, `metric tbsp`, `metric tsp` | 250 mL, 15 mL, 5 mL |
+| `dessertspoon`, `dsp` | 10 mL (UK and Australian recipes) |
 | `au tbsp` | 20 mL |
 | `uk cup`, `imperial pint` | UK imperial (cup = 10 imperial fl oz = 284.131 mL) |
-| `ml`, `l`, `dl` | metric |
-| `g`, `kg`, `oz`, `lb` | mass (`oz` alone is an ounce of weight; use `fl oz` for volume) |
+| `ml`, `cl`, `dl`, `l` | metric |
+| `mg`, `g`, `kg`, `oz`, `lb` | mass (`oz` alone is an ounce of weight; use `fl oz` for volume) |
 
 Legal units never apply by accident, because the difference between a 240 mL cup and a 236.6 mL cup is 1.4%.
 
+`uk tbsp` and `uk tsp` are refused. The old imperial tablespoon was 17.8 mL, and a UK recipe written today means the 15 mL metric spoon, so the error tells you to write `metric tbsp`.
+
 ### Regional names
 
-`plain flour`, `caster sugar`, `icing sugar`, `bicarb soda`, `cornflour`, `double cream`, `single cream`, `whipping cream`, `35% cream`, `wholemeal flour` and many more resolve to a USDA record. Where the match is approximate (caster sugar is finer than granulated; plain flour is close to, not identical to, all-purpose), the result carries a warning saying so.
+`plain flour`, `caster sugar`, `icing sugar`, `bicarb soda`, `cornflour`, `double cream`, `single cream`, `whipping cream`, `35% cream`, `wholemeal flour`, `courgette`, `aubergine`, `rocket`, `fresh coriander`, `spring onion`, `swede`, `beetroot`, `mangetout`, `pak choi`, `capsicum`, `linseed`, `soya milk` and many more resolve to a USDA record. Where the match is approximate (caster sugar is finer than granulated; plain flour is close to, not identical to, all-purpose), the result carries a warning saying so.
 
 ### Counts
 
@@ -188,7 +226,12 @@ toGrams({ ingredient: 'banana', amount: 2, unit: 'medium' }).value;       // 236
 toGrams({ ingredient: 'lemon juice', amount: 2, unit: 'lemon' }).value;   // 96 (juice of two lemons)
 fromGrams({ ingredient: 'egg', amount: 150, to: 'large' }).value;         // 3
 convert({ ingredient: 'egg', amount: 1, from: 'cup', to: 'large' }).value; // 4.86
+toGrams({ ingredient: 'egg', amount: 2, unit: 'eggs' }).value;            // 100 (the default size, large)
+toGrams({ ingredient: 'egg', amount: 2, unit: 'XL' }).value;              // 112
+toGrams({ ingredient: 'courgette', amount: 1 }).value;                    // 196 (one medium zucchini)
 ```
+
+Plurals work (`cloves`, `leaves`, `slices`), and so do `XL`, `lg`, `med` and `sm`. Naming the ingredient as its own unit (`2 eggs`, `2 bananas`) or writing `each` or `whole` takes the ingredient's default size. A USDA food with no curated default takes `medium`, or its only count, and the result carries a warning that names the size used.
 
 The result's `count` field gives the USDA `sizeNote` and portion id that was used. When several USDA rows share a label (an onion has three kinds of slice) the first is used, the others are listed in `warnings`, and `size: 'thin'` picks one. USDA portion weights are for edible material without refuse: a "large" egg is 50 g without the shell, and a medium banana is 118 g without the peel.
 
@@ -208,7 +251,7 @@ A 60.5 g fridge-cold egg sold as US large (2 in tall, 1.75 in wide, weighed on a
 
 ### Dairy by fat percentage
 
-`toGrams({ ingredient: '30% cream', ... })` and `toGrams({ ingredient: 'cream', fatPercent: 30, ... })` use a dairy model. It describes the non-fat part of milk and cream by a line fitted to six USDA records (skim, whole milk, half and half, light cream, light whipping, heavy whipping), then computes density from composition with the Choi-Okos equations.
+`toGrams({ ingredient: '30% cream', ... })` and `toGrams({ ingredient: 'cream', fatPercent: 30, ... })` use a dairy model. The percentage can be written the ways cartons and recipes write it: `35% M.F. cream`, `cream 18%`, `cream (40% fat)`, `2 percent milk`. It describes the non-fat part of milk and cream by a line fitted to six USDA records (skim, whole milk, half and half, light cream, light whipping, heavy whipping), then computes density from composition with the Choi-Okos equations.
 
 The model alone sits 0.8% to 2.2% under USDA's household-measure densities, and the gap grows with fat. So `calibrated` defaults to `true`: the model result is multiplied by the USDA/model ratio, interpolated by fat percentage between the six records. Pass `calibrated: false` for the uncalibrated physical model. 30% fat cream at 20 C is 1.0105 g/mL calibrated and 0.9913 g/mL uncalibrated. `docs/plans/physics-notes.md` has the method, the anchor table and the limits.
 
@@ -286,13 +329,14 @@ Liquids can be converted at another temperature (`temperatureC`). Water uses 0.9
 ```sh
 npm run build:data      # SR Legacy + FNDDS (about 15 MB of downloads, once) -> data/
 npm run build:branded   # Branded Foods (452 MB download, streamed, once) -> data/branded-gaps.json
+npm run build:lite      # data/lite.json and data/lite.mjs from the files above; no download
 npm test
 ```
 
-The builds need Node 22 and `unzip` (and `curl` for the branded download). They write no timestamps, so two runs give byte-identical files. `aliases.json` and `measurements.json` are hand-curated and are not rewritten; `npm test` checks that each alias points at a real record, form and description.
+The builds need Node 22 and `unzip` (and `curl` for the branded download). They write no timestamps, so two runs give byte-identical files. `aliases.json` and `measurements.json` are hand-curated and are not rewritten; `npm test` checks that each alias points at a real record, form and description, and that no two aliases claim the same name. The two data builds finish by running `build:lite`. After editing `aliases.json` or `units.json` by hand, run it yourself: `npm test` fails until the lite files match.
 
 Tests use `node --test` with a glob, which needs Node 21 or later. The helper itself runs on Node 18 and later.
 
 ## Licence
 
-Code: MIT, copyright KieranVR. Data: USDA SR Legacy is public domain; the curated aliases, units and derived densities are released under the same MIT licence.
+Code: MIT, copyright KieranVR. Data: the USDA releases (SR Legacy, FNDDS, Branded Foods) are public domain; the curated aliases, units and derived densities are released under the same MIT licence.

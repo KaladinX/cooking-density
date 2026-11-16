@@ -51,3 +51,18 @@ test('branded aliases and ambiguous aliases point at real gaps', () => {
   for (const a of aliases.filter((x) => x.branded)) assert.ok(gaps.get(a.branded)?.n > 0, a.id);
   for (const a of aliases.filter((x) => x.ambiguousBetween)) for (const id of a.ambiguousBetween) assert.ok(ids.has(id), `${a.id} -> ${id}`);
 });
+
+test('no two aliases share a normalised name or id', () => {
+  const norm = (s) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+  const { aliases } = load('../data/aliases.json');
+  const owner = new Map();
+  const clashes = [];
+  for (const a of aliases) {
+    for (const key of new Set([a.id, ...a.names].map(norm))) {
+      const prior = owner.get(key);
+      if (prior !== undefined && prior !== a.id) clashes.push(`"${key}": ${prior} and ${a.id}`);
+      else owner.set(key, a.id);
+    }
+  }
+  assert.deepEqual(clashes, []);
+});

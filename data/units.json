@@ -134,6 +134,21 @@
       "ml": 100
     },
     {
+      "id": "metric:cL",
+      "name": "cL",
+      "system": "metric",
+      "kind": "volume",
+      "ml": 10
+    },
+    {
+      "id": "metric:dessertspoon",
+      "name": "dessertspoon",
+      "system": "metric",
+      "kind": "volume",
+      "ml": 10,
+      "note": "UK and Australian recipes; two metric teaspoons"
+    },
+    {
       "id": "australian:tsp",
       "name": "tsp",
       "system": "australian",
@@ -196,6 +211,13 @@
       "system": "mass",
       "kind": "mass",
       "grams": 1
+    },
+    {
+      "id": "mass:mg",
+      "name": "mg",
+      "system": "mass",
+      "kind": "mass",
+      "grams": 0.001
     },
     {
       "id": "mass:kg",

@@ -212,3 +212,75 @@ test('same-kind conversions still need no ingredient with counts present', () =>
   near(convert({ amount: 1, from: 'cup', to: 'tbsp' }).value, 16, 1e-6);
   assert.throws(() => convert({ amount: 1, from: 'large', to: 'g' }));
 });
+
+test('unit names: T and t, centilitres, dessertspoons, milligrams', () => {
+  assert.equal(parseUnit('T').id, 'us-customary:tbsp');
+  assert.equal(parseUnit('t').id, 'us-customary:tsp');
+  assert.equal(parseUnit('T.').id, 'us-customary:tbsp');
+  assert.equal(parseUnit('metric T').id, 'metric:tbsp');
+  assert.equal(parseUnit('Tb').id, 'us-customary:tbsp');
+  assert.equal(parseUnit('C').id, 'us-customary:cup');
+  assert.equal(parseUnit('cl').id, 'metric:cL');
+  assert.equal(parseUnit('centilitres').ml, 10);
+  assert.equal(parseUnit('dessertspoon').id, 'metric:dessertspoon');
+  assert.equal(parseUnit('dsp').ml, 10);
+  assert.equal(parseUnit('mg').grams, 0.001);
+  assert.equal(parseUnit('kilo').id, 'mass:kg');
+  near(convert({ amount: 25, from: 'cl', to: 'ml' }).value, 250, 1e-9);
+  near(toGrams({ ingredient: 'water', amount: 10, unit: 'cl' }).value, 99.82, 1e-9);
+});
+
+test('unit names: an imperial spoon is refused with the unit to write instead', () => {
+  assert.throws(() => parseUnit('uk tbsp'), /metric tbsp/);
+  assert.throws(() => parseUnit('imperial tsp'), /metric tsp/);
+  // A known unit in the wrong system is not retried as a count.
+  assert.throws(() => toGrams({ ingredient: 'butter', amount: 1, unit: 'uk tbsp' }), /^Error: No "tbsp" in the imperial system\. Modern UK recipes use the metric spoon: write "metric tbsp" \(15 mL\)\.$/);
+});
+
+test('count units: the ingredient named as its own unit, and size shorthand', () => {
+  near(toGrams({ ingredient: 'egg', amount: 2, unit: 'eggs' }).value, 100, 1e-9);
+  near(toGrams({ ingredient: 'banana', amount: 2, unit: 'bananas' }).value, 236, 1e-9);
+  near(toGrams({ ingredient: 'courgette', amount: 2, unit: 'courgettes' }).value, 392, 1e-9);
+  near(toGrams({ ingredient: 'egg', amount: 2, unit: 'XL' }).value, 112, 1e-9);
+  near(toGrams({ ingredient: 'egg', amount: 1, unit: 'med' }).value, 44, 1e-9);
+  near(toGrams({ ingredient: 'spinach', amount: 2, unit: 'leaves' }).value, 20, 1e-9);
+});
+
+test('count units: a guessed size is named in a warning', () => {
+  // No alias, so no default unit: "medium" is assumed and said so.
+  const guessed = toGrams({ ingredient: 'Bananas, raw', amount: 2, unit: 'bananas' });
+  near(guessed.value, 236, 1e-9);
+  assert.ok(guessed.warnings.some((w) => /No size given for bananas-raw: used "medium/.test(w)), guessed.warnings.join('|'));
+  // The alias has a default unit, so nothing is guessed.
+  assert.ok(!toGrams({ ingredient: 'banana', amount: 2, unit: 'bananas' }).warnings.some((w) => /No size given/.test(w)));
+  // Two counts and no medium: refuse rather than pick one.
+  assert.throws(() => toGrams({ ingredient: 'butter', amount: 1, unit: 'piece' }), /Counts available: pat, stick/);
+});
+
+test('fat percentage in the name, in any of the usual spellings', () => {
+  for (const [q, id] of [
+    ['35 % M.F. cream', 'cream-35pct'], ['cream 18%', 'cream-18pct'], ['Cream (40% fat)', 'cream-40pct'],
+    ['milk, 2 percent', 'milk-2pct'], ['10.5% BF cream', 'cream-10.5pct'], ['48 percent milk fat cream', 'cream-48pct'],
+  ]) {
+    assert.equal(findIngredient(q)?.id, id, q);
+  }
+  assert.equal(findIngredient('ice cream 10%'), null);
+  near(toGrams({ ingredient: 'cream 18%', amount: 1, unit: 'cup' }).value, toGrams({ ingredient: 'single cream', amount: 1, unit: 'cup' }).value, 1e-9);
+});
+
+test('missing arguments fail with a sentence, not a stack of internals', () => {
+  assert.throws(() => toGrams(), /amount must be a number; got undefined/);
+  assert.throws(() => toGrams({ ingredient: 'flour', amount: '2', unit: 'cup' }), /got the string "2"/);
+  assert.throws(() => toGrams({ ingredient: 'flour', amount: 2 }), /No unit given for all-purpose-flour/);
+  assert.throws(() => fromGrams({ ingredient: 'flour', amount: 100 }), /No unit given/);
+  assert.throws(() => convert({ amount: 1, to: 'g' }), /No unit given\./);
+});
+
+test('search: exact alias names first, then raw SR Legacy foods before prepared dishes', () => {
+  assert.equal(searchIngredients('rice')[0].id, 'white-rice');
+  assert.equal(searchIngredients('courgette')[0].id, 'zucchini');
+  assert.equal(searchIngredients('kale')[0].description, 'Kale, raw');
+  assert.equal(searchIngredients('kale', { limit: 3 }).length, 3);
+  assert.deepEqual(searchIngredients('   '), []);
+  assert.ok(findIngredient('egg').names.includes('eggs'));
+});

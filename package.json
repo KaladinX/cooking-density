@@ -1,6 +1,6 @@
 {
   "name": "cooking-density",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Cooking volumes, counts and weights: ingredient densities and egg sizes from USDA data, as JSON and a small helper.",
   "type": "module",
   "main": "./src/index.mjs",
@@ -9,6 +9,14 @@
     ".": {
       "types": "./src/index.d.ts",
       "default": "./src/index.mjs"
+    },
+    "./lite": {
+      "types": "./src/lite.d.ts",
+      "default": "./src/lite.mjs"
+    },
+    "./core": {
+      "types": "./src/core.d.ts",
+      "default": "./src/core.mjs"
     },
     "./data/*": "./data/*",
     "./schema/*": "./schema/*",
@@ -22,11 +30,13 @@
     "examples",
     "docs/plans/physics-notes.md",
     "README.md",
+    "CHANGELOG.md",
     "LICENSE"
   ],
   "scripts": {
-    "build:data": "node scripts/build-data.mjs",
-    "build:branded": "node scripts/build-branded.mjs",
+    "build:data": "node scripts/build-data.mjs && node scripts/build-lite.mjs",
+    "build:branded": "node scripts/build-branded.mjs && node scripts/build-lite.mjs",
+    "build:lite": "node scripts/build-lite.mjs",
     "test": "node --test \"test/*.test.mjs\"",
     "example": "node examples/basic.mjs"
   },
@@ -42,6 +52,7 @@
     "baking",
     "eggs",
     "count-units",
+    "browser",
     "fndds"
   ],
   "repository": "github:KaladinX/cooking-density",

@@ -59,7 +59,8 @@
         "wholemeal flour",
         "whole-grain flour",
         "wholewheat flour",
-        "whole grain wheat flour"
+        "whole grain wheat flour",
+        "wholemeal plain flour"
       ],
       "fdcId": 168893,
       "usdaDescription": "Wheat flour, whole-grain (Includes foods for USDA's Food Distribution Program)",
@@ -2095,7 +2096,12 @@
       "names": [
         "chopped bell pepper",
         "diced bell pepper",
-        "bell pepper"
+        "bell pepper",
+        "red bell pepper",
+        "capsicum",
+        "sweet pepper",
+        "chopped capsicum",
+        "diced capsicum"
       ],
       "fdcId": 170427,
       "usdaDescription": "Peppers, sweet, green, raw",
@@ -2205,6 +2211,730 @@
       "usdaDescription": "Limes, raw",
       "defaultUnit": "fruit",
       "note": "USDA portion weights are for edible material without refuse (SR28 documentation); limes are 16 percent peel and seeds. The record has no volume portions."
+    },
+    {
+      "id": "zucchini",
+      "names": [
+        "zucchini",
+        "zucchinis",
+        "courgette",
+        "courgettes",
+        "chopped zucchini",
+        "diced zucchini",
+        "chopped courgette",
+        "diced courgette"
+      ],
+      "fdcId": 169291,
+      "usdaDescription": "Squash, summer, zucchini, includes skin, raw",
+      "form": "chopped",
+      "note": "Courgette (UK, AU) is zucchini. USDA has no grated form; the chopped cup weight is used for diced or sliced pieces.",
+      "defaultUnit": "medium"
+    },
+    {
+      "id": "eggplant",
+      "names": [
+        "eggplant",
+        "eggplants",
+        "aubergine",
+        "aubergines",
+        "cubed eggplant",
+        "cubed aubergine"
+      ],
+      "fdcId": 169228,
+      "usdaDescription": "Eggplant, raw",
+      "form": "cubes",
+      "note": "Aubergine (UK) is eggplant."
+    },
+    {
+      "id": "cilantro",
+      "names": [
+        "cilantro",
+        "fresh cilantro",
+        "cilantro leaves",
+        "chopped cilantro",
+        "coriander leaves",
+        "fresh coriander",
+        "chopped coriander",
+        "coriander leaf"
+      ],
+      "fdcId": 169997,
+      "usdaDescription": "Coriander (cilantro) leaves, raw",
+      "form": "default",
+      "note": "Fresh coriander (UK, AU) is cilantro. Coriander seed is a separate ingredient."
+    },
+    {
+      "id": "scallions",
+      "names": [
+        "scallions",
+        "scallion",
+        "green onions",
+        "green onion",
+        "spring onions",
+        "spring onion",
+        "salad onions",
+        "chopped scallions",
+        "sliced scallions",
+        "sliced spring onions"
+      ],
+      "fdcId": 170005,
+      "usdaDescription": "Onions, spring or scallions (includes tops and bulb), raw",
+      "form": "chopped",
+      "note": "Spring onion (UK), green onion (US, CA) and scallion are the same plant.",
+      "defaultUnit": "medium"
+    },
+    {
+      "id": "arugula",
+      "names": [
+        "arugula",
+        "rocket",
+        "arugula leaves",
+        "rocket leaves",
+        "salad rocket",
+        "rucola"
+      ],
+      "fdcId": 169387,
+      "usdaDescription": "Arugula, raw",
+      "form": "default",
+      "note": "Rocket (UK, AU) is arugula."
+    },
+    {
+      "id": "fresh-basil",
+      "names": [
+        "fresh basil",
+        "basil",
+        "basil leaves",
+        "fresh basil leaves",
+        "chopped basil",
+        "chopped fresh basil"
+      ],
+      "fdcId": 172232,
+      "usdaDescription": "Basil, fresh",
+      "form": "chopped",
+      "note": "Fresh leaves. Dried basil has its own entry."
+    },
+    {
+      "id": "fresh-parsley",
+      "names": [
+        "fresh parsley",
+        "parsley",
+        "chopped parsley",
+        "chopped fresh parsley",
+        "flat-leaf parsley",
+        "flat leaf parsley",
+        "italian parsley",
+        "curly parsley"
+      ],
+      "fdcId": 170416,
+      "usdaDescription": "Parsley, fresh",
+      "form": "chopped",
+      "note": "Fresh leaves. Dried parsley has its own entry."
+    },
+    {
+      "id": "grated-carrot",
+      "names": [
+        "grated carrot",
+        "grated carrots",
+        "shredded carrot",
+        "shredded carrots"
+      ],
+      "fdcId": 170393,
+      "usdaDescription": "Carrots, raw",
+      "form": "grated",
+      "defaultUnit": "medium"
+    },
+    {
+      "id": "rutabaga",
+      "names": [
+        "rutabaga",
+        "rutabagas",
+        "swede",
+        "swedes",
+        "cubed rutabaga",
+        "cubed swede"
+      ],
+      "fdcId": 168454,
+      "usdaDescription": "Rutabagas, raw",
+      "form": "cubes",
+      "note": "Swede (UK, AU) is rutabaga. In Canada it is also called yellow turnip.",
+      "defaultUnit": "medium"
+    },
+    {
+      "id": "beets",
+      "names": [
+        "beets",
+        "beet",
+        "beetroot",
+        "beetroots",
+        "raw beets",
+        "raw beetroot"
+      ],
+      "fdcId": 169145,
+      "usdaDescription": "Beets, raw",
+      "form": "default",
+      "note": "Raw. Beetroot (UK, AU) is beets."
+    },
+    {
+      "id": "snow-peas",
+      "names": [
+        "snow peas",
+        "snow pea",
+        "mangetout",
+        "mange tout",
+        "mangetouts",
+        "sugar snap peas",
+        "snap peas"
+      ],
+      "fdcId": 170010,
+      "usdaDescription": "Peas, edible-podded, raw",
+      "form": "chopped",
+      "note": "USDA has one edible-podded pea record; sugar snap peas share it with snow peas."
+    },
+    {
+      "id": "bok-choy",
+      "names": [
+        "bok choy",
+        "pak choi",
+        "pak choy",
+        "bok choi",
+        "shredded bok choy",
+        "shredded pak choi"
+      ],
+      "fdcId": 170390,
+      "usdaDescription": "Cabbage, chinese (pak-choi), raw",
+      "form": "shredded",
+      "note": "Pak choi (UK) is bok choy. Napa cabbage is a different vegetable."
+    },
+    {
+      "id": "green-peas",
+      "names": [
+        "green peas",
+        "peas",
+        "fresh peas",
+        "fresh green peas",
+        "garden peas",
+        "shelled peas",
+        "english peas",
+        "petits pois"
+      ],
+      "fdcId": 170419,
+      "usdaDescription": "Peas, green, raw",
+      "form": "default",
+      "note": "Raw shelled peas. Frozen peas have their own entry."
+    },
+    {
+      "id": "frozen-peas",
+      "names": [
+        "frozen peas",
+        "frozen green peas",
+        "frozen petits pois"
+      ],
+      "fdcId": 170016,
+      "usdaDescription": "Peas, green, frozen, unprepared (Includes foods for USDA's Food Distribution Program)",
+      "form": "default"
+    },
+    {
+      "id": "corn-kernels",
+      "names": [
+        "corn kernels",
+        "sweetcorn",
+        "sweet corn",
+        "sweetcorn kernels",
+        "sweet corn kernels",
+        "frozen corn",
+        "frozen sweetcorn"
+      ],
+      "fdcId": 168398,
+      "usdaDescription": "Corn, sweet, yellow, frozen, kernels cut off cob, unprepared (Includes foods for USDA's Food Distribution Program)",
+      "form": "default",
+      "note": "Frozen kernels cut off the cob. Canned corn has its own entry."
+    },
+    {
+      "id": "canned-corn",
+      "names": [
+        "canned corn",
+        "canned sweetcorn",
+        "canned sweet corn",
+        "tinned sweetcorn",
+        "tinned corn",
+        "canned corn kernels"
+      ],
+      "fdcId": 169214,
+      "usdaDescription": "Corn, sweet, yellow, canned, whole kernel, drained solids",
+      "form": "default",
+      "note": "Drained kernels."
+    },
+    {
+      "id": "sweet-potato",
+      "names": [
+        "sweet potato",
+        "sweet potatoes",
+        "cubed sweet potato",
+        "diced sweet potato",
+        "raw sweet potato"
+      ],
+      "fdcId": 168482,
+      "usdaDescription": "Sweet potato, raw, unprepared (Includes foods for USDA's Food Distribution Program)",
+      "form": "cubes",
+      "note": "Raw. Mashed sweet potato has its own entry."
+    },
+    {
+      "id": "mashed-sweet-potato",
+      "names": [
+        "mashed sweet potato",
+        "mashed sweet potatoes",
+        "sweet potato mash"
+      ],
+      "fdcId": 168484,
+      "usdaDescription": "Sweet potato, cooked, boiled, without skin",
+      "form": "mashed",
+      "note": "Boiled without skin, then mashed."
+    },
+    {
+      "id": "mashed-potatoes",
+      "names": [
+        "mashed potatoes",
+        "mashed potato",
+        "potato mash"
+      ],
+      "fdcId": 168555,
+      "usdaDescription": "Potatoes, mashed, home-prepared, whole milk and butter added",
+      "form": "default",
+      "note": "USDA record is home-prepared with whole milk and butter, so the figure includes them."
+    },
+    {
+      "id": "polenta",
+      "names": [
+        "polenta",
+        "coarse cornmeal",
+        "coarse polenta",
+        "dry polenta"
+      ],
+      "fdcId": 168867,
+      "usdaDescription": "Cornmeal, degermed, enriched, yellow",
+      "form": "default",
+      "note": "Polenta is coarse cornmeal. The record is fine degermed cornmeal, and a coarse grind packs a little differently, so treat the figure as approximate."
+    },
+    {
+      "id": "whole-flaxseed",
+      "names": [
+        "whole flaxseed",
+        "flaxseed",
+        "flaxseeds",
+        "flax seeds",
+        "flax seed",
+        "linseed",
+        "linseeds",
+        "whole linseed"
+      ],
+      "fdcId": 169414,
+      "usdaDescription": "Seeds, flaxseed",
+      "form": "whole",
+      "note": "Linseed (UK) is flaxseed. Ground flaxseed has its own entry."
+    },
+    {
+      "id": "hemp-seeds",
+      "names": [
+        "hemp seeds",
+        "hemp seed",
+        "hulled hemp seeds",
+        "shelled hemp seeds",
+        "hemp hearts"
+      ],
+      "fdcId": 170148,
+      "usdaDescription": "Seeds, hemp seed, hulled",
+      "form": "default"
+    },
+    {
+      "id": "chickpeas",
+      "names": [
+        "chickpeas",
+        "garbanzo beans",
+        "garbanzos",
+        "canned chickpeas",
+        "cooked chickpeas",
+        "tinned chickpeas",
+        "chick peas",
+        "canned garbanzo beans",
+        "cooked garbanzo beans"
+      ],
+      "fdcId": 173801,
+      "usdaDescription": "Chickpeas (garbanzo beans, bengal gram), mature seeds, canned, drained, rinsed in tap water",
+      "form": "drained-rinsed",
+      "note": "Canned, drained and rinsed. Home-cooked chickpeas weigh a little more per cup."
+    },
+    {
+      "id": "black-beans",
+      "names": [
+        "black beans",
+        "cooked black beans",
+        "canned black beans",
+        "tinned black beans",
+        "black turtle beans"
+      ],
+      "fdcId": 173735,
+      "usdaDescription": "Beans, black, mature seeds, cooked, boiled, without salt",
+      "form": "default",
+      "note": "Boiled without salt. Canned black beans, drained, come close. Dried black beans have their own entry."
+    },
+    {
+      "id": "short-grain-rice",
+      "names": [
+        "short-grain rice",
+        "short grain rice",
+        "round-grain rice",
+        "round grain rice",
+        "sushi rice",
+        "pudding rice"
+      ],
+      "fdcId": 168881,
+      "usdaDescription": "Rice, white, short-grain, enriched, uncooked",
+      "form": "default",
+      "note": "USDA has one short-grain white rice record, uncooked. Sushi rice (JP) and pudding rice (UK) are short-grain varieties."
+    },
+    {
+      "id": "wild-rice",
+      "names": [
+        "wild rice",
+        "raw wild rice",
+        "uncooked wild rice"
+      ],
+      "fdcId": 169726,
+      "usdaDescription": "Wild rice, raw",
+      "form": "default"
+    },
+    {
+      "id": "millet",
+      "names": [
+        "millet",
+        "whole millet",
+        "raw millet",
+        "uncooked millet",
+        "hulled millet"
+      ],
+      "fdcId": 169702,
+      "usdaDescription": "Millet, raw",
+      "form": "default"
+    },
+    {
+      "id": "cooked-quinoa",
+      "names": [
+        "cooked quinoa"
+      ],
+      "fdcId": 168917,
+      "usdaDescription": "Quinoa, cooked",
+      "form": "default"
+    },
+    {
+      "id": "cooked-brown-rice",
+      "names": [
+        "cooked brown rice",
+        "cooked long-grain brown rice",
+        "boiled brown rice"
+      ],
+      "fdcId": 169704,
+      "usdaDescription": "Rice, brown, long-grain, cooked (Includes foods for USDA's Food Distribution Program)",
+      "form": "default"
+    },
+    {
+      "id": "cooked-pasta",
+      "names": [
+        "cooked pasta",
+        "boiled pasta",
+        "cooked macaroni",
+        "cooked elbow macaroni"
+      ],
+      "fdcId": 169737,
+      "usdaDescription": "Pasta, cooked, enriched, without added salt",
+      "form": "elbows-unpacked",
+      "note": "Cup weight depends on shape. This uses elbows; pass form penne, rotini, shells, farfalle or lasagne for others."
+    },
+    {
+      "id": "cooked-spaghetti",
+      "names": [
+        "cooked spaghetti",
+        "boiled spaghetti",
+        "cooked linguine"
+      ],
+      "fdcId": 169737,
+      "usdaDescription": "Pasta, cooked, enriched, without added salt",
+      "form": "spaghetti-unpacked",
+      "note": "Loosely packed strands. Linguine and other long pasta are close."
+    },
+    {
+      "id": "steel-cut-oats",
+      "names": [
+        "steel-cut oats",
+        "steel cut oats",
+        "irish oats",
+        "pinhead oats",
+        "pinhead oatmeal"
+      ],
+      "fdcId": 169705,
+      "usdaDescription": "Oats (Includes foods for USDA's Food Distribution Program)",
+      "form": "default",
+      "note": "USDA lists whole raw oats (groats). Steel-cut oats are the same grain cut into pieces, so the figure is close but approximate."
+    },
+    {
+      "id": "chopped-dates",
+      "names": [
+        "dates",
+        "chopped dates",
+        "pitted dates",
+        "dried dates",
+        "deglet noor dates"
+      ],
+      "fdcId": 171726,
+      "usdaDescription": "Dates, deglet noor",
+      "form": "chopped",
+      "note": "USDA record is Deglet Noor. Medjool dates are larger and softer, so weigh them."
+    },
+    {
+      "id": "dried-apricots",
+      "names": [
+        "dried apricots",
+        "dried apricot",
+        "dried apricot halves"
+      ],
+      "fdcId": 173941,
+      "usdaDescription": "Apricots, dried, sulfured, uncooked",
+      "form": "halves"
+    },
+    {
+      "id": "prunes",
+      "names": [
+        "prunes",
+        "prune",
+        "pitted prunes",
+        "dried plums"
+      ],
+      "fdcId": 168162,
+      "usdaDescription": "Plums, dried (prunes), uncooked",
+      "form": "pitted"
+    },
+    {
+      "id": "currants",
+      "names": [
+        "currants",
+        "dried currants",
+        "zante currants",
+        "dried zante currants"
+      ],
+      "fdcId": 171724,
+      "usdaDescription": "Currants, zante, dried",
+      "form": "default",
+      "note": "Dried Zante currants, the baking kind. Fresh red and black currants are a different fruit."
+    },
+    {
+      "id": "raspberries",
+      "names": [
+        "raspberries",
+        "raspberry",
+        "fresh raspberries"
+      ],
+      "fdcId": 167755,
+      "usdaDescription": "Raspberries, raw",
+      "form": "default"
+    },
+    {
+      "id": "blackberries",
+      "names": [
+        "blackberries",
+        "blackberry",
+        "fresh blackberries"
+      ],
+      "fdcId": 173946,
+      "usdaDescription": "Blackberries, raw",
+      "form": "default"
+    },
+    {
+      "id": "cherries",
+      "names": [
+        "cherries",
+        "sweet cherries",
+        "fresh cherries",
+        "pitted cherries"
+      ],
+      "fdcId": 171719,
+      "usdaDescription": "Cherries, sweet, raw",
+      "form": "without-pits",
+      "note": "Raw sweet cherries, pitted."
+    },
+    {
+      "id": "cranberries",
+      "names": [
+        "cranberries",
+        "fresh cranberries",
+        "whole cranberries",
+        "raw cranberries"
+      ],
+      "fdcId": 171722,
+      "usdaDescription": "Cranberries, raw",
+      "form": "whole",
+      "note": "Raw whole berries. Dried cranberries have their own entry."
+    },
+    {
+      "id": "marmalade",
+      "names": [
+        "marmalade",
+        "orange marmalade"
+      ],
+      "fdcId": 168819,
+      "usdaDescription": "Marmalade, orange",
+      "form": "default"
+    },
+    {
+      "id": "dulce-de-leche",
+      "names": [
+        "dulce de leche"
+      ],
+      "fdcId": 173461,
+      "usdaDescription": "Dulce de Leche",
+      "form": "default"
+    },
+    {
+      "id": "chicken-stock",
+      "names": [
+        "chicken stock",
+        "chicken broth",
+        "homemade chicken stock",
+        "homemade chicken broth"
+      ],
+      "fdcId": 172884,
+      "usdaDescription": "Soup, stock, chicken, home-prepared",
+      "form": "default",
+      "liquid": true,
+      "note": "USDA lists a cup of this stock at exactly 240 g, the same as water, which is close for stock and broth."
+    },
+    {
+      "id": "beef-stock",
+      "names": [
+        "beef stock",
+        "beef broth",
+        "homemade beef stock",
+        "homemade beef broth"
+      ],
+      "fdcId": 172883,
+      "usdaDescription": "Soup, stock, beef, home-prepared",
+      "form": "default",
+      "liquid": true,
+      "note": "USDA lists a cup of this stock at exactly 240 g, the same as water, which is close for stock and broth."
+    },
+    {
+      "id": "soy-milk",
+      "names": [
+        "soy milk",
+        "soymilk",
+        "soya milk",
+        "soy drink",
+        "soya drink"
+      ],
+      "fdcId": 172456,
+      "usdaDescription": "Soymilk, original and vanilla, with added calcium, vitamins A and D",
+      "form": "default",
+      "liquid": true,
+      "note": "Soya milk (UK, AU) is soy milk. The record is original and vanilla soy milk with added calcium and vitamins."
+    },
+    {
+      "id": "almond-milk",
+      "names": [
+        "almond milk",
+        "almond drink",
+        "vanilla almond milk"
+      ],
+      "fdcId": 168751,
+      "usdaDescription": "Beverages, almond milk, sweetened, vanilla flavor, ready-to-drink",
+      "form": "default",
+      "liquid": true,
+      "note": "The sweetened vanilla record is used because the unsweetened record reads 262 g per cup, too heavy for a thin milk. USDA lists a cup of the vanilla record at 240 g, the same as water."
+    },
+    {
+      "id": "coconut-cream",
+      "names": [
+        "coconut cream"
+      ],
+      "fdcId": 170580,
+      "usdaDescription": "Nuts, coconut cream, raw (liquid expressed from grated meat)",
+      "form": "default",
+      "liquid": true,
+      "note": "USDA lists raw coconut cream at exactly 240 g per cup. Canned coconut cream is thicker, so treat the figure as approximate."
+    },
+    {
+      "id": "brewed-coffee",
+      "names": [
+        "brewed coffee",
+        "black coffee",
+        "filter coffee",
+        "drip coffee",
+        "strong coffee"
+      ],
+      "fdcId": 171890,
+      "usdaDescription": "Beverages, coffee, brewed, prepared with tap water",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "kefir",
+      "names": [
+        "kefir",
+        "plain kefir",
+        "lowfat kefir",
+        "low-fat kefir"
+      ],
+      "fdcId": 170904,
+      "usdaDescription": "Kefir, lowfat, plain, LIFEWAY",
+      "form": "default",
+      "liquid": true,
+      "note": "USDA lists only brand records for kefir; this is the lowfat plain one."
+    },
+    {
+      "id": "red-wine",
+      "names": [
+        "red wine",
+        "dry red wine"
+      ],
+      "fdcId": 173190,
+      "usdaDescription": "Alcoholic beverage, wine, table, red",
+      "form": "default",
+      "note": "The temperature model does not cover alcohol."
+    },
+    {
+      "id": "white-wine",
+      "names": [
+        "white wine",
+        "dry white wine"
+      ],
+      "fdcId": 174837,
+      "usdaDescription": "Alcoholic beverage, wine, table, white",
+      "form": "default",
+      "note": "The temperature model does not cover alcohol."
+    },
+    {
+      "id": "gruyere",
+      "names": [
+        "gruyere",
+        "gruyere cheese",
+        "shredded gruyere",
+        "grated gruyere"
+      ],
+      "fdcId": 171242,
+      "usdaDescription": "Cheese, gruyere",
+      "form": "shredded",
+      "note": "Shredded or grated by the cup. For a block, pass form \"default\"."
+    },
+    {
+      "id": "swiss-cheese",
+      "names": [
+        "swiss cheese",
+        "emmental",
+        "emmentaler",
+        "emmenthal",
+        "shredded swiss cheese",
+        "grated swiss cheese"
+      ],
+      "fdcId": 171251,
+      "usdaDescription": "Cheese, swiss",
+      "form": "shredded",
+      "note": "Emmental is the cheese US recipes call Swiss. Shredded or grated by the cup. For a block, pass form \"default\"."
     },
     {
       "id": "golden-syrup",

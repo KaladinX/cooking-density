@@ -1,0 +1,46 @@
+name: test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: npm test (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      # No install step: the package has no dependencies.
+      - run: npm test
+
+  # The tests need Node 21 for the glob in `node --test`; the helper itself
+  # promises Node 18. Run it there to keep the promise honest.
+  helper:
+    name: helper runs (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [18, 20]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: node examples/basic.mjs
+      - name: lite entry answers
+        run: |
+          node --input-type=module -e "
+            import { toGrams } from './src/lite.mjs';
+            const g = toGrams({ ingredient: 'plain flour', amount: 1, unit: 'cup' }).value;
+            if (Math.abs(g - 125) > 0.01) throw new Error(String(g));
+          "

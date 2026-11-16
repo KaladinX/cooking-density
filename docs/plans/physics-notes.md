@@ -64,7 +64,7 @@ use it on alcoholic drinks. 192 foods lack a fibre or ash value; they are listed
 ## Parametric dairy: `creamDensity({fatPercent, temperatureC})`
 
 Idea: cream is fat plus a watery "serum" whose make-up barely changes as fat rises.
-Method, in `src/physics/dairy.mjs`, fitted in `scripts/build-data.mjs`:
+Method, in `src/physics/dairy-model.mjs`, fitted in `scripts/build-data.mjs`:
 
 1. Take six plain USDA records: skim (173432), whole 3.25% (172217), half and half
    (171255), light cream (170857), light whipping (170858), heavy whipping (170859).
