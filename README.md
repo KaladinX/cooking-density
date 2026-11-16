@@ -339,4 +339,4 @@ Tests use `node --test` with a glob, which needs Node 21 or later. The helper it
 
 ## Licence
 
-Code: MIT, copyright KieranVR. Data: the USDA releases (SR Legacy, FNDDS, Branded Foods) are public domain; the curated aliases, units and derived densities are released under the same MIT licence.
+MIT, copyright KieranVR. See `LICENSE`.
