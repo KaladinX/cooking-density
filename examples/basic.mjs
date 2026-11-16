@@ -1,5 +1,5 @@
 // Run with: node examples/basic.mjs
-import { toGrams, toVolume } from '../src/index.mjs';
+import { toGrams, toVolume, fromGrams, edibleGramsFromShell } from '../src/index.mjs';
 
 const g = (r) => `${r.value.toFixed(1)} g`;
 
@@ -15,6 +15,12 @@ const packed = toGrams({ ingredient: 'brown sugar', amount: 1, unit: 'cup', form
 const loose = toGrams({ ingredient: 'brown sugar', amount: 1, unit: 'cup', form: 'unpacked' });
 console.log('1 cup brown sugar, packed     ->', g(packed));
 console.log('1 cup brown sugar, unpacked   ->', g(loose));
+
+// Counts, and eggs in the shell.
+console.log('\n2 large eggs                  ->', g(toGrams({ ingredient: 'egg', amount: 2, unit: 'large' })));
+console.log('3 garlic cloves               ->', g(toGrams({ ingredient: 'garlic', amount: 3, unit: 'cloves' })));
+console.log('150 g egg                     ->', `${fromGrams({ ingredient: 'egg', amount: 150, to: 'large' }).value} large eggs`);
+console.log('60.5 g egg in the shell       ->', `${edibleGramsFromShell(60.5).toFixed(2)} g edible`);
 
 // Every result says where the density came from.
 const flour = toGrams({ ingredient: 'plain flour', amount: 2, unit: 'metric cup' });

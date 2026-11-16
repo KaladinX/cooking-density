@@ -45,11 +45,47 @@ test('heavy whipping cream: default form is the 238 g fluid cup, whipped kept ap
 
 test('every form cites its raw portion rows', () => {
   for (const ing of data.ingredients) {
-    assert.equal(ing.source, 'usda-sr-legacy');
+    assert.ok(['usda-sr-legacy', 'usda-fndds'].includes(ing.source), ing.id);
     for (const f of ing.forms) {
       assert.ok(f.portions.length > 0);
       assert.ok(f.portions.some((p) => p.usdaPortionId === f.basisPortionId));
       for (const p of f.portions) assert.ok(p.densityGPerMl > 0 && typeof p.modifier === 'string');
     }
   }
+});
+
+test('SR Legacy records are unchanged by FNDDS: SR ids never carry an FNDDS suffix by accident', () => {
+  const sr = data.ingredients.filter((i) => i.source === 'usda-sr-legacy');
+  const fndds = data.ingredients.filter((i) => i.source === 'usda-fndds');
+  assert.ok(sr.length > 4000 && fndds.length > 3000);
+  assert.equal(byFdc.get(168894).id, 'wheat-flour-white-all-purpose-enriched-bleached');
+  assert.equal(new Set(data.ingredients.map((i) => i.fdcId)).size, data.ingredients.length);
+});
+
+test('FNDDS fills foods SR lacks and never repeats an SR description', () => {
+  const srDescriptions = new Set(data.ingredients.filter((i) => i.source === 'usda-sr-legacy').map((i) => i.description.toLowerCase()));
+  for (const i of data.ingredients.filter((x) => x.source === 'usda-fndds')) {
+    assert.ok(!srDescriptions.has(i.description.toLowerCase()), i.description);
+  }
+});
+
+test('count portions: egg sizes, garlic clove, banana, onion, lemon yield', () => {
+  const egg = byFdc.get(171287);
+  const g = (label) => egg.counts.find((c) => c.label === label).gramWeight;
+  assert.deepEqual([g('small'), g('medium'), g('large'), g('extra large'), g('jumbo')], [38, 44, 50, 56, 63]);
+  assert.equal(egg.counts.find((c) => c.label === 'large').sizeNote, 'large');
+  assert.equal(egg.counts.find((c) => c.label === 'large').usdaPortionId, 88374);
+  assert.equal(byFdc.get(169230).counts.find((c) => c.label === 'clove').gramsPerUnit, 3);
+  const banana = byFdc.get(173944).counts.find((c) => c.label === 'medium');
+  assert.equal(banana.sizeNote, 'medium (7" to 7-7/8" long)');
+  assert.equal(banana.gramWeight, 118);
+  assert.equal(byFdc.get(167747).counts.find((c) => c.label === 'lemon').gramWeight, 48);
+  assert.equal(byFdc.get(168156).counts.find((c) => c.label === 'lime').gramWeight, 44);
+});
+
+test('counts stay out of the volume maths: the whole raw egg density comes from the cup', () => {
+  near(density(171287), 243 / 236.5882365, 0.0001);
+  const egg = byFdc.get(171287);
+  assert.ok(egg.forms[0].portions.every((p) => /cup/.test(p.modifier)));
+  assert.ok(egg.forms[0].portions.some((p) => p.modifier === 'cup (4.86 large eggs)'));
 });

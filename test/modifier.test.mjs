@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { parseModifier } from '../src/usda-modifier.mjs';
+import { parseModifier, parseCount } from '../src/usda-modifier.mjs';
 
 const ok = (unit, form, nlea = false) => ({ ok: true, unit, nlea, form });
 
@@ -43,4 +43,28 @@ test('unparseable text is rejected with a reason', () => {
   for (const m of ['oz', 'serving', 'cupcake', 'serving 1 cup', 'can (12 fl oz)', 'cup (4 fl oz)', 'cup, with pits, yields']) {
     assert.equal(parseModifier(m).ok, false, m);
   }
+});
+
+
+test('count portions: size words, countable parts, yields', () => {
+  const label = (m) => parseCount(m).label;
+  assert.equal(label('large'), 'large');
+  assert.equal(label('extra large'), 'extra large');
+  assert.equal(label('extra-large pizza (16-18" diameter)'), 'extra large');
+  assert.equal(label('medium (7" to 7-7/8" long)'), 'medium');
+  assert.equal(label('clove'), 'clove');
+  assert.equal(label('cloves'), 'clove');
+  assert.equal(label('slices'), 'slice');
+  assert.equal(label('slice, thin'), 'slice');
+  assert.equal(label('leaves'), 'leaf');
+  assert.equal(label('fruit without refuse'), 'fruit');
+  assert.equal(label('lemon yields'), 'lemon');
+  assert.equal(label('lime yields'), 'lime');
+  for (const m of ['oz', 'lb', 'steak', 'jar', 'cupcake', 'serving', 'package', 'can (12 fl oz)']) {
+    assert.equal(parseCount(m).ok, false, m);
+  }
+});
+
+test('cup (N large eggs) is a plain cup', () => {
+  assert.deepEqual(parseModifier('cup (4.86 large eggs)'), ok('cup', 'default'));
 });

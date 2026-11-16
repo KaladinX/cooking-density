@@ -1,183 +1,382 @@
 {
-  "foodsInSource": 7793,
-  "foodsWithDensity": 3127,
-  "forms": 3438,
-  "portionsInSource": 14449,
-  "portionsConverted": 4262,
-  "portionsSkipped": 10187,
-  "skippedNonVolume": 9677,
-  "skippedVolumeUnparsed": 510,
-  "skippedBadNumbers": 7,
-  "skipReasons": {
-    "no-leading-volume-unit": 10047,
-    "non-positive-amount-or-grams": 7,
-    "qualifier-has-number": 25,
-    "repeated-unit": 3,
-    "unrecognised-parenthetical": 91,
-    "yield-or-reference": 14
+  "totals": {
+    "foods": 8617,
+    "forms": 7516,
+    "countPortions": 5990
   },
-  "topSkippedModifiers": [
-    {
-      "modifier": "oz",
-      "count": 3166
+  "sources": {
+    "usda-sr-legacy": {
+      "foodsInSource": 7793,
+      "foodsSkippedOverlap": 0,
+      "foodsKept": 4166,
+      "foodsWithDensity": 3128,
+      "foodsCountOnly": 1038,
+      "forms": 3439,
+      "portionsInSource": 14449,
+      "portionsConverted": 4263,
+      "countPortions": 1806,
+      "portionsSkipped": 8380,
+      "skippedNonVolume": 7881,
+      "skippedVolumeUnparsed": 499,
+      "skippedBadNumbers": 7,
+      "skipReasons": {
+        "no-leading-volume-unit": 8241,
+        "non-positive-amount-or-grams": 7,
+        "qualifier-has-number": 25,
+        "repeated-unit": 3,
+        "unrecognised-parenthetical": 90,
+        "yield-or-reference": 14
+      },
+      "topSkippedModifiers": [
+        {
+          "modifier": "oz",
+          "count": 3166
+        },
+        {
+          "modifier": "lb",
+          "count": 281
+        },
+        {
+          "modifier": "steak",
+          "count": 280
+        },
+        {
+          "modifier": "serving",
+          "count": 265
+        },
+        {
+          "modifier": "roast",
+          "count": 185
+        },
+        {
+          "modifier": "fillet",
+          "count": 162
+        },
+        {
+          "modifier": "jar",
+          "count": 131
+        },
+        {
+          "modifier": "bar",
+          "count": 66
+        },
+        {
+          "modifier": "can",
+          "count": 58
+        },
+        {
+          "modifier": "chop",
+          "count": 57
+        },
+        {
+          "modifier": "package",
+          "count": 56
+        },
+        {
+          "modifier": "package (10 oz)",
+          "count": 50
+        },
+        {
+          "modifier": "scoop",
+          "count": 46
+        },
+        {
+          "modifier": "inch sub",
+          "count": 44
+        },
+        {
+          "modifier": "pizza",
+          "count": 37
+        }
+      ],
+      "topSkippedVolumeModifiers": [
+        {
+          "modifier": "serving (5 fl oz)",
+          "count": 26
+        },
+        {
+          "modifier": "cup (1\" pieces)",
+          "count": 25
+        },
+        {
+          "modifier": "portion, amount to make 1/2 cup",
+          "count": 23
+        },
+        {
+          "modifier": "serving 1/2 cup",
+          "count": 23
+        },
+        {
+          "modifier": "cup (4 fl oz)",
+          "count": 22
+        },
+        {
+          "modifier": "serving 1 cup",
+          "count": 19
+        },
+        {
+          "modifier": "can (12 fl oz)",
+          "count": 12
+        },
+        {
+          "modifier": "can or bottle (12 fl oz)",
+          "count": 10
+        },
+        {
+          "modifier": "can or bottle (16 fl oz)",
+          "count": 10
+        },
+        {
+          "modifier": "package yield (2 cups)",
+          "count": 10
+        },
+        {
+          "modifier": "serving 100 ml",
+          "count": 9
+        },
+        {
+          "modifier": "cup 8 fl oz",
+          "count": 8
+        },
+        {
+          "modifier": "bottle Heinz Strained (4 fl oz)",
+          "count": 7
+        },
+        {
+          "modifier": "cup",
+          "count": 7
+        },
+        {
+          "modifier": "serving (2 tbsp)",
+          "count": 7
+        },
+        {
+          "modifier": "serving 6 fl oz",
+          "count": 7
+        },
+        {
+          "modifier": "bottle 8 fl oz",
+          "count": 6
+        },
+        {
+          "modifier": "can (6 fl oz)",
+          "count": 6
+        },
+        {
+          "modifier": "serving 5 fl oz",
+          "count": 6
+        },
+        {
+          "modifier": "tbsp (1/8 cup)",
+          "count": 6
+        },
+        {
+          "modifier": "bottle 16.9 fl oz",
+          "count": 5
+        },
+        {
+          "modifier": "cup (1\" cubes)",
+          "count": 5
+        },
+        {
+          "modifier": "cup (1/2\" pieces)",
+          "count": 5
+        },
+        {
+          "modifier": "cup, poured from box",
+          "count": 5
+        },
+        {
+          "modifier": "bottle 12 fl oz",
+          "count": 4
+        }
+      ]
     },
-    {
-      "modifier": "lb",
-      "count": 281
-    },
-    {
-      "modifier": "steak",
-      "count": 280
-    },
-    {
-      "modifier": "serving",
-      "count": 265
-    },
-    {
-      "modifier": "piece, cooked, excluding refuse (yield from 1 lb raw meat with refuse)",
-      "count": 212
-    },
-    {
-      "modifier": "slice",
-      "count": 186
-    },
-    {
-      "modifier": "roast",
-      "count": 185
-    },
-    {
-      "modifier": "fillet",
-      "count": 162
-    },
-    {
-      "modifier": "piece",
-      "count": 147
-    },
-    {
-      "modifier": "jar",
-      "count": 131
-    },
-    {
-      "modifier": "unit (yield from 1 lb ready-to-cook chicken)",
-      "count": 106
-    },
-    {
-      "modifier": "bar",
-      "count": 66
-    },
-    {
-      "modifier": "medium",
-      "count": 60
-    },
-    {
-      "modifier": "can",
-      "count": 58
-    },
-    {
-      "modifier": "large",
-      "count": 58
+    "usda-fndds": {
+      "foodsInSource": 5432,
+      "foodsSkippedOverlap": 279,
+      "foodsKept": 4451,
+      "foodsWithDensity": 3910,
+      "foodsCountOnly": 541,
+      "forms": 4077,
+      "portionsInSource": 20796,
+      "portionsConverted": 4676,
+      "countPortions": 4184,
+      "portionsSkipped": 11936,
+      "skippedNonVolume": 11042,
+      "skippedVolumeUnparsed": 894,
+      "skippedBadNumbers": 0,
+      "skipReasons": {
+        "no-leading-volume-unit": 6027,
+        "no-readable-amount": 5387,
+        "qualifier-has-number": 1,
+        "unrecognised-parenthetical": 469,
+        "yield-or-reference": 52
+      },
+      "topSkippedModifiers": [
+        {
+          "modifier": "Quantity not specified",
+          "count": 5047
+        },
+        {
+          "modifier": "oz, cooked",
+          "count": 159
+        },
+        {
+          "modifier": "fl oz (no ice)",
+          "count": 158
+        },
+        {
+          "modifier": "oz yields",
+          "count": 151
+        },
+        {
+          "modifier": "regular",
+          "count": 151
+        },
+        {
+          "modifier": "surface inch",
+          "count": 149
+        },
+        {
+          "modifier": "fl oz (NFS)",
+          "count": 148
+        },
+        {
+          "modifier": "fl oz (with ice)",
+          "count": 148
+        },
+        {
+          "modifier": "miniature/bite size",
+          "count": 122
+        },
+        {
+          "modifier": "miniature",
+          "count": 110
+        },
+        {
+          "modifier": "egg",
+          "count": 108
+        },
+        {
+          "modifier": "miniature/slider",
+          "count": 107
+        },
+        {
+          "modifier": "100 calorie package",
+          "count": 96
+        },
+        {
+          "modifier": "individual container",
+          "count": 84
+        },
+        {
+          "modifier": "small/regular fillet",
+          "count": 84
+        }
+      ],
+      "topSkippedVolumeModifiers": [
+        {
+          "modifier": "fl oz (no ice)",
+          "count": 158
+        },
+        {
+          "modifier": "fl oz (NFS)",
+          "count": 148
+        },
+        {
+          "modifier": "fl oz (with ice)",
+          "count": 148
+        },
+        {
+          "modifier": "can (12 fl oz)",
+          "count": 38
+        },
+        {
+          "modifier": "bottle (16.9 fl oz or 500 ml)",
+          "count": 35
+        },
+        {
+          "modifier": "microwavable cup",
+          "count": 32
+        },
+        {
+          "modifier": "cup, dry, yields",
+          "count": 29
+        },
+        {
+          "modifier": "bottle (20 fl oz)",
+          "count": 28
+        },
+        {
+          "modifier": "bottle (12 fl oz)",
+          "count": 20
+        },
+        {
+          "modifier": "can or bottle (12 fl oz)",
+          "count": 20
+        },
+        {
+          "modifier": "cup, in shell, yields",
+          "count": 18
+        },
+        {
+          "modifier": "can or bottle (16 fl oz)",
+          "count": 17
+        },
+        {
+          "modifier": "juice box/pouch (6.75 fl oz)",
+          "count": 16
+        },
+        {
+          "modifier": "fun size box (4.23 fl oz)",
+          "count": 13
+        },
+        {
+          "modifier": "bottle (8 fl oz)",
+          "count": 12
+        },
+        {
+          "modifier": "Keurig cup",
+          "count": 10
+        },
+        {
+          "modifier": "microwave cup, prepared",
+          "count": 10
+        },
+        {
+          "modifier": "can or bottle (16.9 fl oz)",
+          "count": 9
+        },
+        {
+          "modifier": "can or bottle (20 fl oz)",
+          "count": 9
+        },
+        {
+          "modifier": "cup, raw (equivalent to 1 large egg) yields",
+          "count": 9
+        },
+        {
+          "modifier": "bottle (4 fl oz)",
+          "count": 7
+        },
+        {
+          "modifier": "Snapple bottle (16 fl oz)",
+          "count": 6
+        },
+        {
+          "modifier": "bottle (32 fl oz)",
+          "count": 6
+        },
+        {
+          "modifier": "can (8 fl oz)",
+          "count": 6
+        },
+        {
+          "modifier": "cup, unpopped, yields",
+          "count": 5
+        }
+      ]
     }
-  ],
-  "topSkippedVolumeModifiers": [
-    {
-      "modifier": "serving (5 fl oz)",
-      "count": 26
-    },
-    {
-      "modifier": "cup (1\" pieces)",
-      "count": 25
-    },
-    {
-      "modifier": "portion, amount to make 1/2 cup",
-      "count": 23
-    },
-    {
-      "modifier": "serving 1/2 cup",
-      "count": 23
-    },
-    {
-      "modifier": "cup (4 fl oz)",
-      "count": 22
-    },
-    {
-      "modifier": "serving 1 cup",
-      "count": 19
-    },
-    {
-      "modifier": "can (12 fl oz)",
-      "count": 12
-    },
-    {
-      "modifier": "can or bottle (12 fl oz)",
-      "count": 10
-    },
-    {
-      "modifier": "can or bottle (16 fl oz)",
-      "count": 10
-    },
-    {
-      "modifier": "package yield (2 cups)",
-      "count": 10
-    },
-    {
-      "modifier": "serving 100 ml",
-      "count": 9
-    },
-    {
-      "modifier": "cup 8 fl oz",
-      "count": 8
-    },
-    {
-      "modifier": "bottle Heinz Strained (4 fl oz)",
-      "count": 7
-    },
-    {
-      "modifier": "cup",
-      "count": 7
-    },
-    {
-      "modifier": "serving (2 tbsp)",
-      "count": 7
-    },
-    {
-      "modifier": "serving 6 fl oz",
-      "count": 7
-    },
-    {
-      "modifier": "bottle 8 fl oz",
-      "count": 6
-    },
-    {
-      "modifier": "can (6 fl oz)",
-      "count": 6
-    },
-    {
-      "modifier": "serving 5 fl oz",
-      "count": 6
-    },
-    {
-      "modifier": "tbsp (1/8 cup)",
-      "count": 6
-    },
-    {
-      "modifier": "bottle 16.9 fl oz",
-      "count": 5
-    },
-    {
-      "modifier": "cup (1\" cubes)",
-      "count": 5
-    },
-    {
-      "modifier": "cup (1/2\" pieces)",
-      "count": 5
-    },
-    {
-      "modifier": "cup, poured from box",
-      "count": 5
-    },
-    {
-      "modifier": "bottle 12 fl oz",
-      "count": 4
-    }
-  ]
+  }
 }

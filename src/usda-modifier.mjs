@@ -69,6 +69,8 @@ export function parseModifier(modifier) {
       return ' ';
     }
     if (/^yields\b/.test(text)) return ' ';
+    // "cup (4.86 large eggs)": how many eggs fill the cup. Informational, not a form.
+    if (/^\d+(\.\d+)? (?:(?:extra )?(?:large|medium|small)|jumbo) eggs?$/.test(text)) return ' ';
     if (/^1 serving$/.test(text)) return ' ';
     if (unit === 'cup' && text === '8 fl oz') return ' ';
     if (text === 'not packed') {
@@ -98,4 +100,56 @@ export function parseModifier(modifier) {
   // (heavy cream's 238 g fluid cup is its ordinary cup, not a variant).
   const form = qualifier === 'fluid' || qualifier === 'liquid' ? 'default' : slug(qualifier) || 'default';
   return { ok: true, unit, nlea, form };
+}
+
+// ---- Count and size portions ----------------------------------------------
+//
+// SR Legacy and FNDDS also list portions counted in things, not volume:
+// "large", "medium", "clove", "slice", "stick". They go in a separate `counts`
+// array and never enter the volume density maths. Only a fixed list of generic
+// count words is accepted; cuts and packages ("steak", "jar", "can") are not.
+
+const COUNT_WORDS = new Map([
+  ['jumbo', 'jumbo'],
+  ['large', 'large'],
+  ['medium', 'medium'],
+  ['small', 'small'],
+  ['clove', 'clove'], ['cloves', 'clove'],
+  ['each', 'each'],
+  ['whole', 'whole'],
+  ['stick', 'stick'], ['sticks', 'stick'],
+  ['slice', 'slice'], ['slices', 'slice'],
+  ['sprig', 'sprig'], ['sprigs', 'sprig'],
+  ['leaf', 'leaf'], ['leaves', 'leaf'],
+  ['pod', 'pod'], ['pods', 'pod'],
+  ['piece', 'piece'], ['pieces', 'piece'],
+  ['fruit', 'fruit'],
+  ['head', 'head'],
+  ['bunch', 'bunch'],
+  ['stalk', 'stalk'], ['stalks', 'stalk'],
+  ['ear', 'ear'], ['ears', 'ear'],
+  ['spear', 'spear'], ['spears', 'spear'],
+  ['wedge', 'wedge'], ['wedges', 'wedge'],
+  ['pat', 'pat'],
+  ['cube', 'cube'], ['cubes', 'cube'],
+  ['bulb', 'bulb'],
+  ['unit', 'unit'],
+  ['item', 'item'],
+]);
+
+/**
+ * @param {string} modifier raw USDA modifier text
+ * @returns {{ok:true, label:string} | {ok:false}}
+ */
+export function parseCount(modifier) {
+  const lower = modifier.trim().toLowerCase();
+  // "lemon yields" (juice from one lemon): counted in fruit.
+  const yields = /^(lemon|lime|orange) yields$/.exec(lower);
+  if (yields) return { ok: true, label: yields[1] };
+  const m = /^(extra[ -](?:large|small)|[a-z]+)(?=$|[\s,(])/.exec(lower);
+  if (!m) return { ok: false };
+  const word = m[1].replace('-', ' ');
+  if (word === 'extra large' || word === 'extra small') return { ok: true, label: word };
+  const label = COUNT_WORDS.get(word);
+  return label ? { ok: true, label } : { ok: false };
 }

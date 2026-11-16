@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 1,
+  "note": "Sizes are for eggs in the shell. USDA SR Legacy count portions (large 50 g and so on) are edible weights without the shell.",
+  "shell": {
+    "description": "Shell",
+    "refusePercent": 12,
+    "edibleFraction": 0.88,
+    "appliesTo": {
+      "fdcId": 171287,
+      "ndbNumber": 1123,
+      "usdaDescription": "Egg, whole, raw, fresh"
+    },
+    "citation": {
+      "title": "USDA National Nutrient Database for Standard Reference, Release 28, FOOD_DES.txt: NDB 01123 \"Egg, whole, raw, fresh\", Ref_Desc \"Shell\", Refuse 12 (percent)",
+      "url": "https://www.ars.usda.gov/ARSUserFiles/80400525/Data/SR/SR28/dnload/sr28asc.zip"
+    },
+    "note": "One national figure. Shell share varies with hen age, breed and egg size, and is not measured per egg here."
+  },
+  "standards": [
+    {
+      "id": "us",
+      "name": "United States (USDA consumer grades)",
+      "basis": "minimum net weight per dozen; per-egg figures are that weight divided by 12",
+      "citation": {
+        "title": "United States Standards, Grades, and Weight Classes for Shell Eggs, AMS 56, effective July 20, 2000, section 56.218 (Weight classes), Table I",
+        "url": "https://www.ams.usda.gov/sites/default/files/media/Shell_Egg_Standard%5B1%5D.pdf"
+      },
+      "derivation": "minGramsPerEgg = ounces per dozen / 12 x 28.349523125 g; maxGramsPerEggExclusive is the minimum of the next larger class",
+      "classes": [
+        {
+          "name": "Jumbo",
+          "minOuncesPerDozen": 30,
+          "minIndividualOuncesPerDozenRate": 29,
+          "minGramsPerEgg": 70.87,
+          "minIndividualGramsPerEgg": 68.51,
+          "maxGramsPerEggExclusive": null
+        },
+        {
+          "name": "Extra large",
+          "minOuncesPerDozen": 27,
+          "minIndividualOuncesPerDozenRate": 26,
+          "minGramsPerEgg": 63.79,
+          "minIndividualGramsPerEgg": 61.42,
+          "maxGramsPerEggExclusive": 70.87
+        },
+        {
+          "name": "Large",
+          "minOuncesPerDozen": 24,
+          "minIndividualOuncesPerDozenRate": 23,
+          "minGramsPerEgg": 56.7,
+          "minIndividualGramsPerEgg": 54.34,
+          "maxGramsPerEggExclusive": 63.79
+        },
+        {
+          "name": "Medium",
+          "minOuncesPerDozen": 21,
+          "minIndividualOuncesPerDozenRate": 20,
+          "minGramsPerEgg": 49.61,
+          "minIndividualGramsPerEgg": 47.25,
+          "maxGramsPerEggExclusive": 56.7
+        },
+        {
+          "name": "Small",
+          "minOuncesPerDozen": 18,
+          "minIndividualOuncesPerDozenRate": 17,
+          "minGramsPerEgg": 42.52,
+          "minIndividualGramsPerEgg": 40.16,
+          "maxGramsPerEggExclusive": 49.61
+        },
+        {
+          "name": "Peewee",
+          "minOuncesPerDozen": 15,
+          "minIndividualOuncesPerDozenRate": null,
+          "minGramsPerEgg": 35.44,
+          "minIndividualGramsPerEgg": null,
+          "maxGramsPerEggExclusive": 42.52
+        }
+      ]
+    },
+    {
+      "id": "ca",
+      "name": "Canada (Canada A)",
+      "basis": "minimum weight of each egg",
+      "citation": {
+        "title": "Canadian Grade Compendium, Volume 5 - Eggs, section 5, Table for Size Designations for Canada A Eggs (CFIA)",
+        "url": "https://inspection.canada.ca/en/about-cfia/acts-and-regulations/list-acts-and-regulations/documents-incorporated-reference/canadian-grade-compendium-volume-5"
+      },
+      "derivation": "Column 2, \"Egg weighs not less than\". Peewee is read as under 42 g: the page text does not show which column holds its 42 g.",
+      "classes": [
+        {
+          "name": "Jumbo",
+          "minGramsPerEgg": 70,
+          "maxGramsPerEggExclusive": null
+        },
+        {
+          "name": "Extra large",
+          "minGramsPerEgg": 63,
+          "maxGramsPerEggExclusive": 70
+        },
+        {
+          "name": "Large",
+          "minGramsPerEgg": 56,
+          "maxGramsPerEggExclusive": 63
+        },
+        {
+          "name": "Medium",
+          "minGramsPerEgg": 49,
+          "maxGramsPerEggExclusive": 56
+        },
+        {
+          "name": "Small",
+          "minGramsPerEgg": 42,
+          "maxGramsPerEggExclusive": 49
+        },
+        {
+          "name": "Peewee",
+          "minGramsPerEgg": null,
+          "maxGramsPerEggExclusive": 42
+        }
+      ]
+    },
+    {
+      "id": "eu",
+      "name": "European Union (Class A)",
+      "basis": "weight of each egg",
+      "citation": {
+        "title": "Commission Regulation (EC) No 589/2008, Article 4: Grading of Class A eggs by weight",
+        "url": "https://www.legislation.gov.uk/eur/2008/589/data.html"
+      },
+      "derivation": "XL 73 g or more; L 63 g or more and under 73 g; M 53 g or more and under 63 g; S under 53 g. The URL is the legislation.gov.uk copy that was read.",
+      "classes": [
+        {
+          "name": "XL",
+          "minGramsPerEgg": 73,
+          "maxGramsPerEggExclusive": null
+        },
+        {
+          "name": "L",
+          "minGramsPerEgg": 63,
+          "maxGramsPerEggExclusive": 73
+        },
+        {
+          "name": "M",
+          "minGramsPerEgg": 53,
+          "maxGramsPerEggExclusive": 63
+        },
+        {
+          "name": "S",
+          "minGramsPerEgg": null,
+          "maxGramsPerEggExclusive": 53
+        }
+      ]
+    }
+  ],
+  "notAvailable": [
+    {
+      "id": "au",
+      "reason": "No Australian size standard could be found and read. Secondary pages quote ranges, but the Australian Eggs labelling guide itself was not reached, so none are included."
+    }
+  ]
+}

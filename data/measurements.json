@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "note": "Community measurements: weights and sizes that people took in their own kitchens. They are evidence, not corrections to the USDA data, and no density in ingredients.json is derived from them.",
+  "measurements": [
+    {
+      "id": "egg-us-large-kieranvr-001",
+      "contributor": "KieranVR",
+      "submittedOn": "2026-11-16",
+      "ingredient": "egg",
+      "description": "US large chicken egg, in the shell, straight from the fridge",
+      "quantity": "mass-in-shell",
+      "value": 60.5,
+      "unit": "g",
+      "dimensions": {
+        "height": { "value": 2, "unit": "in" },
+        "width": { "value": 1.75, "unit": "in" }
+      },
+      "instrument": "coffee scale",
+      "conditions": "fridge-cold; measurement resolution of the scale not recorded",
+      "sizeClaim": { "standard": "us", "name": "Large" }
+    }
+  ]
+}

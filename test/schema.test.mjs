@@ -9,6 +9,9 @@ for (const [name, dataPath, schemaPath] of [
   ['units.json', '../data/units.json', '../schema/units.schema.json'],
   ['ingredients.json', '../data/ingredients.json', '../schema/ingredients.schema.json'],
   ['aliases.json', '../data/aliases.json', '../schema/aliases.schema.json'],
+  ['egg-sizes.json', '../data/egg-sizes.json', '../schema/egg-sizes.schema.json'],
+  ['measurements.json', '../data/measurements.json', '../schema/measurements.schema.json'],
+  ['branded-gaps.json', '../data/branded-gaps.json', '../schema/branded-gaps.schema.json'],
 ]) {
   test(`${name} validates against its schema`, () => {
     const errors = validate(load(dataPath), load(schemaPath));
@@ -29,12 +32,22 @@ test('every alias points at a real USDA record, form and description', () => {
   const ingredients = load('../data/ingredients.json').ingredients;
   const byFdc = new Map(ingredients.map((i) => [i.fdcId, i]));
   const { aliases } = load('../data/aliases.json');
-  assert.ok(aliases.length >= 150, `only ${aliases.length} aliases`);
+  assert.ok(aliases.length >= 200, `only ${aliases.length} aliases`);
   for (const a of aliases) {
-    if (a.model) continue;
+    if (a.model || a.branded || a.ambiguousBetween) continue;
     const rec = byFdc.get(a.fdcId);
     assert.ok(rec, `${a.id}: fdcId ${a.fdcId} not found`);
     assert.equal(a.usdaDescription, rec.description, a.id);
-    assert.ok(rec.forms.some((f) => f.form === a.form), `${a.id}: form ${a.form} missing`);
+    if (a.form === undefined) assert.equal(rec.forms.length, 0, `${a.id}: only count-only aliases may omit form`);
+    else assert.ok(rec.forms.some((f) => f.form === a.form), `${a.id}: form ${a.form} missing`);
+    if (a.defaultUnit) assert.ok(rec.counts?.some((c) => c.label === a.defaultUnit), `${a.id}: defaultUnit ${a.defaultUnit} is not a count of ${a.usdaDescription}`);
   }
+});
+
+test('branded aliases and ambiguous aliases point at real gaps', () => {
+  const gaps = new Map(load('../data/branded-gaps.json').gaps.map((g) => [g.id, g]));
+  const { aliases } = load('../data/aliases.json');
+  const ids = new Set(aliases.map((a) => a.id));
+  for (const a of aliases.filter((x) => x.branded)) assert.ok(gaps.get(a.branded)?.n > 0, a.id);
+  for (const a of aliases.filter((x) => x.ambiguousBetween)) for (const id of a.ambiguousBetween) assert.ok(ids.has(id), `${a.id} -> ${id}`);
 });

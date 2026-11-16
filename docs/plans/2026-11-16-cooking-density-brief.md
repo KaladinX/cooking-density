@@ -119,3 +119,50 @@ deterministic (running it twice yields byte-identical output).
    most common baking/cooking ingredients pointing at the best USDA record. README with
    the six target use cases as runnable examples, data schema, sources, accuracy notes
    (packing matters ~20%, temperature ~1%), license. JSON Schema in `schema/`.
+
+## Batch 4: coverage gaps (appended 2026-11-16)
+
+Parent-verified before the batch started (not re-checked here): SR Legacy has count portions
+that the batch-1 parser skips. "Egg, whole, raw, fresh" has `large` 50 g, `extra large` 56,
+`jumbo` 63, `medium` 44, `small` 38 and `cup (4.86 large eggs)` 243. "Garlic, raw" has `clove` 3.
+"Bananas, raw" has `medium (7" to 7-7/8" long)` 118. Prior art on npm: cups-to-grams-mcp
+(271 items, USDA plus King Arthur), @jclind/ingredient-parser (about 50 unsourced densities).
+King Arthur's chart is not used (copyrighted compilation).
+
+Items: (1) count units as a separate `counts` array, helper support and aliases;
+(2) egg size standards and a shell fraction in `data/egg-sizes.json`, first community
+measurement in `data/measurements.json`; (3) FNDDS as a second source, SR Legacy wins on
+overlap; (4) branded-label densities for the gap list, median plus every row with a
+rounding-uncertainty estimate; (6) README, accuracy, unmatched list, version 0.2.0.
+
+### Verified in batch 4
+
+(Filled in below as each fact is checked. Entries say what was read and where.)
+
+Read and confirmed during batch 4 (2026-11-16):
+
+- **USDA AMS 56** (https://www.ams.usda.gov/sites/default/files/media/Shell_Egg_Standard%5B1%5D.pdf),
+  section 56.218 Table I, read from the PDF text: minimum net weight per dozen jumbo 30 oz,
+  extra large 27, large 24, medium 21, small 18, peewee 15; individual eggs at the dozen rate
+  29, 26, 23, 20, 17 oz per dozen (peewee none). The weights are in 56.218, not 56.210.
+- **CFIA Canadian Grade Compendium Volume 5, section 5** (page fetched): Canada A egg weighs
+  not less than jumbo 70 g, extra large 63, large 56, medium 49, small 42. The extracted table
+  text shows peewee as 42 with no column; read as "under 42 g", unconfirmed.
+- **Regulation (EC) No 589/2008 Article 4** (legislation.gov.uk copy, read): XL >= 73 g,
+  L 63 to < 73, M 53 to < 63, S < 53.
+- **Australia**: no standard found that could be read; left out and recorded as not available.
+- **Shell fraction**: FDC SR Legacy CSV and API have no refuse field. USDA SR28 `FOOD_DES.txt`
+  (sr28asc.zip, read) gives NDB 01123 "Egg, whole, raw, fresh" Ref_Desc "Shell", Refuse 12.
+  SR28 documentation line: portion "weights are given for edible material without refuse".
+  Also NDB 09040 bananas refuse 36 (skin), 09159 limes 16 (peel and seeds).
+- **FNDDS**: the download page (https://fdc.nal.usda.gov/download-datasets) lists
+  `FoodData_Central_survey_food_csv_2024-10-31.zip` (FNDDS 2021-2023, HTTP 200, 3,325,692 bytes)
+  as the newest survey CSV. `food_portion.csv` has the amount inside `portion_description`
+  ("1 cup") and a numeric code in `modifier`; `food_nutrient.csv` uses nutrient numbers
+  (255 water), not nutrient ids (1051).
+- **Branded Foods**: the same page lists `FoodData_Central_branded_food_csv_2026-10-29.zip`
+  (HTTP 200, 451,954,262 bytes), downloaded in full and streamed. FDC API DEMO_KEY returned
+  `x-ratelimit-limit: 10`, too low for the gap searches.
+- **Spot check of five FNDDS foods** against SR Legacy: see `docs/plans/physics-notes.md`.
+  Three agree to the gram; SR catsup disagrees with itself (tbsp 17 g, cup 240 g); FNDDS cream
+  cheese is exactly water weight (a placeholder).

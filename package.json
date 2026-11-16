@@ -1,7 +1,7 @@
 {
   "name": "cooking-density",
-  "version": "0.1.0",
-  "description": "Cooking volumes to grams and back: ingredient densities from USDA SR Legacy, as JSON data and a small helper.",
+  "version": "0.2.0",
+  "description": "Cooking volumes, counts and weights: ingredient densities and egg sizes from USDA data, as JSON and a small helper.",
   "type": "module",
   "main": "./src/index.mjs",
   "types": "./src/index.d.ts",
@@ -26,6 +26,7 @@
   ],
   "scripts": {
     "build:data": "node scripts/build-data.mjs",
+    "build:branded": "node scripts/build-branded.mjs",
     "test": "node --test \"test/*.test.mjs\"",
     "example": "node examples/basic.mjs"
   },
@@ -38,7 +39,10 @@
     "grams-to-cups",
     "usda",
     "units",
-    "baking"
+    "baking",
+    "eggs",
+    "count-units",
+    "fndds"
   ],
   "repository": "github:KaladinX/cooking-density",
   "author": "KieranVR",

@@ -15,6 +15,7 @@ import { creamDensity, dairyFatRange } from './physics/dairy.mjs';
 export { parseUnit } from './units.mjs';
 export { units } from './units.mjs';
 export { creamDensity } from './physics/dairy.mjs';
+export { eggSizes, measurements, edibleGramsFromShell, shellGramsFromEdible, classifyEgg } from './eggs.mjs';
 export { density as compositionDensity, componentDensity } from './physics/choi-okos.mjs';
 
 /** Pure water at 20 C, g/mL. Standard reference value (see docs/plans/physics-notes.md). */
@@ -63,16 +64,42 @@ function describeRecord(record, extra = {}) {
     kind: 'usda',
     fdcId: record.fdcId,
     description: record.description,
-    form: record.forms.some((f) => f.form === 'default') ? 'default' : record.forms[0].form,
+    form: record.forms.length === 0 ? null : record.forms.some((f) => f.form === 'default') ? 'default' : record.forms[0].form,
     forms,
+    waterEquivalentForms: record.forms.filter((f) => f.waterEquivalent).map((f) => f.form),
+    spreadByForm: Object.fromEntries(record.forms.filter((f) => f.portionSpreadPct).map((f) => [f.form, f.portionSpreadPct])),
     composition: record.composition ?? null,
+    counts: record.counts ?? [],
+    dataSource: record.source,
     liquid: false,
     dairy: false,
     ...extra,
   };
 }
 
+let brandedCache;
+function brandedGaps() {
+  brandedCache ??= readJson('../data/branded-gaps.json');
+  return brandedCache;
+}
+
 function fromAlias(alias) {
+  if (alias.ambiguousBetween) {
+    return {
+      id: alias.id, name: alias.names[0], kind: 'ambiguous', ambiguousBetween: alias.ambiguousBetween,
+      form: null, forms: {}, composition: null, counts: [], dataSource: null, liquid: false, dairy: false,
+      defaultUnit: null, note: alias.note ?? null,
+    };
+  }
+  if (alias.branded) {
+    const gap = brandedGaps().gaps.find((g) => g.id === alias.branded);
+    if (!gap || !gap.n) throw new Error(`Alias ${alias.id} points at branded gap ${alias.branded}, which has no rows`);
+    return {
+      id: alias.id, name: alias.names[0], kind: 'branded', gap: alias.branded,
+      form: 'default', forms: { default: gap.medianDensityGPerMl }, composition: null, counts: [],
+      dataSource: 'usda-branded', liquid: false, dairy: false, defaultUnit: null, note: alias.note ?? null,
+    };
+  }
   if (alias.model) {
     return {
       id: alias.id,
@@ -83,6 +110,8 @@ function fromAlias(alias) {
       form: 'default',
       forms: { default: null },
       composition: null,
+      counts: [],
+      dataSource: null,
       liquid: alias.liquid === true,
       dairy: alias.model === 'dairy',
       note: alias.note ?? null,
@@ -93,9 +122,10 @@ function fromAlias(alias) {
   return describeRecord(record, {
     id: alias.id,
     name: alias.names[0],
-    form: alias.form,
+    ...(alias.form ? { form: alias.form } : {}),
     liquid: alias.liquid === true,
     dairy: alias.dairy === true,
+    defaultUnit: alias.defaultUnit ?? null,
     note: alias.note ?? null,
   });
 }
@@ -173,6 +203,7 @@ export function getDensity(ingredientInput, options = {}) {
   const ing = resolveIngredient(ingredientInput);
   const { form, temperatureC, fatPercent, calibrated = true } = options;
   const warnings = [];
+  if (ing.kind === 'ambiguous') throw new Error(`"${ing.name}" is ambiguous. ${ing.note} Choose one of: ${ing.ambiguousBetween.join(', ')}.`);
   if (ing.note) warnings.push(ing.note);
 
   if (temperatureC !== undefined && !Number.isFinite(temperatureC)) throw new Error('temperatureC must be a number');
@@ -213,8 +244,35 @@ export function getDensity(ingredientInput, options = {}) {
     };
   }
 
+  // Branded-label median (gap ingredients USDA SR Legacy and FNDDS lack).
+  if (ing.kind === 'branded') {
+    const { gaps, source } = brandedGaps();
+    const gap = gaps.find((g) => g.id === ing.gap);
+    if (form && form !== 'default') throw new Error(`${ing.id} has only the default form`);
+    if (temperatureC !== undefined && temperatureC !== 20) warnings.push(`temperatureC ignored: ${ing.id} has no composition to scale from.`);
+    if (fatPercent !== undefined) warnings.push(`fatPercent ignored: ${ing.id} is not a dairy liquid.`);
+    warnings.push(...gap.warnings);
+    return {
+      densityGPerMl: gap.medianDensityGPerMl,
+      form: 'default',
+      temperatureC: 20,
+      source: {
+        kind: 'usda-branded',
+        gap: gap.id,
+        rows: gap.n,
+        release: source.release,
+        medianUncertaintyPct: gap.medianUncertaintyPct,
+        interquartileDensityGPerMl: [gap.q1DensityGPerMl, gap.q3DensityGPerMl],
+      },
+      warnings,
+    };
+  }
+
   // USDA record.
   if (fatPercent !== undefined) warnings.push(`fatPercent ignored: ${ing.id} is not a dairy liquid.`);
+  if (Object.keys(ing.forms).length === 0) {
+    throw new Error(`${ing.id} has no volume portions in the USDA data, only counts (${[...new Set(ing.counts.map((c) => c.label))].join(', ')}), so it cannot be converted to or from a volume.`);
+  }
   const chosen = form ?? ing.form;
   if (!(chosen in ing.forms)) {
     throw new Error(`${ing.id} has no form "${chosen}". Available: ${Object.keys(ing.forms).join(', ')}`);
@@ -223,6 +281,12 @@ export function getDensity(ingredientInput, options = {}) {
   if (!form && names.some((n) => PACKING_FORMS.includes(n))) {
     const others = names.filter((n) => n !== chosen);
     if (others.length) warnings.push(`Form "${chosen}" used. Packing changes density: also available ${others.join(', ')}.`);
+  }
+  if ((ing.waterEquivalentForms ?? []).includes(chosen) && !ing.liquid) {
+    warnings.push(`Every volume portion of "${chosen}" in the USDA record weighs exactly like water (cup 240 g, tbsp 15 g, tsp 5 g). That fits a water-like liquid; for a paste or solid it usually means USDA used a placeholder, so treat the density as unverified.`);
+  }
+  if (ing.spreadByForm?.[chosen]) {
+    warnings.push(`The USDA portions for "${chosen}" disagree by ${ing.spreadByForm[chosen]}% in density. The figure comes from the largest portion; check the portion rows in data/ingredients.json.`);
   }
   let densityGPerMl = ing.forms[chosen];
   let t = 20;
@@ -240,69 +304,143 @@ export function getDensity(ingredientInput, options = {}) {
     densityGPerMl,
     form: chosen,
     temperatureC: t,
-    source: { kind: 'usda-sr-legacy', fdcId: ing.fdcId, description: ing.description },
+    source: { kind: ing.dataSource ?? 'usda-sr-legacy', fdcId: ing.fdcId, description: ing.description },
     warnings,
   };
 }
 
+// ---- Count units ("large", "clove", "slice") --------------------------------
+
+const GENERIC_COUNT_WORDS = new Set(['each', 'ea', 'whole', 'piece', 'pieces', 'item', 'items', 'unit', 'units', 'count']);
+
+function countWord(text) {
+  return normalise(text).replace(/\bextra large\b/, 'extra large');
+}
+
+const PLURALS = new Map([['cloves', 'clove'], ['slices', 'slice'], ['leaves', 'leaf'], ['pods', 'pod'], ['sprigs', 'sprig'], ['stalks', 'stalk'], ['ears', 'ear'], ['spears', 'spear'], ['sticks', 'stick'], ['wedges', 'wedge'], ['cubes', 'cube'], ['lemons', 'lemon'], ['limes', 'lime'], ['oranges', 'orange']]);
+
+/**
+ * Find the count portion an ingredient has for `text` ("large", "clove", "slice, thin",
+ * "cloves"). Returns {entry, others} or null. When several USDA rows share a label
+ * (onion "slice"), the first is used and the rest are listed in `others`.
+ * `size` narrows by a substring of the USDA size note.
+ */
+function findCount(ing, text, size) {
+  const counts = ing.counts ?? [];
+  if (!counts.length) return null;
+  let word = countWord(text);
+  if (GENERIC_COUNT_WORDS.has(word)) {
+    if (counts.some((c) => c.label === word)) { /* a real label: use it */ } else if (ing.defaultUnit) word = countWord(ing.defaultUnit);
+    else return null;
+  }
+  word = PLURALS.get(word) ?? word;
+  let hits = counts.filter((c) => normalise(c.sizeNote) === word);
+  if (!hits.length) hits = counts.filter((c) => c.label === word);
+  if (size) hits = hits.filter((c) => c.sizeNote.toLowerCase().includes(String(size).toLowerCase()));
+  if (!hits.length) return null;
+  return { entry: hits[0], others: hits.slice(1) };
+}
+
+function countSource(ing, entry) {
+  return { kind: ing.dataSource ?? 'usda-sr-legacy', fdcId: ing.fdcId, description: ing.description, portionId: entry.usdaPortionId, modifier: entry.sizeNote };
+}
+
+function resolveEndpoint(input, ing, size) {
+  try {
+    return { unit: parseUnit(input) };
+  } catch (err) {
+    if (typeof input !== 'string' || !ing || typeof ing === 'string') throw err;
+    const found = findCount(ing, input, size);
+    if (!found) {
+      const labels = [...new Set((ing.counts ?? []).map((c) => c.label))];
+      throw new Error(`${err.message} for ${ing.id}.${labels.length ? ` Counts available: ${labels.join(', ')}.` : ' It has no count portions.'}`);
+    }
+    return { count: found };
+  }
+}
+
 /**
  * Convert an amount between any two units. Volume to mass and back use the
- * ingredient's density; volume to volume and mass to mass need none.
- * Options: ingredient, amount, from, to, form, temperatureC, fatPercent, calibrated.
+ * ingredient's density; volume to volume and mass to mass need none. A unit can
+ * also be a count the ingredient has USDA portions for ("large", "clove", "slice"):
+ * counts convert through grams, and through density when the other side is a volume.
+ * Options: ingredient, amount, from, to, form, temperatureC, fatPercent, calibrated, size.
  */
-export function convert({ ingredient, amount, from, to, ...options }) {
+export function convert({ ingredient, amount, from, to, size, ...options }) {
   if (!Number.isFinite(amount)) throw new Error('amount must be a number');
-  const fromUnit = parseUnit(from);
-  const toUnit = parseUnit(to);
-  if (fromUnit.kind === toUnit.kind) {
+  const ing = ingredient === undefined ? undefined : resolveIngredient(ingredient);
+  const fromEnd = resolveEndpoint(from ?? ing?.defaultUnit, ing, size);
+  const toEnd = resolveEndpoint(to, ing, size);
+  const fromUnit = fromEnd.unit;
+  const toUnit = toEnd.unit;
+  const usesCount = Boolean(fromEnd.count || toEnd.count);
+
+  if (!usesCount && fromUnit.kind === toUnit.kind) {
     const warnings = [];
-    if (ingredient !== undefined && (options.temperatureC !== undefined || options.fatPercent !== undefined)) {
+    if (ing && (options.temperatureC !== undefined || options.fatPercent !== undefined)) {
       warnings.push('Same-kind conversion needs no density; temperatureC and fatPercent were not used.');
     }
-    return {
-      value: convertUnit(amount, fromUnit, toUnit),
-      unit: toUnit.id,
-      amount,
-      from: fromUnit.id,
-      densityGPerMl: null,
-      source: null,
-      form: null,
-      warnings,
-    };
+    return { value: convertUnit(amount, fromUnit, toUnit), unit: toUnit.id, amount, from: fromUnit.id, densityGPerMl: null, source: null, form: null, warnings };
   }
-  if (ingredient === undefined) throw new Error('A volume-to-mass conversion needs an ingredient');
-  const d = getDensity(ingredient, options);
-  let value;
+  if (!ing) throw new Error('This conversion needs an ingredient');
+
+  const gram = parseUnit('g');
+  const warnings = [];
+  const needsDensity = (fromUnit?.kind === 'volume') || (toUnit?.kind === 'volume');
+  const d = needsDensity ? getDensity(ing, options) : null;
+  if (d) warnings.push(...d.warnings);
+  else if (ing.note) warnings.push(ing.note);
+  let countInfo = null;
+  const note = (found, role) => {
+    const e = found.entry;
+    countInfo = { label: e.label, sizeNote: e.sizeNote, gramsPerUnit: e.gramsPerUnit, usdaPortionId: e.usdaPortionId };
+    if (found.others.length) {
+      warnings.push(`${found.others.length + 1} USDA portions match "${e.label}" (${role}); used "${e.sizeNote}" at ${e.gramsPerUnit} g. Others: ${found.others.map((o) => `"${o.sizeNote}" ${o.gramsPerUnit} g`).join(', ')}. Pass size to choose.`);
+    }
+    return e;
+  };
+
+  // Everything passes through grams.
+  let grams;
   let volumeMl;
-  if (fromUnit.kind === 'volume') {
-    volumeMl = toMl(amount, fromUnit);
-    value = convertUnit(volumeMl * d.densityGPerMl, parseUnit('g'), toUnit);
-  } else {
-    const grams = convertUnit(amount, fromUnit, parseUnit('g'));
-    volumeMl = grams / d.densityGPerMl;
-    value = fromMl(volumeMl, toUnit);
-  }
+  if (fromEnd.count) grams = amount * note(fromEnd.count, 'from').gramsPerUnit;
+  else if (fromUnit.kind === 'mass') grams = convertUnit(amount, fromUnit, gram);
+  else { volumeMl = toMl(amount, fromUnit); grams = volumeMl * d.densityGPerMl; }
+
+  let value;
+  if (toEnd.count) value = grams / note(toEnd.count, 'to').gramsPerUnit;
+  else if (toUnit.kind === 'mass') value = convertUnit(grams, gram, toUnit);
+  else { volumeMl ??= grams / d.densityGPerMl; value = fromMl(grams / d.densityGPerMl, toUnit); }
+
+  const countEnd = fromEnd.count ?? toEnd.count;
   return {
     value,
-    unit: toUnit.id,
+    unit: toEnd.count ? `count:${toEnd.count.entry.label}` : toUnit.id,
     amount,
-    from: fromUnit.id,
-    volumeMl,
-    densityGPerMl: d.densityGPerMl,
-    form: d.form,
-    temperatureC: d.temperatureC,
-    ...(d.fatPercent !== undefined ? { fatPercent: d.fatPercent } : {}),
-    source: d.source,
-    warnings: d.warnings,
+    from: fromEnd.count ? `count:${fromEnd.count.entry.label}` : fromUnit.id,
+    ...(volumeMl !== undefined ? { volumeMl } : {}),
+    densityGPerMl: d ? d.densityGPerMl : null,
+    form: d ? d.form : null,
+    ...(d ? { temperatureC: d.temperatureC } : {}),
+    ...(d && d.fatPercent !== undefined ? { fatPercent: d.fatPercent } : {}),
+    ...(countInfo ? { count: countInfo } : {}),
+    source: d ? d.source : countSource(ing, countEnd.entry),
+    warnings,
   };
 }
 
-/** Grams for `amount` of a volume (or any) unit. Defaults to grams. */
+/** Grams for `amount` of a volume, count or mass unit. `to` defaults to grams. Without `unit`, the ingredient's default count (egg: large) is used. */
 export function toGrams({ ingredient, amount, unit, to = 'g', ...options }) {
   return convert({ ingredient, amount, from: unit, to, ...options });
 }
 
-/** Volume for `amount` of a mass unit (default grams). `to` is the volume unit, default US cup. */
+/** Volume for `amount` of a mass or count unit (default grams). `to` is the volume unit, default US cup. */
 export function toVolume({ ingredient, amount, unit = 'g', to = 'cup', ...options }) {
   return convert({ ingredient, amount, from: unit, to, ...options });
+}
+
+/** A count ("large", "clove", "medium") from grams: how many of them make up `amount` of a mass unit. */
+export function fromGrams({ ingredient, amount, unit = 'g', to, ...options }) {
+  const ing = resolveIngredient(ingredient);
+  return convert({ ingredient: ing, amount, from: unit, to: to ?? ing.defaultUnit, ...options });
 }

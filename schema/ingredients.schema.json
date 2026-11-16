@@ -2,79 +2,314 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "cooking-density ingredients.json",
   "type": "object",
-  "required": ["schemaVersion", "source", "densityUnit", "compositionUnit", "ingredients"],
+  "required": [
+    "schemaVersion",
+    "source",
+    "sources",
+    "densityUnit",
+    "compositionUnit",
+    "ingredients"
+  ],
   "additionalProperties": false,
   "properties": {
-    "schemaVersion": { "const": 1 },
+    "schemaVersion": {
+      "const": 1
+    },
     "source": {
       "type": "object",
-      "required": ["name", "release", "url", "license"],
+      "required": [
+        "name",
+        "release",
+        "url",
+        "license"
+      ],
       "additionalProperties": false,
       "properties": {
-        "name": { "type": "string" },
-        "release": { "type": "string" },
-        "url": { "type": "string" },
-        "license": { "type": "string" }
+        "name": {
+          "type": "string"
+        },
+        "release": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "license": {
+          "type": "string"
+        }
       }
     },
-    "densityUnit": { "const": "g/mL" },
-    "compositionUnit": { "type": "string" },
-    "ingredients": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/ingredient" } }
+    "densityUnit": {
+      "const": "g/mL"
+    },
+    "compositionUnit": {
+      "type": "string"
+    },
+    "ingredients": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/ingredient"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "release",
+          "url",
+          "license"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "enum": [
+              "usda-sr-legacy",
+              "usda-fndds"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "release": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "license": {
+            "type": "string"
+          }
+        }
+      }
+    }
   },
   "$defs": {
     "ingredient": {
       "type": "object",
-      "required": ["id", "fdcId", "description", "category", "source", "forms"],
+      "required": [
+        "id",
+        "fdcId",
+        "description",
+        "category",
+        "source",
+        "forms"
+      ],
       "additionalProperties": false,
       "properties": {
-        "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
-        "fdcId": { "type": "integer", "minimum": 1 },
-        "description": { "type": "string", "minLength": 1 },
-        "category": { "type": "string" },
-        "source": { "const": "usda-sr-legacy" },
-        "composition": { "$ref": "#/$defs/composition" },
-        "forms": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/form" } }
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "fdcId": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "category": {
+          "type": "string"
+        },
+        "source": {
+          "enum": [
+            "usda-sr-legacy",
+            "usda-fndds"
+          ]
+        },
+        "composition": {
+          "$ref": "#/$defs/composition"
+        },
+        "forms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/form"
+          }
+        },
+        "counts": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/count"
+          }
+        }
       }
     },
     "composition": {
       "type": "object",
-      "required": ["water", "protein", "fat", "carbohydrate", "fiber", "ash", "sum", "carbohydrateByDifference"],
+      "required": [
+        "water",
+        "protein",
+        "fat",
+        "carbohydrate",
+        "fiber",
+        "ash",
+        "sum",
+        "carbohydrateByDifference"
+      ],
       "additionalProperties": false,
       "properties": {
-        "water": { "type": "number", "minimum": 0 },
-        "protein": { "type": "number", "minimum": 0 },
-        "fat": { "type": "number", "minimum": 0 },
-        "carbohydrate": { "type": "number", "minimum": 0 },
-        "fiber": { "type": "number", "minimum": 0 },
-        "ash": { "type": "number", "minimum": 0 },
-        "sum": { "type": "number", "minimum": 0 },
-        "carbohydrateByDifference": { "type": "number", "minimum": 0 },
-        "missing": { "type": "array", "items": { "enum": ["fiber", "ash"] } }
+        "water": {
+          "type": "number",
+          "minimum": 0
+        },
+        "protein": {
+          "type": "number",
+          "minimum": 0
+        },
+        "fat": {
+          "type": "number",
+          "minimum": 0
+        },
+        "carbohydrate": {
+          "type": "number",
+          "minimum": 0
+        },
+        "fiber": {
+          "type": "number",
+          "minimum": 0
+        },
+        "ash": {
+          "type": "number",
+          "minimum": 0
+        },
+        "sum": {
+          "type": "number",
+          "minimum": 0
+        },
+        "carbohydrateByDifference": {
+          "type": "number",
+          "minimum": 0
+        },
+        "missing": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "fiber",
+              "ash"
+            ]
+          }
+        }
       }
     },
     "form": {
       "type": "object",
-      "required": ["form", "densityGPerMl", "basisPortionId", "portions"],
+      "required": [
+        "form",
+        "densityGPerMl",
+        "basisPortionId",
+        "portions"
+      ],
       "additionalProperties": false,
       "properties": {
-        "form": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
-        "densityGPerMl": { "type": "number", "exclusiveMinimum": 0 },
-        "basisPortionId": { "type": "integer" },
-        "portions": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/portion" } }
+        "form": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "densityGPerMl": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "basisPortionId": {
+          "type": "integer"
+        },
+        "portions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/portion"
+          }
+        },
+        "waterEquivalent": {
+          "const": true
+        },
+        "portionSpreadPct": {
+          "type": "number",
+          "minimum": 5
+        }
       }
     },
     "portion": {
       "type": "object",
-      "required": ["usdaPortionId", "amount", "modifier", "gramWeight", "unit", "volumeMl", "densityGPerMl"],
+      "required": [
+        "usdaPortionId",
+        "amount",
+        "modifier",
+        "gramWeight",
+        "unit",
+        "volumeMl",
+        "densityGPerMl"
+      ],
       "additionalProperties": false,
       "properties": {
-        "usdaPortionId": { "type": "integer" },
-        "amount": { "type": "number", "exclusiveMinimum": 0 },
-        "modifier": { "type": "string" },
-        "gramWeight": { "type": "number", "exclusiveMinimum": 0 },
-        "unit": { "type": "string", "pattern": "^[a-z-]+:[A-Za-z ]+$" },
-        "volumeMl": { "type": "number", "exclusiveMinimum": 0 },
-        "densityGPerMl": { "type": "number", "exclusiveMinimum": 0 }
+        "usdaPortionId": {
+          "type": "integer"
+        },
+        "amount": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "modifier": {
+          "type": "string"
+        },
+        "gramWeight": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "unit": {
+          "type": "string",
+          "pattern": "^[a-z-]+:[A-Za-z ]+$"
+        },
+        "volumeMl": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "densityGPerMl": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
+    },
+    "count": {
+      "type": "object",
+      "required": [
+        "label",
+        "sizeNote",
+        "amount",
+        "gramWeight",
+        "gramsPerUnit",
+        "usdaPortionId"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "type": "string",
+          "pattern": "^[a-z]+( [a-z]+)?$"
+        },
+        "sizeNote": {
+          "type": "string",
+          "minLength": 1
+        },
+        "amount": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "gramWeight": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "gramsPerUnit": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "usdaPortionId": {
+          "type": "integer"
+        }
       }
     }
   }

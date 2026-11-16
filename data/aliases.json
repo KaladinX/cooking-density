@@ -459,6 +459,54 @@
       "form": "default"
     },
     {
+      "id": "egg",
+      "names": [
+        "egg",
+        "eggs",
+        "whole egg",
+        "whole eggs",
+        "large egg",
+        "large eggs",
+        "raw egg",
+        "raw eggs",
+        "chicken egg",
+        "hen egg"
+      ],
+      "fdcId": 171287,
+      "usdaDescription": "Egg, whole, raw, fresh",
+      "form": "default",
+      "liquid": true,
+      "defaultUnit": "large",
+      "note": "USDA egg weights are for the edible part without the shell (large = 50 g; the shell is 12 percent of an egg in SR). In-shell sizes are in data/egg-sizes.json."
+    },
+    {
+      "id": "garlic-clove",
+      "names": [
+        "garlic clove",
+        "garlic cloves",
+        "clove of garlic",
+        "cloves of garlic",
+        "clove garlic"
+      ],
+      "fdcId": 169230,
+      "usdaDescription": "Garlic, raw",
+      "form": "default",
+      "defaultUnit": "clove"
+    },
+    {
+      "id": "lemon",
+      "names": [
+        "lemon",
+        "lemons",
+        "whole lemon"
+      ],
+      "fdcId": 167746,
+      "usdaDescription": "Lemons, raw, without peel",
+      "form": "sections",
+      "defaultUnit": "fruit",
+      "note": "USDA lemon weights are for the fruit without peel."
+    },
+    {
       "id": "brown-sugar",
       "names": [
         "brown sugar",
@@ -1216,7 +1264,8 @@
       "fdcId": 172183,
       "usdaDescription": "Egg, white, raw, fresh",
       "form": "default",
-      "liquid": true
+      "liquid": true,
+      "defaultUnit": "large"
     },
     {
       "id": "egg-yolk",
@@ -1228,40 +1277,50 @@
       "fdcId": 172184,
       "usdaDescription": "Egg, yolk, raw, fresh",
       "form": "default",
-      "liquid": true
+      "liquid": true,
+      "defaultUnit": "large"
     },
     {
       "id": "lemon-juice",
       "names": [
         "lemon juice",
-        "fresh lemon juice"
+        "fresh lemon juice",
+        "juice of one lemon",
+        "juice of a lemon"
       ],
       "fdcId": 167747,
       "usdaDescription": "Lemon juice, raw",
       "form": "default",
-      "liquid": true
+      "liquid": true,
+      "defaultUnit": "lemon"
     },
     {
       "id": "lime-juice",
       "names": [
         "lime juice",
-        "fresh lime juice"
+        "fresh lime juice",
+        "juice of one lime",
+        "juice of a lime"
       ],
       "fdcId": 168156,
       "usdaDescription": "Lime juice, raw",
       "form": "default",
-      "liquid": true
+      "liquid": true,
+      "defaultUnit": "lime"
     },
     {
       "id": "orange-juice",
       "names": [
         "orange juice",
-        "fresh orange juice"
+        "fresh orange juice",
+        "juice of one orange",
+        "juice of an orange"
       ],
       "fdcId": 169098,
       "usdaDescription": "Orange juice, raw (Includes foods for USDA's Food Distribution Program)",
       "form": "default",
-      "liquid": true
+      "liquid": true,
+      "defaultUnit": "fruit"
     },
     {
       "id": "apple-juice",
@@ -1961,6 +2020,20 @@
       "form": "mashed"
     },
     {
+      "id": "banana",
+      "names": [
+        "banana",
+        "bananas",
+        "whole banana",
+        "ripe banana"
+      ],
+      "fdcId": 173944,
+      "usdaDescription": "Bananas, raw",
+      "form": "mashed",
+      "defaultUnit": "medium",
+      "note": "USDA portion weights are for edible material without refuse (SR28 documentation); bananas are 36 percent skin, so a medium banana in the peel weighs more than 118 g."
+    },
+    {
       "id": "sliced-strawberries",
       "names": [
         "sliced strawberries",
@@ -1987,11 +2060,13 @@
         "chopped onion",
         "diced onion",
         "onion",
-        "onions"
+        "onions",
+        "medium onion"
       ],
       "fdcId": 170000,
       "usdaDescription": "Onions, raw",
-      "form": "chopped"
+      "form": "chopped",
+      "defaultUnit": "medium"
     },
     {
       "id": "chopped-carrots",
@@ -2118,6 +2193,247 @@
       "fdcId": 171705,
       "usdaDescription": "Avocados, raw, all commercial varieties",
       "form": "pureed"
+    },
+    {
+      "id": "lime",
+      "names": [
+        "lime",
+        "limes",
+        "whole lime"
+      ],
+      "fdcId": 168155,
+      "usdaDescription": "Limes, raw",
+      "defaultUnit": "fruit",
+      "note": "USDA portion weights are for edible material without refuse (SR28 documentation); limes are 16 percent peel and seeds. The record has no volume portions."
+    },
+    {
+      "id": "golden-syrup",
+      "names": [
+        "golden syrup"
+      ],
+      "branded": "golden-syrup"
+    },
+    {
+      "id": "ghee",
+      "names": [
+        "ghee",
+        "clarified butter"
+      ],
+      "branded": "ghee"
+    },
+    {
+      "id": "kosher-salt-diamond-crystal",
+      "names": [
+        "diamond crystal kosher salt",
+        "kosher salt (diamond crystal)",
+        "diamond crystal salt"
+      ],
+      "branded": "kosher-salt-diamond-crystal",
+      "note": "Diamond Crystal and Morton kosher salt differ by about 1.7 times per teaspoon. This is the Diamond Crystal figure."
+    },
+    {
+      "id": "kosher-salt-morton",
+      "names": [
+        "morton kosher salt",
+        "kosher salt (morton)",
+        "morton coarse kosher salt"
+      ],
+      "branded": "kosher-salt-morton",
+      "note": "Diamond Crystal and Morton kosher salt differ by about 1.7 times per teaspoon. This is the Morton figure."
+    },
+    {
+      "id": "flaky-sea-salt",
+      "names": [
+        "flaky sea salt",
+        "flake salt",
+        "sea salt flakes",
+        "flaky salt",
+        "finishing salt"
+      ],
+      "branded": "flaky-sea-salt"
+    },
+    {
+      "id": "chia-seeds",
+      "names": [
+        "chia seeds",
+        "chia seed",
+        "chia"
+      ],
+      "branded": "chia-seeds"
+    },
+    {
+      "id": "agave-syrup",
+      "names": [
+        "agave syrup",
+        "agave nectar",
+        "agave"
+      ],
+      "branded": "agave-syrup"
+    },
+    {
+      "id": "plain-greek-yogurt",
+      "names": [
+        "plain greek yogurt",
+        "greek yogurt",
+        "plain greek yoghurt",
+        "greek yoghurt",
+        "strained yogurt"
+      ],
+      "branded": "plain-greek-yogurt",
+      "note": "Labels give Greek yogurt servings as a nominal fraction of a cup (170 g as 3/4 cup), which reads about 9 percent lower than USDA plain yogurt (1.036 g/mL). For a measured cup, \"plain yogurt\" is the better figure."
+    },
+    {
+      "id": "creme-fraiche",
+      "names": [
+        "creme fraiche",
+        "crème fraîche",
+        "creme fraiche (cultured)"
+      ],
+      "branded": "creme-fraiche"
+    },
+    {
+      "id": "gelatin-powder",
+      "names": [
+        "gelatin",
+        "gelatin powder",
+        "unflavored gelatin",
+        "unflavoured gelatin",
+        "powdered gelatin"
+      ],
+      "branded": "gelatin-powder"
+    },
+    {
+      "id": "pastry-flour",
+      "names": [
+        "pastry flour",
+        "soft pastry flour"
+      ],
+      "branded": "pastry-flour"
+    },
+    {
+      "id": "desiccated-coconut",
+      "names": [
+        "desiccated coconut",
+        "unsweetened shredded coconut",
+        "unsweetened coconut",
+        "unsweetened coconut flakes",
+        "dried coconut"
+      ],
+      "branded": "desiccated-coconut"
+    },
+    {
+      "id": "basmati-rice",
+      "names": [
+        "basmati rice",
+        "basmati",
+        "dry basmati rice"
+      ],
+      "branded": "basmati-rice"
+    },
+    {
+      "id": "arborio-rice",
+      "names": [
+        "arborio rice",
+        "arborio",
+        "risotto rice"
+      ],
+      "branded": "arborio-rice"
+    },
+    {
+      "id": "smoked-paprika",
+      "names": [
+        "smoked paprika",
+        "pimenton",
+        "pimentón"
+      ],
+      "branded": "smoked-paprika"
+    },
+    {
+      "id": "za-atar",
+      "names": [
+        "za'atar",
+        "zaatar",
+        "za'atar spice"
+      ],
+      "branded": "za-atar"
+    },
+    {
+      "id": "garam-masala",
+      "names": [
+        "garam masala"
+      ],
+      "branded": "garam-masala"
+    },
+    {
+      "id": "sumac",
+      "names": [
+        "sumac",
+        "ground sumac"
+      ],
+      "branded": "sumac"
+    },
+    {
+      "id": "ground-cumin",
+      "names": [
+        "ground cumin",
+        "cumin powder",
+        "cumin"
+      ],
+      "branded": "ground-cumin"
+    },
+    {
+      "id": "ground-coriander",
+      "names": [
+        "ground coriander",
+        "coriander powder"
+      ],
+      "branded": "ground-coriander"
+    },
+    {
+      "id": "chinese-five-spice",
+      "names": [
+        "five spice",
+        "chinese five spice",
+        "five-spice powder",
+        "5 spice"
+      ],
+      "branded": "chinese-five-spice"
+    },
+    {
+      "id": "italian-seasoning",
+      "names": [
+        "italian seasoning",
+        "italian herbs"
+      ],
+      "branded": "italian-seasoning"
+    },
+    {
+      "id": "nutritional-yeast",
+      "names": [
+        "nutritional yeast",
+        "nooch"
+      ],
+      "branded": "nutritional-yeast"
+    },
+    {
+      "id": "chipotle-powder",
+      "names": [
+        "chipotle powder",
+        "ground chipotle",
+        "chipotle chili powder"
+      ],
+      "branded": "chipotle-powder"
+    },
+    {
+      "id": "kosher-salt",
+      "names": [
+        "kosher salt"
+      ],
+      "ambiguousBetween": [
+        "kosher-salt-diamond-crystal",
+        "kosher-salt-morton"
+      ],
+      "note": "Kosher salt weighs about 1.7 times more per teaspoon in Morton than in Diamond Crystal. Name the brand."
     },
     {
       "id": "water",

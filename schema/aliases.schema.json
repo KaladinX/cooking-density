@@ -2,43 +2,167 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "cooking-density aliases.json",
   "type": "object",
-  "required": ["schemaVersion", "aliases"],
+  "required": [
+    "schemaVersion",
+    "aliases"
+  ],
   "additionalProperties": false,
   "properties": {
-    "schemaVersion": { "const": 1 },
-    "note": { "type": "string" },
-    "aliases": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/alias" } }
+    "schemaVersion": {
+      "const": 1
+    },
+    "note": {
+      "type": "string"
+    },
+    "aliases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/alias"
+      }
+    }
   },
   "$defs": {
-    "names": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+    "names": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
     "alias": {
       "oneOf": [
         {
           "type": "object",
-          "required": ["id", "names", "fdcId", "usdaDescription", "form"],
+          "required": [
+            "id",
+            "names",
+            "fdcId",
+            "usdaDescription"
+          ],
           "additionalProperties": false,
           "properties": {
-            "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
-            "names": { "$ref": "#/$defs/names" },
-            "fdcId": { "type": "integer", "minimum": 1 },
-            "usdaDescription": { "type": "string", "minLength": 1 },
-            "form": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
-            "liquid": { "const": true },
-            "dairy": { "const": true },
-            "note": { "type": "string" }
+            "id": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+            },
+            "names": {
+              "$ref": "#/$defs/names"
+            },
+            "fdcId": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "usdaDescription": {
+              "type": "string",
+              "minLength": 1
+            },
+            "form": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+            },
+            "liquid": {
+              "const": true
+            },
+            "dairy": {
+              "const": true
+            },
+            "note": {
+              "type": "string"
+            },
+            "defaultUnit": {
+              "type": "string",
+              "minLength": 1
+            }
           }
         },
         {
           "type": "object",
-          "required": ["id", "names", "model"],
+          "required": [
+            "id",
+            "names",
+            "model"
+          ],
           "additionalProperties": false,
           "properties": {
-            "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
-            "names": { "$ref": "#/$defs/names" },
-            "model": { "enum": ["water", "dairy"] },
-            "fatPercent": { "type": "number", "minimum": 0, "exclusiveMaximum": 100 },
-            "liquid": { "const": true },
-            "note": { "type": "string" }
+            "id": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+            },
+            "names": {
+              "$ref": "#/$defs/names"
+            },
+            "model": {
+              "enum": [
+                "water",
+                "dairy"
+              ]
+            },
+            "fatPercent": {
+              "type": "number",
+              "minimum": 0,
+              "exclusiveMaximum": 100
+            },
+            "liquid": {
+              "const": true
+            },
+            "note": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "names",
+            "branded"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+            },
+            "names": {
+              "$ref": "#/$defs/names"
+            },
+            "branded": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+            },
+            "note": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "names",
+            "ambiguousBetween"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+            },
+            "names": {
+              "$ref": "#/$defs/names"
+            },
+            "ambiguousBetween": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "string"
+              }
+            },
+            "note": {
+              "type": "string"
+            }
           }
         }
       ]

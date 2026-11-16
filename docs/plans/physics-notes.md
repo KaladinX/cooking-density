@@ -240,3 +240,196 @@ portion for them or no matching record. Each is absent rather than guessed:
 Forms matter for several: `cheddar` and `mozzarella` default to the shredded form,
 `brown sugar` to packed, `raisins` to unpacked, `rolled oats` to the single dry oats
 record. Pass `form` to override.
+
+## Batch 4: counts, eggs, FNDDS, branded gap fills
+
+### Count portions
+
+SR Legacy and FNDDS list portions in things as well as volumes. The parser used to skip
+them. `parseCount` now reads a fixed list of generic count words at the start of the
+modifier (`large`, `medium`, `small`, `extra large`, `jumbo`, `clove`, `each`, `whole`,
+`stick`, `slice`, `sprig`, `leaf`, `pod`, `piece`, `fruit`, `head`, `bunch`, `stalk`,
+`ear`, `spear`, `wedge`, `pat`, `cube`, `bulb`, `unit`, `item`, and "lemon/lime/orange
+yields", which is the juice of one fruit). Cuts and packages ("steak", "jar", "can",
+"package") are not counted. Each count keeps `sizeNote` (the modifier text verbatim),
+`amount`, `gramWeight`, `gramsPerUnit` and the USDA portion id, and stays out of the
+volume density. A food with counts and no volume portion has `forms: []`.
+
+SR Legacy: 1,806 count portions (1,038 SR foods have counts and no volume density, so
+they enter `ingredients.json` with `forms: []`). FNDDS: 4,184. Total 5,990.
+
+`cup (4.86 large eggs)` (243 g) is a volume portion with a note about how many eggs fill
+it. The parser now ignores that parenthetical, so the whole raw egg gets a density,
+1.0271 g/mL, and a cup of eggs is 4.86 large eggs.
+
+Edible weights: the SR28 documentation says portion weights are "for edible material
+without refuse". So `large` egg 50 g is without the shell, a medium banana's 118 g is
+without the peel, and `lime yields` 44 g is the juice of one lime.
+
+### Egg sizes and the shell
+
+Source for the shell fraction: USDA SR28 `FOOD_DES.txt`, NDB 01123 "Egg, whole, raw,
+fresh", `Ref_Desc` "Shell", `Refuse` 12. The FDC CSV and API for SR Legacy carry no
+refuse field, which is why the older SR28 file was read.
+
+Size standards (all read, not recalled):
+
+- US: AMS 56 section 56.218 Table I. Minimum net weight per dozen: jumbo 30 oz, extra
+  large 27, large 24, medium 21, small 18, peewee 15. Individual eggs at the dozen
+  rate: 29, 26, 23, 20, 17. Per-egg grams are ounces / 12 x 28.349523125.
+  The standard sets class minimums, not maximums; the data stores the next class's
+  minimum as the exclusive upper edge. The weights are in section 56.218 of the AMS 56
+  booklet (effective July 20, 2000), not in 7 CFR 56.210.
+- Canada A: Canadian Grade Compendium Volume 5, section 5: jumbo 70 g, extra large 63,
+  large 56, medium 49, small 42 (egg weighs not less than). The page text flattens the
+  table, so peewee is read as "under 42 g" without confirmation.
+- EU Class A: Regulation (EC) No 589/2008 Article 4: XL 73 g or more; L 63 to under 73;
+  M 53 to under 63; S under 53. The copy read is on legislation.gov.uk (it includes UK
+  amendments; the figures are the original ones).
+- Australia: not included. Secondary pages quote ranges, but no Australian standard
+  could be found and read.
+
+#### The 60.5 g egg
+
+A US "large" egg, fridge-cold, 2 in tall and 1.75 in wide, 60.5 g in the shell on a
+coffee scale (contributor KieranVR; scale resolution not recorded).
+
+- Class: US Large (56.70 up to 63.79 g per egg on the per-dozen average; the individual
+  minimum is 54.34 g). Canada Large (56 to under 63). EU M (53 to under 63).
+- Edible estimate: 60.5 x 0.88 = **53.24 g**.
+- USDA: large egg **50 g** (SR portion 88374). Difference **+6.5%**.
+
+Why they differ, as far as the numbers show:
+
+1. USDA's 50 g is the class floor. The US large minimum is 24 oz per dozen = 56.70 g in
+   the shell, and 56.70 x 0.88 = 49.9 g. The large class spans 56.70 to 63.79 g in the
+   shell, so edible 49.9 to 56.1 g. The 60.5 g egg is 54% of the way up that span; the
+   midpoint of the class is 60.2 g in the shell, 53.0 g edible. So the egg is ordinary
+   for a large egg and 50 g is its lower end.
+2. The 12% shell is one national average. A given egg's shell share is not measured here,
+   and no measurement of it was found to cite.
+3. The coffee scale's resolution and calibration are unknown, so no error bar is claimed.
+
+The check in `test/eggs.test.mjs` asserts the egg is in the US Large range and that the
+edible estimate is within 0% to 10% above 50 g.
+
+### FNDDS
+
+Source: FDC "FNDDS 2021-2023" CSV, `FoodData_Central_survey_food_csv_2024-10-31.zip`
+(3.3 MB; the newest survey file on https://fdc.nal.usda.gov/download-datasets, checked
+2026-11-16). SR Legacy wins. A FNDDS food is dropped when its description, split at
+commas, equals the leading segments of an SR Legacy description (279 of 5,432 foods).
+Near duplicates stay (FNDDS "Rice, white, cooked, no added fat" next to SR rice).
+
+FNDDS writes the amount in `portion_description` ("1 cup", "1 tablespoon", "1 large"),
+and its `modifier` column is a numeric code, so the amount is split off and the rest goes
+through the same modifier parser. "Quantity not specified" (5,387 rows) has no amount
+and is skipped. FNDDS composition uses nutrient numbers (255 is water) where SR uses
+nutrient ids (1051 is water); both are mapped.
+
+Result: 4,451 FNDDS foods kept (3,910 with a volume density, 541 with counts only),
+4,077 forms, 4,184 count portions.
+
+Spot-check of five FNDDS foods against SR Legacy:
+
+| FNDDS food | FNDDS g/mL | SR Legacy | Verdict |
+|---|---|---|---|
+| Rice, white, cooked, no added fat (1 cup 158 g) | 0.6678 | cooked rice 0.668 (158 g) | agrees |
+| Sugar, brown (1 cup 220 g) | 0.9299 | brown sugar packed 0.9299 | agrees |
+| Sugar, white, confectioner's, powdered (1 cup 120 g) | 0.5072 | powdered sugar 0.5072 | agrees |
+| Ketchup (1 tbsp 17 g, 1 cup 272 g) | 1.1497 | catsup 1.0144 (tbsp 17 g, cup 240 g) | SR disagrees with itself: its tbsp gives 1.152, its cup 1.014. FNDDS is consistent. |
+| Cream cheese, regular, plain (1 cup 240 g, 1 tbsp 15 g) | 1.0144 | cream cheese 0.9806 (cup 232 g) | FNDDS is exactly water weight: a placeholder. Flagged `waterEquivalent`. |
+
+Findings that came out of this and are now flagged in the data:
+
+- `waterEquivalent`: 389 FNDDS forms (of 4,077) and 167 SR forms (of 3,439) have every
+  volume portion at exactly cup 240 g, tbsp 15 g, tsp 5 g or fl oz 30 g. Water-like
+  liquids pass for real. Hummus, guacamole, cream cheese and dips look like defaults.
+- `portionSpreadPct`: 178 FNDDS and 89 SR forms have portions that disagree by more than
+  5% in density. SR catsup is the clearest case. The rule "density from the largest
+  portion" takes the cup (240 g) over the tablespoon (17 g), which here picks the worse
+  number. The ketchup alias warns; it was not changed to a different record because the
+  FNDDS record would then be the only evidence.
+
+### Branded-label gap fills
+
+Source: FDC Branded Foods CSV, release 2026-10-29 (452 MB zip, 3.1 GB unpacked; streamed
+with `unzip -p`, never unpacked). Chosen over the API because the API's DEMO_KEY allows
+a handful of requests per hour (a test call returned `x-ratelimit-limit: 10`), far too few
+for 24 searches with paging.
+
+Method (`scripts/build-branded.mjs`, patterns in `scripts/branded-gaps.mjs`):
+
+1. Pass over `food.csv`: keep rows whose description matches a gap's pattern.
+2. Pass over `branded_food.csv`: keep rows matching the gap's brand, ingredients and
+   exclusion patterns; read the household serving text (`1/4 tsp`, `1 tbsp`, `3/4 cup`);
+   take grams from `serving_size` when its unit is grams, else from a "(NNg)" in the
+   household text; compute density = grams / (amount x mL).
+3. Volume units are the FDA labelling units (cup 240 mL, tbsp 15 mL, tsp 5 mL), because
+   US labels use them.
+4. Drop rows outside 0.05 to 3 g/mL (Lyle's golden syrup appears as "1 tsp, 21 g"
+   in some listings, a data error that would read as 4.3 g/mL).
+5. Collapse rows that repeat the same brand, description, household text and weight.
+6. Median, quartiles and range of the density; every row kept with `uncertaintyPct`.
+
+Rounding uncertainty per row: half a unit of the last printed digit as a percent of the
+gram weight. "15.0" is read as 15 (0.5/15 = 3.3%), "1.2" as 1.2 (0.05/1.2 = 4.2%), "1"
+as 1 (50%). Float32 artifacts such as 1.2000000476837158 are cleaned to 7 significant
+digits first. This measures only how coarse the printed number is. It cannot see that the
+household volume itself is nominal.
+
+Controls: the same method on three foods SR Legacy measures, median against SR default
+density: honey 1.40 against 1.4329 (-2.3%, 1,144 rows), granulated sugar 0.80 against
+0.8454 (-5.4%, 360 rows, median row uncertainty 12.5%), table salt 1.20 against 1.2342
+(-2.8%, 231 rows). Label densities run a few percent low and quantise coarsely.
+
+Results (rows after de-duplication, median g/mL):
+
+| Gap | Rows | Median | Notes |
+|---|---|---|---|
+| Golden syrup | 1 | 1.40 | one Lyle's row; 1 row only |
+| Treacle | 0 | none | no row in the release matches |
+| Ghee | 148 | 0.9333 | |
+| Kosher salt, Diamond Crystal | 3 | 0.56 | 2.8 g per US tsp; uncertainty 7.1% |
+| Kosher salt, Morton | 4 | 0.96 | 4.7 g per US tsp |
+| Flaky sea salt | 15 | 1.20 | quartiles 0.76 to 1.20: brands differ |
+| Chia seeds | 234 | 0.80 | |
+| Agave syrup | 171 | 1.40 | |
+| Plain Greek yogurt | 463 | 0.9444 | 9% under SR plain yogurt: labels state 170 g as 3/4 cup |
+| Creme fraiche | 7 | 0.9333 | |
+| Gelatin powder | 5 | 0.6667 | |
+| Pastry flour | 27 | 0.50 | |
+| Desiccated coconut | 104 | 0.4583 | quartiles 0.33 to 0.50 |
+| Basmati rice, dry | 236 | 0.75 | |
+| Arborio rice, dry | 120 | 0.75 | |
+| Smoked paprika | 6 | 0.48 | uncertainty 8.3% |
+| Za'atar | 36 | 0.76 | uncertainty 6.7%; brands disagree |
+| Garam masala | 38 | 0.56 | uncertainty 7.1% |
+| Sumac | 3 | 0.40 | 3 rows; uncertainty 10% |
+| Ground cumin | 15 | 0.56 | uncertainty 7.1% |
+| Ground coriander | 11 | 0.48 | uncertainty 8.3% |
+| Chinese five spice | 29 | 0.48 | uncertainty 8.3% |
+| Italian seasoning | 31 | 0.24 | uncertainty 16.7% |
+| Nutritional yeast | 24 | 0.25 | |
+| Chipotle powder | 3 | 0.72 | 3 rows |
+
+Kosher salt: Morton is 1.7 times Diamond Crystal per teaspoon (0.96 / 0.56), a little
+under the "about 2x" rule of thumb. Both brands have few distinct rows because most label
+rows repeat the same servings.
+
+King Arthur's weight chart was not used.
+
+### Still unmatched
+
+- Treacle: no row in the 2026-10-29 release matches.
+- `kosher salt` with no brand: ambiguous by design (Morton and Diamond Crystal differ by
+  1.7 times per teaspoon); the helper asks for a brand.
+- `cream` with no fat percentage, and US "corn flour" (two different products).
+- Not looked at in batch 4, still absent from the data: baking chocolate by the cup and
+  citrus zest.
+- Australian egg size standard (none found that could be read).
+- Spices beyond the ten fetched (smoked paprika, za'atar, garam masala, sumac, ground
+  cumin, ground coriander, five spice, Italian seasoning, nutritional yeast, chipotle
+  powder). Others that SR lacks were not searched for.
+- Weak fills that work but warn: golden syrup (1 row), sumac (3), chipotle powder (3),
+  Diamond Crystal kosher salt (3), and every spice whose labels give a fraction of a gram.

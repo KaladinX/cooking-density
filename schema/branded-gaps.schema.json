@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "cooking-density branded-gaps.json",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "source",
+    "method",
+    "gaps",
+    "controls"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "name",
+        "release",
+        "url",
+        "license"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "release": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "license": {
+          "type": "string"
+        }
+      }
+    },
+    "method": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/gap"
+      }
+    },
+    "controls": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/gap"
+      }
+    }
+  },
+  "$defs": {
+    "row": {
+      "type": "object",
+      "required": [
+        "fdcId",
+        "brandOwner",
+        "brandName",
+        "description",
+        "household",
+        "servingGrams",
+        "gramsFrom",
+        "volumeMl",
+        "densityGPerMl",
+        "uncertaintyPct"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "fdcId": {
+          "type": "integer"
+        },
+        "brandOwner": {
+          "type": "string"
+        },
+        "brandName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "household": {
+          "type": "string"
+        },
+        "servingGrams": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "gramsFrom": {
+          "enum": [
+            "serving_size",
+            "household text"
+          ]
+        },
+        "volumeMl": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "densityGPerMl": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "uncertaintyPct": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "gap": {
+      "type": "object",
+      "required": [
+        "id",
+        "label",
+        "names",
+        "n",
+        "funnel"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "label": {
+          "type": "string"
+        },
+        "names": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "n": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "funnel": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "medianDensityGPerMl": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "q1DensityGPerMl": {
+          "type": "number"
+        },
+        "q3DensityGPerMl": {
+          "type": "number"
+        },
+        "minDensityGPerMl": {
+          "type": "number"
+        },
+        "maxDensityGPerMl": {
+          "type": "number"
+        },
+        "medianUncertaintyPct": {
+          "type": "number",
+          "minimum": 0
+        },
+        "rowsAbove5PctUncertainty": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/row"
+          }
+        },
+        "rowsOmitted": {
+          "type": "integer"
+        },
+        "compareTo": {
+          "type": "object"
+        },
+        "differencePct": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

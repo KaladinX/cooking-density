@@ -1,0 +1,198 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "cooking-density egg-sizes.json",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "note",
+    "shell",
+    "standards",
+    "notAvailable"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "note": {
+      "type": "string"
+    },
+    "shell": {
+      "type": "object",
+      "required": [
+        "description",
+        "refusePercent",
+        "edibleFraction",
+        "appliesTo",
+        "citation",
+        "note"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "refusePercent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "edibleFraction": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        },
+        "appliesTo": {
+          "type": "object",
+          "required": [
+            "fdcId",
+            "ndbNumber",
+            "usdaDescription"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "fdcId": {
+              "type": "integer"
+            },
+            "ndbNumber": {
+              "type": "integer"
+            },
+            "usdaDescription": {
+              "type": "string"
+            }
+          }
+        },
+        "citation": {
+          "$ref": "#/$defs/citation"
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "standards": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "basis",
+          "citation",
+          "derivation",
+          "classes"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "enum": [
+              "us",
+              "ca",
+              "eu"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "basis": {
+            "type": "string"
+          },
+          "citation": {
+            "$ref": "#/$defs/citation"
+          },
+          "derivation": {
+            "type": "string"
+          },
+          "classes": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/$defs/class"
+            }
+          }
+        }
+      }
+    },
+    "notAvailable": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "reason"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "citation": {
+      "type": "object",
+      "required": [
+        "title",
+        "url"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string",
+          "pattern": "^https://"
+        }
+      }
+    },
+    "class": {
+      "type": "object",
+      "required": [
+        "name",
+        "minGramsPerEgg",
+        "maxGramsPerEggExclusive"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "minOuncesPerDozen": {
+          "type": "number"
+        },
+        "minIndividualOuncesPerDozenRate": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "minGramsPerEgg": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "minIndividualGramsPerEgg": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "maxGramsPerEggExclusive": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

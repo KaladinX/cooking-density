@@ -28,10 +28,27 @@ export interface Composition {
   missing?: string[];
 }
 
+export interface CountPortion {
+  /** "large", "medium", "clove", "slice", "stick", "lemon" (juice from one lemon) and similar. */
+  label: string;
+  /** The USDA modifier text, verbatim: 'medium (7" to 7-7/8" long)'. */
+  sizeNote: string;
+  amount: number;
+  gramWeight: number;
+  gramsPerUnit: number;
+  usdaPortionId: number;
+}
+
 export interface Ingredient {
   id: string;
   name: string;
-  kind: 'usda' | 'model';
+  /** "usda" (SR Legacy or FNDDS record), "model" (water, dairy), "branded" (label median), "ambiguous" (name several brands share). */
+  kind: 'usda' | 'model' | 'branded' | 'ambiguous';
+  /** Which USDA dataset a "usda" ingredient came from. */
+  dataSource?: 'usda-sr-legacy' | 'usda-fndds' | 'usda-branded' | null;
+  counts: CountPortion[];
+  /** Count unit used when a call names none (egg: "large"). */
+  defaultUnit?: string | null;
   /** Present for kind "usda". */
   fdcId?: number;
   description?: string;
@@ -56,10 +73,13 @@ export interface DensityOptions {
   fatPercent?: number;
   /** Dairy model only: scale to USDA measured values (default true). */
   calibrated?: boolean;
+  /** Narrow a count unit by a piece of its USDA size note: size: "thin" picks "slice, thin". */
+  size?: string;
 }
 
 export type DensitySource =
-  | { kind: 'usda-sr-legacy'; fdcId: number; description: string }
+  | { kind: 'usda-sr-legacy' | 'usda-fndds'; fdcId: number; description: string; portionId?: number; modifier?: string }
+  | { kind: 'usda-branded'; gap: string; rows: number; release: string; medianUncertaintyPct: number; interquartileDensityGPerMl: [number, number] }
   | { kind: 'reference'; name: string }
   | { kind: 'model'; name: string; model: 'dairy' };
 
@@ -83,6 +103,8 @@ export interface ConversionResult {
   form: string | null;
   temperatureC?: number;
   fatPercent?: number;
+  /** Present when a count unit was used. */
+  count?: { label: string; sizeNote: string; gramsPerUnit: number; usdaPortionId: number };
   source: DensitySource | null;
   warnings: string[];
 }
@@ -115,6 +137,44 @@ export function toVolume(args: {
   /** Target volume unit, default "cup". */
   to?: UnitInput;
 } & DensityOptions): ConversionResult;
+
+export function fromGrams(args: {
+  ingredient: string | number | Ingredient;
+  amount: number;
+  /** Source unit, default "g". */
+  unit?: UnitInput;
+  /** A count ("large", "clove") or any unit; default is the ingredient's defaultUnit. */
+  to?: UnitInput;
+} & DensityOptions): ConversionResult;
+
+export interface EggClass {
+  name: string;
+  minOuncesPerDozen?: number;
+  minIndividualOuncesPerDozenRate?: number | null;
+  minGramsPerEgg: number | null;
+  minIndividualGramsPerEgg?: number | null;
+  maxGramsPerEggExclusive: number | null;
+}
+export interface EggStandard { id: 'us' | 'ca' | 'eu'; name: string; basis: string; citation: { title: string; url: string }; derivation: string; classes: EggClass[] }
+export interface EggSizes {
+  schemaVersion: 1;
+  note: string;
+  shell: { description: string; refusePercent: number; edibleFraction: number; appliesTo: { fdcId: number; ndbNumber: number; usdaDescription: string }; citation: { title: string; url: string }; note: string };
+  standards: EggStandard[];
+  notAvailable: { id: string; reason: string }[];
+}
+export interface Measurement {
+  id: string; contributor: string; submittedOn: string; ingredient: string; description: string;
+  quantity: 'mass-in-shell' | 'mass' | 'volume'; value: number; unit: 'g' | 'mL';
+  dimensions?: { height?: { value: number; unit: string }; width?: { value: number; unit: string } };
+  instrument: string; conditions: string; sizeClaim?: { standard: 'us' | 'ca' | 'eu'; name: string };
+}
+export function eggSizes(): EggSizes;
+export function measurements(): Measurement[];
+/** Edible grams of an egg from its in-shell weight (USDA SR: shell is 12 percent). */
+export function edibleGramsFromShell(gramsInShell: number): number;
+export function shellGramsFromEdible(edibleGrams: number): number;
+export function classifyEgg(gramsInShell: number, standard?: 'us' | 'ca' | 'eu'): EggClass | null;
 
 export function creamDensity(args: { fatPercent: number; temperatureC?: number; calibrated?: boolean }): number;
 export function compositionDensity(composition: Partial<Record<'water' | 'protein' | 'fat' | 'carbohydrate' | 'fiber' | 'ash', number>>, temperatureC?: number): number;

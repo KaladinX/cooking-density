@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  findIngredient, searchIngredients, toGrams, toVolume, convert, getDensity, parseUnit, WATER_DENSITY_20C,
+  findIngredient, searchIngredients, toGrams, toVolume, convert, getDensity, parseUnit, fromGrams, WATER_DENSITY_20C,
 } from '../src/index.mjs';
 
 const near = (a, b, tol) => assert.ok(Math.abs(a - b) <= tol, `${a} not within ${tol} of ${b}`);
@@ -134,6 +134,12 @@ test('every alias resolves and converts', () => {
     assert.ok(ing, a.id);
     assert.equal(ing.id, a.id, a.names[0]);
     if (a.model === 'dairy' && a.fatPercent === undefined) continue;
+    if (a.ambiguousBetween) { assert.throws(() => getDensity(a.names[0]), /ambiguous/); continue; }
+    if (ing.counts.length && !Object.keys(ing.forms).length) {
+      const c = toGrams({ ingredient: a.names[0], amount: 1 });
+      assert.ok(c.value > 5 && c.value < 500, `${a.id}: ${c.value}`);
+      continue;
+    }
     const r = toGrams({ ingredient: a.names[0], amount: 1, unit: 'cup' });
     assert.ok(r.value > 10 && r.value < 500, `${a.id}: ${r.value}`);
   }
@@ -143,3 +149,66 @@ import { readFileSync } from 'node:fs';
 function readFileSyncAliases() {
   return readFileSync(new URL('../data/aliases.json', import.meta.url), 'utf8');
 }
+
+test('count units: 2 large eggs, 3 garlic cloves, medium banana', () => {
+  const eggs = toGrams({ ingredient: 'egg', amount: 2, unit: 'large' });
+  near(eggs.value, 100, 1e-9);
+  assert.equal(eggs.unit, 'mass:g');
+  assert.deepEqual([eggs.count.label, eggs.count.sizeNote, eggs.count.gramsPerUnit, eggs.count.usdaPortionId], ['large', 'large', 50, 88374]);
+  assert.equal(eggs.source.fdcId, 171287);
+  assert.equal(eggs.densityGPerMl, null);
+  near(toGrams({ ingredient: 'egg', amount: 2, unit: 'extra large' }).value, 112, 1e-9);
+  near(toGrams({ ingredient: 'garlic', amount: 3, unit: 'cloves' }).value, 9, 1e-9);
+  near(toGrams({ ingredient: 'garlic clove', amount: 3 }).value, 9, 1e-9);
+  const banana = toGrams({ ingredient: 'banana', amount: 2, unit: 'medium' });
+  near(banana.value, 236, 1e-9);
+  assert.equal(banana.count.sizeNote, 'medium (7" to 7-7/8" long)');
+  near(toGrams({ ingredient: 'egg', amount: 3 }).value, 150, 1e-9); // default unit: large
+  near(toGrams({ ingredient: 'lemon juice', amount: 2, unit: 'lemon' }).value, 96, 1e-9);
+  near(toGrams({ ingredient: 'lime', amount: 1 }).value, 67, 1e-9);
+});
+
+test('count units: grams to count, count to volume, the other direction', () => {
+  near(fromGrams({ ingredient: 'egg', amount: 150, to: 'large' }).value, 3, 1e-9);
+  near(fromGrams({ ingredient: 'egg', amount: 100 }).value, 2, 1e-9);
+  const cups = convert({ ingredient: 'egg', amount: 5, from: 'large', to: 'cup' });
+  near(cups.value, 250 / 1.027101 / 236.5882365, 1e-3);
+  assert.ok(cups.count && cups.densityGPerMl);
+  const eggs = convert({ ingredient: 'egg', amount: 1, from: 'cup', to: 'large' });
+  near(eggs.value, 243 / 50, 1e-3);
+  near(convert({ ingredient: 'egg', amount: 1, from: 'large', to: 'small' }).value, 50 / 38, 1e-9);
+});
+
+test('count units: several USDA rows for one label warn and can be chosen', () => {
+  const first = toGrams({ ingredient: 'onion', amount: 1, unit: 'slice' });
+  assert.ok(first.warnings.some((w) => /3 USDA portions match "slice"/.test(w)));
+  const thin = toGrams({ ingredient: 'onion', amount: 1, unit: 'slice', size: 'thin' });
+  near(thin.value, 9, 1e-9);
+  assert.equal(thin.count.sizeNote, 'slice, thin');
+  near(toGrams({ ingredient: 'onion', amount: 1 }).value, 110, 1e-9); // default medium
+});
+
+test('count units: unknown count and count-only foods fail clearly', () => {
+  assert.throws(() => toGrams({ ingredient: 'egg', amount: 1, unit: 'bushel' }), /Counts available/);
+  assert.throws(() => toGrams({ ingredient: 'flour', amount: 1, unit: 'large' }), /no count portions/);
+  assert.throws(() => convert({ ingredient: 'lime', amount: 1, from: 'fruit', to: 'cup' }), /no volume portions/);
+});
+
+test('branded gap fills: ghee, kosher salt by brand, ambiguity, warnings', () => {
+  const ghee = getDensity('ghee');
+  assert.equal(ghee.source.kind, 'usda-branded');
+  near(ghee.densityGPerMl, 0.9333, 0.001);
+  const dc = toGrams({ ingredient: 'diamond crystal kosher salt', amount: 1, unit: 'tsp' });
+  const morton = toGrams({ ingredient: 'morton kosher salt', amount: 1, unit: 'tsp' });
+  assert.ok(morton.value / dc.value > 1.5 && morton.value / dc.value < 2, `${morton.value / dc.value}`);
+  assert.ok(dc.warnings.some((w) => /above 5%/.test(w)));
+  assert.throws(() => getDensity('kosher salt'), /ambiguous/);
+  const sumac = getDensity('sumac');
+  assert.ok(sumac.warnings.some((w) => /above 5%/.test(w)) && sumac.source.rows === 3);
+  assert.ok(findIngredient('crème fraîche'));
+});
+
+test('same-kind conversions still need no ingredient with counts present', () => {
+  near(convert({ amount: 1, from: 'cup', to: 'tbsp' }).value, 16, 1e-6);
+  assert.throws(() => convert({ amount: 1, from: 'large', to: 'g' }));
+});
