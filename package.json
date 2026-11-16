@@ -1,0 +1,50 @@
+{
+  "name": "cooking-density",
+  "version": "0.1.0",
+  "description": "Cooking volumes to grams and back: ingredient densities from USDA SR Legacy, as JSON data and a small helper.",
+  "type": "module",
+  "main": "./src/index.mjs",
+  "types": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.mjs"
+    },
+    "./data/*": "./data/*",
+    "./schema/*": "./schema/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "data",
+    "schema",
+    "scripts",
+    "examples",
+    "docs/plans/physics-notes.md",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build:data": "node scripts/build-data.mjs",
+    "test": "node --test \"test/*.test.mjs\"",
+    "example": "node examples/basic.mjs"
+  },
+  "keywords": [
+    "cooking",
+    "recipe",
+    "density",
+    "conversion",
+    "cups-to-grams",
+    "grams-to-cups",
+    "usda",
+    "units",
+    "baking"
+  ],
+  "repository": "github:KaladinX/cooking-density",
+  "author": "KieranVR",
+  "license": "MIT",
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  }
+}

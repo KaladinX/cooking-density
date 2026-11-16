@@ -1,0 +1,230 @@
+{
+  "schemaVersion": 1,
+  "note": "Volumes in millilitres, masses in grams. us-legal values are the FDA labelling units used by NLEA portions in USDA data.",
+  "units": [
+    {
+      "id": "us-customary:tsp",
+      "name": "tsp",
+      "system": "us-customary",
+      "kind": "volume",
+      "ml": 4.92892159375
+    },
+    {
+      "id": "us-customary:tbsp",
+      "name": "tbsp",
+      "system": "us-customary",
+      "kind": "volume",
+      "ml": 14.78676478125
+    },
+    {
+      "id": "us-customary:fl oz",
+      "name": "fl oz",
+      "system": "us-customary",
+      "kind": "volume",
+      "ml": 29.5735295625
+    },
+    {
+      "id": "us-customary:cup",
+      "name": "cup",
+      "system": "us-customary",
+      "kind": "volume",
+      "ml": 236.5882365
+    },
+    {
+      "id": "us-customary:pint",
+      "name": "pint",
+      "system": "us-customary",
+      "kind": "volume",
+      "ml": 473.176473
+    },
+    {
+      "id": "us-customary:quart",
+      "name": "quart",
+      "system": "us-customary",
+      "kind": "volume",
+      "ml": 946.352946
+    },
+    {
+      "id": "us-customary:gallon",
+      "name": "gallon",
+      "system": "us-customary",
+      "kind": "volume",
+      "ml": 3785.411784
+    },
+    {
+      "id": "us-customary:cubic inch",
+      "name": "cubic inch",
+      "system": "us-customary",
+      "kind": "volume",
+      "ml": 16.387064,
+      "note": "1 inch = 2.54 cm exactly"
+    },
+    {
+      "id": "us-legal:tsp",
+      "name": "tsp",
+      "system": "us-legal",
+      "kind": "volume",
+      "ml": 5,
+      "note": "21 CFR 101.9(b)(5)(viii)"
+    },
+    {
+      "id": "us-legal:tbsp",
+      "name": "tbsp",
+      "system": "us-legal",
+      "kind": "volume",
+      "ml": 15,
+      "note": "21 CFR 101.9(b)(5)(viii)"
+    },
+    {
+      "id": "us-legal:fl oz",
+      "name": "fl oz",
+      "system": "us-legal",
+      "kind": "volume",
+      "ml": 30,
+      "note": "21 CFR 101.9(b)(5)(viii)"
+    },
+    {
+      "id": "us-legal:cup",
+      "name": "cup",
+      "system": "us-legal",
+      "kind": "volume",
+      "ml": 240,
+      "note": "21 CFR 101.9(b)(5)(viii)"
+    },
+    {
+      "id": "metric:tsp",
+      "name": "tsp",
+      "system": "metric",
+      "kind": "volume",
+      "ml": 5
+    },
+    {
+      "id": "metric:tbsp",
+      "name": "tbsp",
+      "system": "metric",
+      "kind": "volume",
+      "ml": 15
+    },
+    {
+      "id": "metric:cup",
+      "name": "cup",
+      "system": "metric",
+      "kind": "volume",
+      "ml": 250
+    },
+    {
+      "id": "metric:mL",
+      "name": "mL",
+      "system": "metric",
+      "kind": "volume",
+      "ml": 1
+    },
+    {
+      "id": "metric:L",
+      "name": "L",
+      "system": "metric",
+      "kind": "volume",
+      "ml": 1000
+    },
+    {
+      "id": "metric:dL",
+      "name": "dL",
+      "system": "metric",
+      "kind": "volume",
+      "ml": 100
+    },
+    {
+      "id": "australian:tsp",
+      "name": "tsp",
+      "system": "australian",
+      "kind": "volume",
+      "ml": 5
+    },
+    {
+      "id": "australian:tbsp",
+      "name": "tbsp",
+      "system": "australian",
+      "kind": "volume",
+      "ml": 20
+    },
+    {
+      "id": "australian:cup",
+      "name": "cup",
+      "system": "australian",
+      "kind": "volume",
+      "ml": 250
+    },
+    {
+      "id": "imperial:fl oz",
+      "name": "fl oz",
+      "system": "imperial",
+      "kind": "volume",
+      "ml": 28.4130625
+    },
+    {
+      "id": "imperial:cup",
+      "name": "cup",
+      "system": "imperial",
+      "kind": "volume",
+      "ml": 284.130625,
+      "note": "10 imperial fl oz"
+    },
+    {
+      "id": "imperial:pint",
+      "name": "pint",
+      "system": "imperial",
+      "kind": "volume",
+      "ml": 568.26125
+    },
+    {
+      "id": "imperial:quart",
+      "name": "quart",
+      "system": "imperial",
+      "kind": "volume",
+      "ml": 1136.5225
+    },
+    {
+      "id": "imperial:gallon",
+      "name": "gallon",
+      "system": "imperial",
+      "kind": "volume",
+      "ml": 4546.09
+    },
+    {
+      "id": "mass:g",
+      "name": "g",
+      "system": "mass",
+      "kind": "mass",
+      "grams": 1
+    },
+    {
+      "id": "mass:kg",
+      "name": "kg",
+      "system": "mass",
+      "kind": "mass",
+      "grams": 1000
+    },
+    {
+      "id": "mass:oz",
+      "name": "oz",
+      "system": "mass",
+      "kind": "mass",
+      "grams": 28.349523125
+    },
+    {
+      "id": "mass:lb",
+      "name": "lb",
+      "system": "mass",
+      "kind": "mass",
+      "grams": 453.59237
+    },
+    {
+      "id": "us-customary:stick-butter",
+      "name": "stick of butter",
+      "system": "us-customary",
+      "kind": "mass",
+      "grams": 113.3980925,
+      "note": "1/4 lb = 8 US tbsp of butter"
+    }
+  ]
+}

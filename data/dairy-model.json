@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "method": "least-squares line of each non-fat component fraction against fat fraction",
+  "components": {
+    "water": {
+      "intercept": 0.91122137,
+      "slope": -0.0022212
+    },
+    "protein": {
+      "intercept": 0.03273777,
+      "slope": 0.01751137
+    },
+    "carbohydrate": {
+      "intercept": 0.04940484,
+      "slope": -0.01704641
+    },
+    "fiber": {
+      "intercept": 0,
+      "slope": 0
+    },
+    "ash": {
+      "intercept": 0.00679383,
+      "slope": 0.00190965
+    }
+  },
+  "fatRange": [
+    0.0018,
+    0.3608
+  ],
+  "records": [
+    {
+      "fdcId": 173432,
+      "description": "Milk, nonfat, fluid, without added vitamin A and vitamin D (fat free or skim)",
+      "fat": 0.0018
+    },
+    {
+      "fdcId": 172217,
+      "description": "Milk, whole, 3.25% milkfat, without added vitamin A and vitamin D",
+      "fat": 0.0327
+    },
+    {
+      "fdcId": 171255,
+      "description": "Cream, fluid, half and half",
+      "fat": 0.115
+    },
+    {
+      "fdcId": 170857,
+      "description": "Cream, fluid, light (coffee cream or table cream)",
+      "fat": 0.191
+    },
+    {
+      "fdcId": 170858,
+      "description": "Cream, fluid, light whipping",
+      "fat": 0.3091
+    },
+    {
+      "fdcId": 170859,
+      "description": "Cream, fluid, heavy whipping",
+      "fat": 0.3608
+    }
+  ],
+  "calibration": [
+    {
+      "fdcId": 173432,
+      "fat": 0.0018,
+      "usdaDensityGPerMl": 1.035554,
+      "modelDensityGPerMl": 1.026891,
+      "ratio": 1.0084363
+    },
+    {
+      "fdcId": 172217,
+      "fat": 0.0327,
+      "usdaDensityGPerMl": 1.031328,
+      "modelDensityGPerMl": 1.023074,
+      "ratio": 1.00806777
+    },
+    {
+      "fdcId": 171255,
+      "fat": 0.115,
+      "usdaDensityGPerMl": 1.022874,
+      "modelDensityGPerMl": 1.013055,
+      "ratio": 1.00969264
+    },
+    {
+      "fdcId": 170857,
+      "fat": 0.191,
+      "usdaDensityGPerMl": 1.014421,
+      "modelDensityGPerMl": 1.003987,
+      "ratio": 1.01039243
+    },
+    {
+      "fdcId": 170858,
+      "fat": 0.3091,
+      "usdaDensityGPerMl": 1.010194,
+      "modelDensityGPerMl": 0.990236,
+      "ratio": 1.02015467
+    },
+    {
+      "fdcId": 170859,
+      "fat": 0.3608,
+      "usdaDensityGPerMl": 1.005967,
+      "modelDensityGPerMl": 0.984343,
+      "ratio": 1.0219684
+    }
+  ]
+}

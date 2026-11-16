@@ -1,0 +1,2181 @@
+{
+  "schemaVersion": 1,
+  "note": "Hand-curated names for common ingredients. Each entry points at one USDA SR Legacy record (fdcId) and form, or at a model. usdaDescription is copied byte-for-byte from the USDA record.",
+  "aliases": [
+    {
+      "id": "all-purpose-flour",
+      "names": [
+        "all-purpose flour",
+        "all purpose flour",
+        "ap flour",
+        "plain flour",
+        "white flour",
+        "flour",
+        "wheat flour",
+        "plain white flour"
+      ],
+      "fdcId": 168894,
+      "usdaDescription": "Wheat flour, white, all-purpose, enriched, bleached",
+      "form": "default",
+      "note": "Plain flour (UK, AU) is close to US all-purpose flour; no separate USDA record exists."
+    },
+    {
+      "id": "self-rising-flour",
+      "names": [
+        "self-rising flour",
+        "self raising flour",
+        "self-raising flour"
+      ],
+      "fdcId": 168895,
+      "usdaDescription": "Wheat flour, white, all-purpose, self-rising, enriched",
+      "form": "default"
+    },
+    {
+      "id": "bread-flour",
+      "names": [
+        "bread flour",
+        "strong flour",
+        "strong white flour",
+        "strong bread flour"
+      ],
+      "fdcId": 168896,
+      "usdaDescription": "Wheat flour, white, bread, enriched",
+      "form": "default"
+    },
+    {
+      "id": "cake-flour",
+      "names": [
+        "cake flour",
+        "soft flour"
+      ],
+      "fdcId": 169723,
+      "usdaDescription": "Wheat flour, white, cake, enriched",
+      "form": "unsifted-dipped"
+    },
+    {
+      "id": "whole-wheat-flour",
+      "names": [
+        "whole wheat flour",
+        "wholemeal flour",
+        "whole-grain flour",
+        "wholewheat flour",
+        "whole grain wheat flour"
+      ],
+      "fdcId": 168893,
+      "usdaDescription": "Wheat flour, whole-grain (Includes foods for USDA's Food Distribution Program)",
+      "form": "default"
+    },
+    {
+      "id": "rye-flour",
+      "names": [
+        "rye flour",
+        "medium rye flour"
+      ],
+      "fdcId": 168886,
+      "usdaDescription": "Rye flour, medium",
+      "form": "default"
+    },
+    {
+      "id": "light-rye-flour",
+      "names": [
+        "light rye flour"
+      ],
+      "fdcId": 168887,
+      "usdaDescription": "Rye flour, light",
+      "form": "default"
+    },
+    {
+      "id": "dark-rye-flour",
+      "names": [
+        "dark rye flour",
+        "pumpernickel flour"
+      ],
+      "fdcId": 168885,
+      "usdaDescription": "Rye flour, dark",
+      "form": "default"
+    },
+    {
+      "id": "cornstarch",
+      "names": [
+        "cornstarch",
+        "corn starch",
+        "cornflour",
+        "maize starch"
+      ],
+      "fdcId": 169698,
+      "usdaDescription": "Cornstarch",
+      "form": "default",
+      "note": "In the UK, AU and NZ, \"cornflour\" means cornstarch."
+    },
+    {
+      "id": "cornmeal",
+      "names": [
+        "cornmeal",
+        "yellow cornmeal",
+        "corn meal",
+        "degermed cornmeal"
+      ],
+      "fdcId": 168867,
+      "usdaDescription": "Cornmeal, degermed, enriched, yellow",
+      "form": "default"
+    },
+    {
+      "id": "masa-harina",
+      "names": [
+        "masa harina",
+        "masa flour",
+        "corn masa flour",
+        "masa"
+      ],
+      "fdcId": 169749,
+      "usdaDescription": "Corn flour, yellow, masa, enriched",
+      "form": "default"
+    },
+    {
+      "id": "rice-flour",
+      "names": [
+        "rice flour",
+        "white rice flour"
+      ],
+      "fdcId": 169714,
+      "usdaDescription": "Rice flour, white, unenriched",
+      "form": "default"
+    },
+    {
+      "id": "oat-flour",
+      "names": [
+        "oat flour"
+      ],
+      "fdcId": 169741,
+      "usdaDescription": "Oat flour, partially debranned",
+      "form": "default"
+    },
+    {
+      "id": "buckwheat-flour",
+      "names": [
+        "buckwheat flour"
+      ],
+      "fdcId": 170687,
+      "usdaDescription": "Buckwheat flour, whole-groat",
+      "form": "default"
+    },
+    {
+      "id": "almond-flour",
+      "names": [
+        "almond flour",
+        "almond meal",
+        "ground almonds"
+      ],
+      "fdcId": 170567,
+      "usdaDescription": "Nuts, almonds",
+      "form": "ground"
+    },
+    {
+      "id": "rolled-oats",
+      "names": [
+        "rolled oats",
+        "oats",
+        "old-fashioned oats",
+        "old fashioned oats",
+        "quick oats",
+        "porridge oats"
+      ],
+      "fdcId": 173904,
+      "usdaDescription": "Cereals, oats, regular and quick, not fortified, dry",
+      "form": "default",
+      "note": "One USDA record covers regular and quick oats."
+    },
+    {
+      "id": "wheat-bran",
+      "names": [
+        "wheat bran",
+        "bran"
+      ],
+      "fdcId": 169722,
+      "usdaDescription": "Wheat bran, crude",
+      "form": "default"
+    },
+    {
+      "id": "wheat-germ",
+      "names": [
+        "wheat germ"
+      ],
+      "fdcId": 168892,
+      "usdaDescription": "Wheat germ, crude",
+      "form": "default"
+    },
+    {
+      "id": "ground-flaxseed",
+      "names": [
+        "ground flaxseed",
+        "flaxseed meal",
+        "ground flax",
+        "linseed meal"
+      ],
+      "fdcId": 169414,
+      "usdaDescription": "Seeds, flaxseed",
+      "form": "ground"
+    },
+    {
+      "id": "breadcrumbs",
+      "names": [
+        "breadcrumbs",
+        "bread crumbs",
+        "dry breadcrumbs",
+        "dry bread crumbs",
+        "dried breadcrumbs"
+      ],
+      "fdcId": 174928,
+      "usdaDescription": "Bread, crumbs, dry, grated, plain",
+      "form": "default"
+    },
+    {
+      "id": "couscous",
+      "names": [
+        "couscous",
+        "dry couscous"
+      ],
+      "fdcId": 169699,
+      "usdaDescription": "Couscous, dry",
+      "form": "default"
+    },
+    {
+      "id": "bulgur",
+      "names": [
+        "bulgur",
+        "bulgur wheat",
+        "dry bulgur"
+      ],
+      "fdcId": 170688,
+      "usdaDescription": "Bulgur, dry",
+      "form": "default"
+    },
+    {
+      "id": "pearl-barley",
+      "names": [
+        "pearl barley",
+        "pearled barley",
+        "barley"
+      ],
+      "fdcId": 170284,
+      "usdaDescription": "Barley, pearled, raw",
+      "form": "default"
+    },
+    {
+      "id": "white-rice",
+      "names": [
+        "white rice",
+        "rice",
+        "long-grain rice",
+        "long grain white rice",
+        "long grain rice",
+        "uncooked rice",
+        "raw rice"
+      ],
+      "fdcId": 169756,
+      "usdaDescription": "Rice, white, long-grain, regular, raw, unenriched",
+      "form": "default"
+    },
+    {
+      "id": "brown-rice",
+      "names": [
+        "brown rice",
+        "long-grain brown rice"
+      ],
+      "fdcId": 169703,
+      "usdaDescription": "Rice, brown, long-grain, raw (Includes foods for USDA's Food Distribution Program)",
+      "form": "default"
+    },
+    {
+      "id": "cooked-white-rice",
+      "names": [
+        "cooked rice",
+        "cooked white rice"
+      ],
+      "fdcId": 168878,
+      "usdaDescription": "Rice, white, long-grain, regular, enriched, cooked",
+      "form": "default"
+    },
+    {
+      "id": "spaghetti",
+      "names": [
+        "spaghetti",
+        "dry spaghetti"
+      ],
+      "fdcId": 169736,
+      "usdaDescription": "Pasta, dry, enriched",
+      "form": "spaghetti"
+    },
+    {
+      "id": "elbow-macaroni",
+      "names": [
+        "macaroni",
+        "elbow macaroni",
+        "elbows",
+        "dry macaroni"
+      ],
+      "fdcId": 169736,
+      "usdaDescription": "Pasta, dry, enriched",
+      "form": "elbows"
+    },
+    {
+      "id": "penne",
+      "names": [
+        "penne",
+        "dry penne"
+      ],
+      "fdcId": 169736,
+      "usdaDescription": "Pasta, dry, enriched",
+      "form": "penne"
+    },
+    {
+      "id": "egg-noodles",
+      "names": [
+        "egg noodles",
+        "dry egg noodles"
+      ],
+      "fdcId": 169731,
+      "usdaDescription": "Noodles, egg, dry, enriched",
+      "form": "default"
+    },
+    {
+      "id": "lentils",
+      "names": [
+        "lentils",
+        "dry lentils",
+        "raw lentils"
+      ],
+      "fdcId": 172420,
+      "usdaDescription": "Lentils, raw",
+      "form": "default"
+    },
+    {
+      "id": "chickpeas-dry",
+      "names": [
+        "dried chickpeas",
+        "dry chickpeas",
+        "garbanzo beans (dry)",
+        "chickpeas (dry)"
+      ],
+      "fdcId": 173756,
+      "usdaDescription": "Chickpeas (garbanzo beans, bengal gram), mature seeds, raw",
+      "form": "default"
+    },
+    {
+      "id": "black-beans-dry",
+      "names": [
+        "dried black beans",
+        "dry black beans",
+        "black beans (dry)"
+      ],
+      "fdcId": 173734,
+      "usdaDescription": "Beans, black, mature seeds, raw",
+      "form": "default"
+    },
+    {
+      "id": "kidney-beans-dry",
+      "names": [
+        "dried kidney beans",
+        "dry kidney beans",
+        "kidney beans (dry)"
+      ],
+      "fdcId": 175193,
+      "usdaDescription": "Beans, kidney, all types, mature seeds, raw",
+      "form": "default"
+    },
+    {
+      "id": "pinto-beans-dry",
+      "names": [
+        "dried pinto beans",
+        "dry pinto beans",
+        "pinto beans (dry)"
+      ],
+      "fdcId": 175199,
+      "usdaDescription": "Beans, pinto, mature seeds, raw (Includes foods for USDA's Food Distribution Program)",
+      "form": "default"
+    },
+    {
+      "id": "navy-beans-dry",
+      "names": [
+        "dried navy beans",
+        "dry navy beans",
+        "navy beans (dry)"
+      ],
+      "fdcId": 173745,
+      "usdaDescription": "Beans, navy, mature seeds, raw",
+      "form": "default"
+    },
+    {
+      "id": "great-northern-beans-dry",
+      "names": [
+        "dried great northern beans",
+        "great northern beans (dry)"
+      ],
+      "fdcId": 175190,
+      "usdaDescription": "Beans, great northern, mature seeds, raw (Includes foods for USDA's Food Distribution Program)",
+      "form": "default"
+    },
+    {
+      "id": "tapioca-pearls",
+      "names": [
+        "tapioca pearls",
+        "pearl tapioca",
+        "dry tapioca"
+      ],
+      "fdcId": 169717,
+      "usdaDescription": "Tapioca, pearl, dry",
+      "form": "default"
+    },
+    {
+      "id": "arrowroot",
+      "names": [
+        "arrowroot",
+        "arrowroot flour",
+        "arrowroot powder"
+      ],
+      "fdcId": 170684,
+      "usdaDescription": "Arrowroot flour",
+      "form": "default"
+    },
+    {
+      "id": "quinoa",
+      "names": [
+        "quinoa",
+        "dry quinoa",
+        "uncooked quinoa"
+      ],
+      "fdcId": 168874,
+      "usdaDescription": "Quinoa, uncooked",
+      "form": "default"
+    },
+    {
+      "id": "semolina",
+      "names": [
+        "semolina",
+        "semolina flour"
+      ],
+      "fdcId": 169715,
+      "usdaDescription": "Semolina, enriched",
+      "form": "default"
+    },
+    {
+      "id": "brown-sugar",
+      "names": [
+        "brown sugar",
+        "light brown sugar",
+        "dark brown sugar",
+        "soft brown sugar",
+        "packed brown sugar"
+      ],
+      "fdcId": 168833,
+      "usdaDescription": "Sugars, brown",
+      "form": "packed",
+      "note": "USDA has one record for brown sugar; light and dark share it. Packed is the usual recipe meaning."
+    },
+    {
+      "id": "granulated-sugar",
+      "names": [
+        "granulated sugar",
+        "white sugar",
+        "sugar",
+        "table sugar",
+        "white granulated sugar",
+        "cane sugar",
+        "regular sugar"
+      ],
+      "fdcId": 169655,
+      "usdaDescription": "Sugars, granulated",
+      "form": "default"
+    },
+    {
+      "id": "caster-sugar",
+      "names": [
+        "caster sugar",
+        "castor sugar",
+        "superfine sugar",
+        "baker's sugar",
+        "bakers sugar"
+      ],
+      "fdcId": 169655,
+      "usdaDescription": "Sugars, granulated",
+      "form": "default",
+      "note": "Caster sugar has finer crystals than granulated. USDA has no record for it, so the granulated sugar figure is used and may run a few percent off."
+    },
+    {
+      "id": "powdered-sugar",
+      "names": [
+        "powdered sugar",
+        "confectioners sugar",
+        "confectioners' sugar",
+        "icing sugar",
+        "10x sugar"
+      ],
+      "fdcId": 169656,
+      "usdaDescription": "Sugars, powdered",
+      "form": "default"
+    },
+    {
+      "id": "turbinado-sugar",
+      "names": [
+        "turbinado sugar",
+        "raw sugar",
+        "sugar in the raw",
+        "demerara sugar"
+      ],
+      "fdcId": 170674,
+      "usdaDescription": "Sugar, turbinado",
+      "form": "default",
+      "note": "Demerara is not turbinado; USDA lists only turbinado, used here as the nearest record."
+    },
+    {
+      "id": "maple-sugar",
+      "names": [
+        "maple sugar"
+      ],
+      "fdcId": 169658,
+      "usdaDescription": "Sugars, maple",
+      "form": "default"
+    },
+    {
+      "id": "honey",
+      "names": [
+        "honey",
+        "runny honey",
+        "liquid honey"
+      ],
+      "fdcId": 169640,
+      "usdaDescription": "Honey",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "maple-syrup",
+      "names": [
+        "maple syrup",
+        "pure maple syrup"
+      ],
+      "fdcId": 169661,
+      "usdaDescription": "Syrups, maple",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "light-corn-syrup",
+      "names": [
+        "light corn syrup",
+        "corn syrup",
+        "white corn syrup"
+      ],
+      "fdcId": 168837,
+      "usdaDescription": "Syrups, corn, light",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "dark-corn-syrup",
+      "names": [
+        "dark corn syrup"
+      ],
+      "fdcId": 168836,
+      "usdaDescription": "Syrups, corn, dark",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "molasses",
+      "names": [
+        "molasses",
+        "blackstrap molasses"
+      ],
+      "fdcId": 168820,
+      "usdaDescription": "Molasses",
+      "form": "default",
+      "liquid": true,
+      "note": "USDA lists one molasses record; blackstrap and light molasses differ slightly."
+    },
+    {
+      "id": "baking-soda",
+      "names": [
+        "baking soda",
+        "bicarbonate of soda",
+        "bicarb soda",
+        "bicarb",
+        "sodium bicarbonate",
+        "bicarbonate soda"
+      ],
+      "fdcId": 175040,
+      "usdaDescription": "Leavening agents, baking soda",
+      "form": "default"
+    },
+    {
+      "id": "baking-powder",
+      "names": [
+        "baking powder",
+        "double-acting baking powder"
+      ],
+      "fdcId": 172804,
+      "usdaDescription": "Leavening agents, baking powder, double-acting, straight phosphate",
+      "form": "default"
+    },
+    {
+      "id": "cream-of-tartar",
+      "names": [
+        "cream of tartar"
+      ],
+      "fdcId": 175041,
+      "usdaDescription": "Leavening agents, cream of tartar",
+      "form": "default"
+    },
+    {
+      "id": "active-dry-yeast",
+      "names": [
+        "active dry yeast",
+        "dry yeast",
+        "baker's yeast",
+        "bakers yeast",
+        "yeast"
+      ],
+      "fdcId": 175043,
+      "usdaDescription": "Leavening agents, yeast, baker's, active dry",
+      "form": "default"
+    },
+    {
+      "id": "table-salt",
+      "names": [
+        "table salt",
+        "salt",
+        "fine salt",
+        "iodized salt"
+      ],
+      "fdcId": 173468,
+      "usdaDescription": "Salt, table",
+      "form": "default",
+      "note": "Coarse salts (kosher, flaked sea salt) weigh much less per cup than table salt; USDA has no record for them."
+    },
+    {
+      "id": "cocoa-powder",
+      "names": [
+        "cocoa powder",
+        "unsweetened cocoa powder",
+        "cocoa",
+        "natural cocoa powder",
+        "cocoa (unsweetened)"
+      ],
+      "fdcId": 169593,
+      "usdaDescription": "Cocoa, dry powder, unsweetened",
+      "form": "default"
+    },
+    {
+      "id": "dutch-process-cocoa",
+      "names": [
+        "dutch process cocoa",
+        "dutch-process cocoa",
+        "dutched cocoa",
+        "alkalized cocoa",
+        "cocoa processed with alkali"
+      ],
+      "fdcId": 169594,
+      "usdaDescription": "Cocoa, dry powder, unsweetened, processed with alkali",
+      "form": "default"
+    },
+    {
+      "id": "semisweet-chocolate-chips",
+      "names": [
+        "semisweet chocolate chips",
+        "semi-sweet chocolate chips",
+        "chocolate chips",
+        "dark chocolate chips",
+        "chocolate chunks"
+      ],
+      "fdcId": 167976,
+      "usdaDescription": "Candies, semisweet chocolate",
+      "form": "large-chips"
+    },
+    {
+      "id": "mini-chocolate-chips",
+      "names": [
+        "mini chocolate chips",
+        "mini semisweet chocolate chips"
+      ],
+      "fdcId": 167976,
+      "usdaDescription": "Candies, semisweet chocolate",
+      "form": "mini-chips"
+    },
+    {
+      "id": "milk-chocolate-chips",
+      "names": [
+        "milk chocolate chips"
+      ],
+      "fdcId": 167587,
+      "usdaDescription": "Candies, milk chocolate",
+      "form": "chips"
+    },
+    {
+      "id": "white-chocolate-chips",
+      "names": [
+        "white chocolate chips"
+      ],
+      "fdcId": 167571,
+      "usdaDescription": "Candies, white chocolate",
+      "form": "chips"
+    },
+    {
+      "id": "vanilla-extract",
+      "names": [
+        "vanilla extract",
+        "vanilla",
+        "pure vanilla extract"
+      ],
+      "fdcId": 173471,
+      "usdaDescription": "Vanilla extract",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "mini-marshmallows",
+      "names": [
+        "mini marshmallows",
+        "miniature marshmallows"
+      ],
+      "fdcId": 167995,
+      "usdaDescription": "Candies, marshmallows",
+      "form": "of-miniature"
+    },
+    {
+      "id": "butter",
+      "names": [
+        "butter",
+        "salted butter"
+      ],
+      "fdcId": 173410,
+      "usdaDescription": "Butter, salted",
+      "form": "default"
+    },
+    {
+      "id": "unsalted-butter",
+      "names": [
+        "unsalted butter",
+        "sweet butter",
+        "sweet cream butter"
+      ],
+      "fdcId": 173430,
+      "usdaDescription": "Butter, without salt",
+      "form": "default"
+    },
+    {
+      "id": "margarine",
+      "names": [
+        "margarine",
+        "stick margarine"
+      ],
+      "fdcId": 172346,
+      "usdaDescription": "Margarine, regular, 80% fat, composite, stick, with salt",
+      "form": "default"
+    },
+    {
+      "id": "vegetable-shortening",
+      "names": [
+        "vegetable shortening",
+        "shortening",
+        "white vegetable fat",
+        "crisco"
+      ],
+      "fdcId": 173584,
+      "usdaDescription": "Shortening, vegetable, household, composite",
+      "form": "default"
+    },
+    {
+      "id": "lard",
+      "names": [
+        "lard"
+      ],
+      "fdcId": 171401,
+      "usdaDescription": "Lard",
+      "form": "default"
+    },
+    {
+      "id": "olive-oil",
+      "names": [
+        "olive oil",
+        "extra virgin olive oil",
+        "extra-virgin olive oil",
+        "evoo",
+        "virgin olive oil"
+      ],
+      "fdcId": 171413,
+      "usdaDescription": "Oil, olive, salad or cooking",
+      "form": "default",
+      "liquid": true,
+      "note": "USDA lists one olive oil record; extra virgin and refined grades differ by well under 1 percent."
+    },
+    {
+      "id": "vegetable-oil",
+      "names": [
+        "vegetable oil",
+        "cooking oil",
+        "refined soybean oil"
+      ],
+      "fdcId": 172370,
+      "usdaDescription": "Oil, vegetable, soybean, refined",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "soybean-oil",
+      "names": [
+        "soybean oil",
+        "soya oil"
+      ],
+      "fdcId": 171411,
+      "usdaDescription": "Oil, soybean, salad or cooking",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "canola-oil",
+      "names": [
+        "canola oil",
+        "rapeseed oil"
+      ],
+      "fdcId": 172336,
+      "usdaDescription": "Oil, canola",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "sunflower-oil",
+      "names": [
+        "sunflower oil"
+      ],
+      "fdcId": 171025,
+      "usdaDescription": "Oil, sunflower, linoleic, (approx. 65%)",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "coconut-oil",
+      "names": [
+        "coconut oil"
+      ],
+      "fdcId": 171412,
+      "usdaDescription": "Oil, coconut",
+      "form": "default",
+      "liquid": true,
+      "note": "Coconut oil is solid below about 24 C; the USDA figure is for liquid oil."
+    },
+    {
+      "id": "peanut-oil",
+      "names": [
+        "peanut oil",
+        "groundnut oil"
+      ],
+      "fdcId": 171410,
+      "usdaDescription": "Oil, peanut, salad or cooking",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "sesame-oil",
+      "names": [
+        "sesame oil"
+      ],
+      "fdcId": 171016,
+      "usdaDescription": "Oil, sesame, salad or cooking",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "corn-oil",
+      "names": [
+        "corn oil",
+        "maize oil"
+      ],
+      "fdcId": 171029,
+      "usdaDescription": "Oil, corn, industrial and retail, all purpose salad or cooking",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "walnut-oil",
+      "names": [
+        "walnut oil"
+      ],
+      "fdcId": 171030,
+      "usdaDescription": "Oil, walnut",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "almond-oil",
+      "names": [
+        "almond oil"
+      ],
+      "fdcId": 171031,
+      "usdaDescription": "Oil, almond",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "whole-milk",
+      "names": [
+        "milk",
+        "whole milk",
+        "full-fat milk",
+        "full fat milk",
+        "full cream milk",
+        "homogenised milk",
+        "homogenized milk",
+        "3.25% milk"
+      ],
+      "fdcId": 171265,
+      "usdaDescription": "Milk, whole, 3.25% milkfat, with added vitamin D",
+      "form": "default",
+      "liquid": true,
+      "dairy": true
+    },
+    {
+      "id": "reduced-fat-milk",
+      "names": [
+        "2% milk",
+        "reduced fat milk",
+        "reduced-fat milk",
+        "semi-skimmed milk",
+        "semi skimmed milk"
+      ],
+      "fdcId": 171267,
+      "usdaDescription": "Milk, reduced fat, fluid, 2% milkfat, with added vitamin A and vitamin D",
+      "form": "default",
+      "liquid": true,
+      "dairy": true
+    },
+    {
+      "id": "lowfat-milk",
+      "names": [
+        "1% milk",
+        "low-fat milk",
+        "lowfat milk",
+        "low fat milk"
+      ],
+      "fdcId": 170872,
+      "usdaDescription": "Milk, lowfat, fluid, 1% milkfat, with added vitamin A and vitamin D",
+      "form": "default",
+      "liquid": true,
+      "dairy": true
+    },
+    {
+      "id": "skim-milk",
+      "names": [
+        "skim milk",
+        "skimmed milk",
+        "nonfat milk",
+        "non-fat milk",
+        "fat-free milk",
+        "fat free milk"
+      ],
+      "fdcId": 171269,
+      "usdaDescription": "Milk, nonfat, fluid, with added vitamin A and vitamin D (fat free or skim)",
+      "form": "default",
+      "liquid": true,
+      "dairy": true
+    },
+    {
+      "id": "buttermilk",
+      "names": [
+        "buttermilk",
+        "cultured buttermilk",
+        "lowfat buttermilk"
+      ],
+      "fdcId": 170874,
+      "usdaDescription": "Milk, buttermilk, fluid, cultured, lowfat",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "evaporated-milk",
+      "names": [
+        "evaporated milk"
+      ],
+      "fdcId": 171276,
+      "usdaDescription": "Milk, canned, evaporated, with added vitamin D and without added vitamin A",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "sweetened-condensed-milk",
+      "names": [
+        "sweetened condensed milk",
+        "condensed milk"
+      ],
+      "fdcId": 171275,
+      "usdaDescription": "Milk, canned, condensed, sweetened",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "nonfat-dry-milk",
+      "names": [
+        "nonfat dry milk",
+        "skim milk powder",
+        "powdered milk",
+        "milk powder",
+        "dry milk powder",
+        "nonfat milk powder"
+      ],
+      "fdcId": 170877,
+      "usdaDescription": "Milk, dry, nonfat, regular, without added vitamin A and vitamin D",
+      "form": "default"
+    },
+    {
+      "id": "whole-milk-powder",
+      "names": [
+        "whole milk powder",
+        "dry whole milk"
+      ],
+      "fdcId": 173454,
+      "usdaDescription": "Milk, dry, whole, without added vitamin D",
+      "form": "default"
+    },
+    {
+      "id": "half-and-half",
+      "names": [
+        "half and half",
+        "half & half",
+        "half-and-half",
+        "half n half"
+      ],
+      "fdcId": 171255,
+      "usdaDescription": "Cream, fluid, half and half",
+      "form": "default",
+      "liquid": true,
+      "dairy": true
+    },
+    {
+      "id": "light-cream",
+      "names": [
+        "light cream",
+        "coffee cream",
+        "table cream"
+      ],
+      "fdcId": 170857,
+      "usdaDescription": "Cream, fluid, light (coffee cream or table cream)",
+      "form": "default",
+      "liquid": true,
+      "dairy": true
+    },
+    {
+      "id": "light-whipping-cream",
+      "names": [
+        "light whipping cream"
+      ],
+      "fdcId": 170858,
+      "usdaDescription": "Cream, fluid, light whipping",
+      "form": "default",
+      "liquid": true,
+      "dairy": true
+    },
+    {
+      "id": "heavy-cream",
+      "names": [
+        "heavy cream",
+        "heavy whipping cream",
+        "36% cream"
+      ],
+      "fdcId": 170859,
+      "usdaDescription": "Cream, fluid, heavy whipping",
+      "form": "default",
+      "liquid": true,
+      "dairy": true
+    },
+    {
+      "id": "sour-cream",
+      "names": [
+        "sour cream",
+        "soured cream"
+      ],
+      "fdcId": 171257,
+      "usdaDescription": "Cream, sour, cultured",
+      "form": "default"
+    },
+    {
+      "id": "cream-cheese",
+      "names": [
+        "cream cheese"
+      ],
+      "fdcId": 173418,
+      "usdaDescription": "Cheese, cream",
+      "form": "default"
+    },
+    {
+      "id": "plain-yogurt",
+      "names": [
+        "plain yogurt",
+        "yogurt",
+        "yoghurt",
+        "natural yogurt",
+        "plain yoghurt",
+        "whole milk yogurt"
+      ],
+      "fdcId": 171284,
+      "usdaDescription": "Yogurt, plain, whole milk",
+      "form": "default"
+    },
+    {
+      "id": "cheddar-cheese",
+      "names": [
+        "cheddar cheese",
+        "cheddar",
+        "shredded cheddar",
+        "grated cheddar"
+      ],
+      "fdcId": 173414,
+      "usdaDescription": "Cheese, cheddar (Includes foods for USDA's Food Distribution Program)",
+      "form": "shredded",
+      "note": "Shredded or grated by the cup. For a block, pass form \"default\"."
+    },
+    {
+      "id": "parmesan-cheese",
+      "names": [
+        "parmesan",
+        "parmesan cheese",
+        "grated parmesan",
+        "parmigiano reggiano (grated)"
+      ],
+      "fdcId": 171247,
+      "usdaDescription": "Cheese, parmesan, grated",
+      "form": "default"
+    },
+    {
+      "id": "mozzarella-cheese",
+      "names": [
+        "mozzarella",
+        "mozzarella cheese",
+        "shredded mozzarella"
+      ],
+      "fdcId": 171244,
+      "usdaDescription": "Cheese, mozzarella, low moisture, part-skim",
+      "form": "shredded"
+    },
+    {
+      "id": "monterey-jack-cheese",
+      "names": [
+        "monterey jack",
+        "monterey jack cheese"
+      ],
+      "fdcId": 170844,
+      "usdaDescription": "Cheese, monterey",
+      "form": "shredded"
+    },
+    {
+      "id": "feta-cheese",
+      "names": [
+        "feta",
+        "feta cheese",
+        "crumbled feta"
+      ],
+      "fdcId": 173420,
+      "usdaDescription": "Cheese, feta",
+      "form": "crumbled"
+    },
+    {
+      "id": "ricotta-cheese",
+      "names": [
+        "ricotta",
+        "ricotta cheese"
+      ],
+      "fdcId": 170851,
+      "usdaDescription": "Cheese, ricotta, whole milk",
+      "form": "default"
+    },
+    {
+      "id": "cottage-cheese",
+      "names": [
+        "cottage cheese",
+        "creamed cottage cheese"
+      ],
+      "fdcId": 172179,
+      "usdaDescription": "Cheese, cottage, creamed, large or small curd",
+      "form": "large-curd-unpacked"
+    },
+    {
+      "id": "blue-cheese",
+      "names": [
+        "blue cheese",
+        "crumbled blue cheese"
+      ],
+      "fdcId": 172175,
+      "usdaDescription": "Cheese, blue",
+      "form": "crumbled-unpacked"
+    },
+    {
+      "id": "egg-white",
+      "names": [
+        "egg white",
+        "egg whites",
+        "raw egg white"
+      ],
+      "fdcId": 172183,
+      "usdaDescription": "Egg, white, raw, fresh",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "egg-yolk",
+      "names": [
+        "egg yolk",
+        "egg yolks",
+        "raw egg yolk"
+      ],
+      "fdcId": 172184,
+      "usdaDescription": "Egg, yolk, raw, fresh",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "lemon-juice",
+      "names": [
+        "lemon juice",
+        "fresh lemon juice"
+      ],
+      "fdcId": 167747,
+      "usdaDescription": "Lemon juice, raw",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "lime-juice",
+      "names": [
+        "lime juice",
+        "fresh lime juice"
+      ],
+      "fdcId": 168156,
+      "usdaDescription": "Lime juice, raw",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "orange-juice",
+      "names": [
+        "orange juice",
+        "fresh orange juice"
+      ],
+      "fdcId": 169098,
+      "usdaDescription": "Orange juice, raw (Includes foods for USDA's Food Distribution Program)",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "apple-juice",
+      "names": [
+        "apple juice"
+      ],
+      "fdcId": 173933,
+      "usdaDescription": "Apple juice, canned or bottled, unsweetened, without added ascorbic acid",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "tomato-juice",
+      "names": [
+        "tomato juice"
+      ],
+      "fdcId": 170545,
+      "usdaDescription": "Tomato juice, canned, without salt added",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "white-vinegar",
+      "names": [
+        "white vinegar",
+        "distilled vinegar",
+        "distilled white vinegar",
+        "vinegar",
+        "spirit vinegar"
+      ],
+      "fdcId": 172237,
+      "usdaDescription": "Vinegar, distilled",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "cider-vinegar",
+      "names": [
+        "cider vinegar",
+        "apple cider vinegar"
+      ],
+      "fdcId": 173469,
+      "usdaDescription": "Vinegar, cider",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "balsamic-vinegar",
+      "names": [
+        "balsamic vinegar"
+      ],
+      "fdcId": 172241,
+      "usdaDescription": "Vinegar, balsamic",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "red-wine-vinegar",
+      "names": [
+        "red wine vinegar"
+      ],
+      "fdcId": 172240,
+      "usdaDescription": "Vinegar, red wine",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "soy-sauce",
+      "names": [
+        "soy sauce",
+        "shoyu"
+      ],
+      "fdcId": 174277,
+      "usdaDescription": "Soy sauce made from soy and wheat (shoyu)",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "worcestershire-sauce",
+      "names": [
+        "worcestershire sauce",
+        "worcester sauce"
+      ],
+      "fdcId": 171610,
+      "usdaDescription": "Sauce, worcestershire",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "ketchup",
+      "names": [
+        "ketchup",
+        "catsup",
+        "tomato ketchup"
+      ],
+      "fdcId": 168556,
+      "usdaDescription": "Catsup",
+      "form": "default"
+    },
+    {
+      "id": "mayonnaise",
+      "names": [
+        "mayonnaise",
+        "mayo"
+      ],
+      "fdcId": 171009,
+      "usdaDescription": "Salad dressing, mayonnaise, regular",
+      "form": "default"
+    },
+    {
+      "id": "yellow-mustard",
+      "names": [
+        "yellow mustard",
+        "prepared mustard",
+        "mustard"
+      ],
+      "fdcId": 172234,
+      "usdaDescription": "Mustard, prepared, yellow",
+      "form": "default"
+    },
+    {
+      "id": "tomato-paste",
+      "names": [
+        "tomato paste"
+      ],
+      "fdcId": 170459,
+      "usdaDescription": "Tomato products, canned, paste, without salt added (Includes foods for USDA's Food Distribution Program)",
+      "form": "default"
+    },
+    {
+      "id": "crushed-tomatoes",
+      "names": [
+        "crushed tomatoes",
+        "canned crushed tomatoes"
+      ],
+      "fdcId": 170501,
+      "usdaDescription": "Tomatoes, crushed, canned",
+      "form": "default"
+    },
+    {
+      "id": "tomato-sauce-canned",
+      "names": [
+        "canned tomato sauce",
+        "tomato sauce (canned)"
+      ],
+      "fdcId": 170054,
+      "usdaDescription": "Tomato products, canned, sauce",
+      "form": "default"
+    },
+    {
+      "id": "canned-pumpkin",
+      "names": [
+        "canned pumpkin",
+        "pumpkin puree",
+        "pumpkin purée"
+      ],
+      "fdcId": 168450,
+      "usdaDescription": "Pumpkin, canned, without salt",
+      "form": "default"
+    },
+    {
+      "id": "smooth-peanut-butter",
+      "names": [
+        "peanut butter",
+        "smooth peanut butter",
+        "creamy peanut butter"
+      ],
+      "fdcId": 174266,
+      "usdaDescription": "Peanut butter, smooth style, with salt (Includes foods for USDA's Food Distribution Program)",
+      "form": "default"
+    },
+    {
+      "id": "chunky-peanut-butter",
+      "names": [
+        "chunky peanut butter",
+        "crunchy peanut butter"
+      ],
+      "fdcId": 174265,
+      "usdaDescription": "Peanut butter, chunk style, with salt",
+      "form": "default"
+    },
+    {
+      "id": "tahini",
+      "names": [
+        "tahini",
+        "sesame paste"
+      ],
+      "fdcId": 170189,
+      "usdaDescription": "Seeds, sesame butter, tahini, from roasted and toasted kernels (most common type)",
+      "form": "default"
+    },
+    {
+      "id": "jam",
+      "names": [
+        "jam",
+        "preserves",
+        "fruit jam"
+      ],
+      "fdcId": 169641,
+      "usdaDescription": "Jams and preserves",
+      "form": "default"
+    },
+    {
+      "id": "unsweetened-applesauce",
+      "names": [
+        "applesauce",
+        "unsweetened applesauce"
+      ],
+      "fdcId": 171695,
+      "usdaDescription": "Applesauce, canned, unsweetened, without added ascorbic acid (Includes foods for USDA's Food Distribution Program)",
+      "form": "default"
+    },
+    {
+      "id": "coconut-milk",
+      "names": [
+        "coconut milk",
+        "canned coconut milk"
+      ],
+      "fdcId": 170173,
+      "usdaDescription": "Nuts, coconut milk, canned (liquid expressed from grated meat and water)",
+      "form": "default",
+      "liquid": true
+    },
+    {
+      "id": "shredded-coconut",
+      "names": [
+        "shredded coconut",
+        "sweetened shredded coconut",
+        "flaked coconut"
+      ],
+      "fdcId": 168586,
+      "usdaDescription": "Nuts, coconut meat, dried (desiccated), sweetened, shredded",
+      "form": "shredded",
+      "note": "USDA record is sweetened. Unsweetened desiccated coconut is lighter."
+    },
+    {
+      "id": "ground-cinnamon",
+      "names": [
+        "cinnamon",
+        "ground cinnamon"
+      ],
+      "fdcId": 171320,
+      "usdaDescription": "Spices, cinnamon, ground",
+      "form": "default"
+    },
+    {
+      "id": "ground-cloves",
+      "names": [
+        "ground cloves",
+        "cloves (ground)"
+      ],
+      "fdcId": 171321,
+      "usdaDescription": "Spices, cloves, ground",
+      "form": "default"
+    },
+    {
+      "id": "ground-ginger",
+      "names": [
+        "ground ginger",
+        "ginger powder",
+        "dried ginger"
+      ],
+      "fdcId": 170926,
+      "usdaDescription": "Spices, ginger, ground",
+      "form": "default"
+    },
+    {
+      "id": "ground-nutmeg",
+      "names": [
+        "nutmeg",
+        "ground nutmeg"
+      ],
+      "fdcId": 171326,
+      "usdaDescription": "Spices, nutmeg, ground",
+      "form": "default"
+    },
+    {
+      "id": "ground-allspice",
+      "names": [
+        "allspice",
+        "ground allspice"
+      ],
+      "fdcId": 171315,
+      "usdaDescription": "Spices, allspice, ground",
+      "form": "default"
+    },
+    {
+      "id": "paprika",
+      "names": [
+        "paprika"
+      ],
+      "fdcId": 171329,
+      "usdaDescription": "Spices, paprika",
+      "form": "default"
+    },
+    {
+      "id": "black-pepper",
+      "names": [
+        "black pepper",
+        "ground black pepper",
+        "pepper",
+        "ground pepper"
+      ],
+      "fdcId": 170931,
+      "usdaDescription": "Spices, pepper, black",
+      "form": "ground"
+    },
+    {
+      "id": "cayenne-pepper",
+      "names": [
+        "cayenne pepper",
+        "cayenne",
+        "red pepper (ground)"
+      ],
+      "fdcId": 170932,
+      "usdaDescription": "Spices, pepper, red or cayenne",
+      "form": "default"
+    },
+    {
+      "id": "garlic-powder",
+      "names": [
+        "garlic powder"
+      ],
+      "fdcId": 171325,
+      "usdaDescription": "Spices, garlic powder",
+      "form": "default"
+    },
+    {
+      "id": "onion-powder",
+      "names": [
+        "onion powder"
+      ],
+      "fdcId": 171327,
+      "usdaDescription": "Spices, onion powder",
+      "form": "default"
+    },
+    {
+      "id": "chili-powder",
+      "names": [
+        "chili powder",
+        "chilli powder"
+      ],
+      "fdcId": 171319,
+      "usdaDescription": "Spices, chili powder",
+      "form": "default"
+    },
+    {
+      "id": "ground-turmeric",
+      "names": [
+        "turmeric",
+        "ground turmeric"
+      ],
+      "fdcId": 172231,
+      "usdaDescription": "Spices, turmeric, ground",
+      "form": "default"
+    },
+    {
+      "id": "curry-powder",
+      "names": [
+        "curry powder"
+      ],
+      "fdcId": 170924,
+      "usdaDescription": "Spices, curry powder",
+      "form": "default"
+    },
+    {
+      "id": "dried-oregano",
+      "names": [
+        "dried oregano",
+        "oregano"
+      ],
+      "fdcId": 171328,
+      "usdaDescription": "Spices, oregano, dried",
+      "form": "leaves"
+    },
+    {
+      "id": "dried-basil",
+      "names": [
+        "dried basil",
+        "basil (dried)"
+      ],
+      "fdcId": 171317,
+      "usdaDescription": "Spices, basil, dried",
+      "form": "leaves"
+    },
+    {
+      "id": "dried-thyme",
+      "names": [
+        "dried thyme",
+        "thyme (dried)"
+      ],
+      "fdcId": 170938,
+      "usdaDescription": "Spices, thyme, dried",
+      "form": "leaves"
+    },
+    {
+      "id": "dried-parsley",
+      "names": [
+        "dried parsley",
+        "parsley (dried)"
+      ],
+      "fdcId": 170930,
+      "usdaDescription": "Spices, parsley, dried",
+      "form": "default"
+    },
+    {
+      "id": "dried-rosemary",
+      "names": [
+        "dried rosemary",
+        "rosemary (dried)"
+      ],
+      "fdcId": 171333,
+      "usdaDescription": "Spices, rosemary, dried",
+      "form": "default"
+    },
+    {
+      "id": "ground-sage",
+      "names": [
+        "ground sage",
+        "sage (ground)"
+      ],
+      "fdcId": 170935,
+      "usdaDescription": "Spices, sage, ground",
+      "form": "default"
+    },
+    {
+      "id": "ground-mustard",
+      "names": [
+        "ground mustard",
+        "dry mustard",
+        "mustard powder"
+      ],
+      "fdcId": 170929,
+      "usdaDescription": "Spices, mustard seed, ground",
+      "form": "default"
+    },
+    {
+      "id": "poppy-seeds",
+      "names": [
+        "poppy seeds",
+        "poppy seed"
+      ],
+      "fdcId": 171330,
+      "usdaDescription": "Spices, poppy seed",
+      "form": "default"
+    },
+    {
+      "id": "ground-cardamom",
+      "names": [
+        "ground cardamom",
+        "cardamom"
+      ],
+      "fdcId": 170919,
+      "usdaDescription": "Spices, cardamom",
+      "form": "ground"
+    },
+    {
+      "id": "coriander-seed",
+      "names": [
+        "coriander seed",
+        "coriander seeds"
+      ],
+      "fdcId": 170922,
+      "usdaDescription": "Spices, coriander seed",
+      "form": "default"
+    },
+    {
+      "id": "fennel-seed",
+      "names": [
+        "fennel seed",
+        "fennel seeds"
+      ],
+      "fdcId": 171323,
+      "usdaDescription": "Spices, fennel seed",
+      "form": "whole"
+    },
+    {
+      "id": "pumpkin-pie-spice",
+      "names": [
+        "pumpkin pie spice"
+      ],
+      "fdcId": 171332,
+      "usdaDescription": "Spices, pumpkin pie spice",
+      "form": "default"
+    },
+    {
+      "id": "cumin-seed",
+      "names": [
+        "cumin seed",
+        "cumin seeds",
+        "whole cumin"
+      ],
+      "fdcId": 170923,
+      "usdaDescription": "Spices, cumin seed",
+      "form": "whole"
+    },
+    {
+      "id": "celery-seed",
+      "names": [
+        "celery seed"
+      ],
+      "fdcId": 170920,
+      "usdaDescription": "Spices, celery seed",
+      "form": "default"
+    },
+    {
+      "id": "whole-almonds",
+      "names": [
+        "almonds",
+        "whole almonds"
+      ],
+      "fdcId": 170567,
+      "usdaDescription": "Nuts, almonds",
+      "form": "whole"
+    },
+    {
+      "id": "sliced-almonds",
+      "names": [
+        "sliced almonds",
+        "flaked almonds"
+      ],
+      "fdcId": 170567,
+      "usdaDescription": "Nuts, almonds",
+      "form": "sliced"
+    },
+    {
+      "id": "slivered-almonds",
+      "names": [
+        "slivered almonds"
+      ],
+      "fdcId": 170567,
+      "usdaDescription": "Nuts, almonds",
+      "form": "slivered"
+    },
+    {
+      "id": "chopped-walnuts",
+      "names": [
+        "walnuts",
+        "chopped walnuts",
+        "english walnuts"
+      ],
+      "fdcId": 170187,
+      "usdaDescription": "Nuts, walnuts, english",
+      "form": "chopped"
+    },
+    {
+      "id": "chopped-pecans",
+      "names": [
+        "pecans",
+        "chopped pecans"
+      ],
+      "fdcId": 170182,
+      "usdaDescription": "Nuts, pecans",
+      "form": "chopped"
+    },
+    {
+      "id": "pecan-halves",
+      "names": [
+        "pecan halves"
+      ],
+      "fdcId": 170182,
+      "usdaDescription": "Nuts, pecans",
+      "form": "halves"
+    },
+    {
+      "id": "chopped-hazelnuts",
+      "names": [
+        "hazelnuts",
+        "chopped hazelnuts",
+        "filberts"
+      ],
+      "fdcId": 170581,
+      "usdaDescription": "Nuts, hazelnuts or filberts",
+      "form": "chopped"
+    },
+    {
+      "id": "cashews",
+      "names": [
+        "cashews",
+        "cashew nuts",
+        "roasted cashews"
+      ],
+      "fdcId": 170571,
+      "usdaDescription": "Nuts, cashew nuts, dry roasted, without salt added",
+      "form": "default"
+    },
+    {
+      "id": "pistachios",
+      "names": [
+        "pistachios",
+        "pistachio nuts"
+      ],
+      "fdcId": 170184,
+      "usdaDescription": "Nuts, pistachio nuts, raw",
+      "form": "default"
+    },
+    {
+      "id": "peanuts",
+      "names": [
+        "raw peanuts",
+        "peanuts"
+      ],
+      "fdcId": 172430,
+      "usdaDescription": "Peanuts, all types, raw",
+      "form": "default"
+    },
+    {
+      "id": "pine-nuts",
+      "names": [
+        "pine nuts",
+        "pignoli"
+      ],
+      "fdcId": 170591,
+      "usdaDescription": "Nuts, pine nuts, dried",
+      "form": "default"
+    },
+    {
+      "id": "macadamia-nuts",
+      "names": [
+        "macadamia nuts",
+        "macadamias"
+      ],
+      "fdcId": 170178,
+      "usdaDescription": "Nuts, macadamia nuts, raw",
+      "form": "whole-or-halves"
+    },
+    {
+      "id": "sunflower-seeds",
+      "names": [
+        "sunflower seeds",
+        "sunflower seed kernels"
+      ],
+      "fdcId": 170562,
+      "usdaDescription": "Seeds, sunflower seed kernels, dried",
+      "form": "default"
+    },
+    {
+      "id": "pumpkin-seeds",
+      "names": [
+        "pumpkin seeds",
+        "pepitas"
+      ],
+      "fdcId": 170556,
+      "usdaDescription": "Seeds, pumpkin and squash seed kernels, dried",
+      "form": "default"
+    },
+    {
+      "id": "sesame-seeds",
+      "names": [
+        "sesame seeds",
+        "sesame seed"
+      ],
+      "fdcId": 170150,
+      "usdaDescription": "Seeds, sesame seeds, whole, dried",
+      "form": "default"
+    },
+    {
+      "id": "raisins",
+      "names": [
+        "raisins",
+        "dark raisins",
+        "sultanas"
+      ],
+      "fdcId": 168165,
+      "usdaDescription": "Raisins, dark, seedless (Includes foods for USDA's Food Distribution Program)",
+      "form": "unpacked",
+      "note": "Sultanas are golden raisins; USDA golden and dark raisins share the same weights."
+    },
+    {
+      "id": "dried-cranberries",
+      "names": [
+        "dried cranberries",
+        "craisins"
+      ],
+      "fdcId": 171723,
+      "usdaDescription": "Cranberries, dried, sweetened (Includes foods for USDA's Food Distribution Program)",
+      "form": "default"
+    },
+    {
+      "id": "blueberries",
+      "names": [
+        "blueberries",
+        "fresh blueberries"
+      ],
+      "fdcId": 171711,
+      "usdaDescription": "Blueberries, raw",
+      "form": "default"
+    },
+    {
+      "id": "mashed-bananas",
+      "names": [
+        "mashed bananas",
+        "mashed banana"
+      ],
+      "fdcId": 173944,
+      "usdaDescription": "Bananas, raw",
+      "form": "mashed"
+    },
+    {
+      "id": "sliced-strawberries",
+      "names": [
+        "sliced strawberries",
+        "strawberries"
+      ],
+      "fdcId": 167762,
+      "usdaDescription": "Strawberries, raw",
+      "form": "sliced"
+    },
+    {
+      "id": "sliced-apples",
+      "names": [
+        "sliced apples",
+        "apple slices",
+        "apples"
+      ],
+      "fdcId": 171688,
+      "usdaDescription": "Apples, raw, with skin (Includes foods for USDA's Food Distribution Program)",
+      "form": "slices"
+    },
+    {
+      "id": "chopped-onion",
+      "names": [
+        "chopped onion",
+        "diced onion",
+        "onion",
+        "onions"
+      ],
+      "fdcId": 170000,
+      "usdaDescription": "Onions, raw",
+      "form": "chopped"
+    },
+    {
+      "id": "chopped-carrots",
+      "names": [
+        "chopped carrots",
+        "diced carrots",
+        "carrots"
+      ],
+      "fdcId": 170393,
+      "usdaDescription": "Carrots, raw",
+      "form": "chopped"
+    },
+    {
+      "id": "chopped-celery",
+      "names": [
+        "chopped celery",
+        "diced celery",
+        "celery"
+      ],
+      "fdcId": 169988,
+      "usdaDescription": "Celery, raw",
+      "form": "chopped"
+    },
+    {
+      "id": "chopped-bell-pepper",
+      "names": [
+        "chopped bell pepper",
+        "diced bell pepper",
+        "bell pepper"
+      ],
+      "fdcId": 170427,
+      "usdaDescription": "Peppers, sweet, green, raw",
+      "form": "chopped"
+    },
+    {
+      "id": "minced-garlic",
+      "names": [
+        "minced garlic",
+        "garlic"
+      ],
+      "fdcId": 169230,
+      "usdaDescription": "Garlic, raw",
+      "form": "default"
+    },
+    {
+      "id": "grated-ginger",
+      "names": [
+        "fresh ginger",
+        "grated ginger",
+        "ginger root"
+      ],
+      "fdcId": 169231,
+      "usdaDescription": "Ginger root, raw",
+      "form": "default"
+    },
+    {
+      "id": "diced-potatoes",
+      "names": [
+        "diced potatoes",
+        "potatoes (diced)"
+      ],
+      "fdcId": 170026,
+      "usdaDescription": "Potatoes, flesh and skin, raw",
+      "form": "diced"
+    },
+    {
+      "id": "chopped-tomatoes",
+      "names": [
+        "chopped tomatoes",
+        "diced tomatoes",
+        "fresh tomatoes"
+      ],
+      "fdcId": 170457,
+      "usdaDescription": "Tomatoes, red, ripe, raw, year round average",
+      "form": "chopped-or-sliced"
+    },
+    {
+      "id": "chopped-broccoli",
+      "names": [
+        "chopped broccoli",
+        "broccoli florets"
+      ],
+      "fdcId": 170379,
+      "usdaDescription": "Broccoli, raw",
+      "form": "chopped"
+    },
+    {
+      "id": "shredded-cabbage",
+      "names": [
+        "shredded cabbage",
+        "cabbage"
+      ],
+      "fdcId": 169975,
+      "usdaDescription": "Cabbage, raw",
+      "form": "shredded"
+    },
+    {
+      "id": "sliced-mushrooms",
+      "names": [
+        "sliced mushrooms",
+        "mushrooms"
+      ],
+      "fdcId": 169251,
+      "usdaDescription": "Mushrooms, white, raw",
+      "form": "pieces-or-slices"
+    },
+    {
+      "id": "fresh-spinach",
+      "names": [
+        "fresh spinach",
+        "spinach",
+        "baby spinach"
+      ],
+      "fdcId": 168462,
+      "usdaDescription": "Spinach, raw",
+      "form": "default"
+    },
+    {
+      "id": "mashed-avocado",
+      "names": [
+        "mashed avocado",
+        "avocado puree"
+      ],
+      "fdcId": 171705,
+      "usdaDescription": "Avocados, raw, all commercial varieties",
+      "form": "pureed"
+    },
+    {
+      "id": "water",
+      "names": [
+        "water",
+        "tap water",
+        "cold water",
+        "warm water",
+        "drinking water",
+        "distilled water"
+      ],
+      "model": "water",
+      "liquid": true,
+      "note": "Reference density 0.9982 g/mL at 20 C, scaled for temperature with the Choi-Okos water polynomial."
+    },
+    {
+      "id": "single-cream",
+      "names": [
+        "single cream",
+        "18% cream"
+      ],
+      "model": "dairy",
+      "fatPercent": 18,
+      "liquid": true,
+      "note": "UK single cream is at least 18 percent milk fat. Density comes from the dairy model."
+    },
+    {
+      "id": "cream-35",
+      "names": [
+        "35% cream",
+        "35 percent cream",
+        "whipping cream",
+        "whipping cream (35%)",
+        "35% mf cream"
+      ],
+      "model": "dairy",
+      "fatPercent": 35,
+      "liquid": true,
+      "note": "Whipping cream (UK, Canada) is 35 percent milk fat or more. Density comes from the dairy model at 35 percent; pass fatPercent for another figure."
+    },
+    {
+      "id": "cream",
+      "names": [
+        "cream",
+        "dairy cream"
+      ],
+      "model": "dairy",
+      "liquid": true
+    },
+    {
+      "id": "double-cream",
+      "names": [
+        "double cream"
+      ],
+      "model": "dairy",
+      "fatPercent": 48,
+      "liquid": true,
+      "note": "UK double cream is at least 48 percent milk fat, above the 36.08 percent top of the USDA records the dairy model was fitted to, so the result is an extrapolation."
+    }
+  ]
+}
